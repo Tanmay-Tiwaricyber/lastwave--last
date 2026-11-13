@@ -1,0 +1,72 @@
+name: Build Silent Programmer APK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: LastWave-SilentProgrammer/source
+    env:
+      RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+      RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+      RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check signing secrets
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+        run: |
+          if [ -z "$SIGNING_KEY" ] || [ -z "$RELEASE_STORE_PASSWORD" ] || [ -z "$RELEASE_KEY_ALIAS" ] || [ -z "$RELEASE_KEY_PASSWORD" ]; then
+            echo 'Set SIGNING_KEY (base64 keystore), RELEASE_STORE_PASSWORD, RELEASE_KEY_ALIAS and RELEASE_KEY_PASSWORD as repository Actions secrets.' >&2
+            exit 1
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install Android build dependencies
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager 'platforms;android-37.0' 'build-tools;36.0.0' 'ndk;28.2.13676358' 'cmake;3.22.1'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build signed release
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :app:assembleRelease --no-daemon --no-parallel --max-workers=2
+
+      - name: Verify and name APK
+        run: |
+          set -euo pipefail
+          apk=app/build/outputs/apk/release/app-release.apk
+          test -s "$apk"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$apk"
+          "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c 4 "$apk"
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$apk" | grep -E "^package: name='com.lastwave.app' versionCode='39' versionName='5.9.0'"
+          mkdir -p release
+          cp "$apk" release/LastWave-Silent-Programmer-v5.9.0.apk
+          (cd release && sha256sum LastWave-Silent-Programmer-v5.9.0.apk > CHECKSUMS.txt)
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LastWave-Silent-Programmer-v5.9.0
+          path: |
+            LastWave-SilentProgrammer/source/release/LastWave-Silent-Programmer-v5.9.0.apk
+            LastWave-SilentProgrammer/source/release/CHECKSUMS.txt
+          if-no-files-found: error
+          retention-days: 30
