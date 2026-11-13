@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LastWave v5.3.0 — Silent Programmer UI</title>
+<style>
+  /* ============================================================
+     LastWave v5.3.0 — "Silent Programmer" design
+     Ported from txt4nm4y.vercel.app:
+       • zinc monochrome surface stack (zinc-950 → zinc-50)
+       • 1px hairline "ring" borders, no elevation
+       • IBM Plex Sans body / IBM Plex Mono micro-labels
+       • single emerald accent + live status dot
+       • rounded-lg (8–12px) corners
+     ============================================================ */
+  :root{
+    --zinc-50:#fafafa; --zinc-100:#f4f4f5; --zinc-200:#e4e4e7; --zinc-300:#d4d4d8;
+    --zinc-400:#9f9fa9; --zinc-500:#71717b; --zinc-600:#52525c; --zinc-700:#3f3f46;
+    --zinc-800:#27272a; --zinc-900:#18181b; --zinc-950:#09090b;
+    --green-400:#05df72; --green-600:#00a544;
+    --page:var(--zinc-950); --card:var(--zinc-900); --muted:var(--zinc-800);
+    --ink:var(--zinc-50); --muted-fg:var(--zinc-400);
+    --hairline:var(--zinc-800); --hairline-strong:var(--zinc-700);
+    --accent:var(--green-400); --on-accent:var(--zinc-950);
+    --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --r-sm:8px; --r:12px; --r-lg:16px;
+  }
+  html[data-theme="light"]{
+    --page:var(--zinc-50); --card:#ffffff; --muted:var(--zinc-100);
+    --ink:var(--zinc-950); --muted-fg:var(--zinc-500);
+    --hairline:var(--zinc-200); --hairline-strong:var(--zinc-300);
+    --accent:var(--green-600); --on-accent:#fff;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    margin:0;background:var(--page);color:var(--ink);
+    font-family:var(--sans);font-size:15px;line-height:1.5;
+    display:flex;justify-content:center;padding:24px 16px 48px;
+    transition:background .3s,color .3s;
+  }
+  .wrap{width:100%;max-width:420px}
+
+  /* ── chrome ─────────────────────────────────────────────── */
+  .pagebar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted-fg)}
+  .themebtn{
+    font-family:var(--mono);font-size:11px;letter-spacing:.6px;
+    background:transparent;color:var(--muted-fg);cursor:pointer;
+    border:1px solid var(--hairline);border-radius:999px;padding:6px 12px;
+  }
+  .themebtn:hover{color:var(--ink);border-color:var(--hairline-strong)}
+
+  /* ── greeting hero: name → rule → mono status ───────────── */
+  .hero{margin-bottom:22px}
+  .hero h1{
+    margin:0;font-size:30px;line-height:1.2;letter-spacing:-.9px;font-weight:600;
+  }
+  .rule{height:1px;background:var(--hairline);margin:14px 0 12px}
+  .statusline{display:flex;align-items:center;gap:7px;font-family:var(--mono);
+    font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted-fg)}
+  .dot{width:6px;height:6px;border-radius:999px;background:var(--accent);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+
+  /* ── section eyebrow + card ─────────────────────────────── */
+  .section{margin:22px 0 0}
+  .slabel{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;
+    text-transform:uppercase;color:var(--muted-fg);margin:0 0 8px 4px}
+  .card{
+    background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-lg);
+    overflow:hidden;
+  }
+  .row{display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;
+    transition:background .15s}
+  .row + .row{border-top:1px solid var(--hairline)}
+  .row:hover{background:var(--muted)}
+  .chip{
+    width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;
+    background:var(--muted);border:1px solid var(--hairline);color:var(--muted-fg);
+  }
+  .chip svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.6;
+    stroke-linecap:round;stroke-linejoin:round}
+  .row .txt{flex:1;min-width:0}
+  .row .t{font-size:14.5px;font-weight:500;letter-spacing:-.1px}
+  .row .s{font-size:12.5px;color:var(--muted-fg)}
+  .chev{color:var(--muted-fg);flex:none}
+  .chev svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7}
+
+  /* toggle */
+  .sw{width:40px;height:23px;border-radius:999px;background:var(--muted);
+    border:1px solid var(--hairline);position:relative;flex:none;transition:background .2s}
+  .sw.on{background:var(--accent);border-color:transparent}
+  .sw i{position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:999px;
+    background:var(--zinc-400);transition:transform .2s,background .2s}
+  .sw.on i{transform:translateX(17px);background:var(--on-accent)}
+
+  /* ── identity / about card ──────────────────────────────── */
+  .idcard{display:flex;align-items:center;gap:14px}
+  .avatar{width:56px;height:56px;border-radius:999px;flex:none;display:grid;place-items:center;
+    background:var(--zinc-950);border:1px solid var(--hairline);color:var(--accent)}
+  html[data-theme="light"] .avatar{background:var(--zinc-100);color:var(--green-600)}
+  .avatar svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round}
+  .idcard .nm{font-size:19px;font-weight:600;letter-spacing:-.5px;line-height:1.2}
+  .idcard .hd{font-family:var(--mono);font-size:11px;letter-spacing:.9px;color:var(--muted-fg);margin-top:3px}
+  .vpill{font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;color:var(--muted-fg);
+    border:1px solid var(--hairline);border-radius:999px;padding:5px 10px;background:var(--muted)}
+
+  /* ── now playing ────────────────────────────────────────── */
+  .np{display:flex;align-items:center;gap:13px;padding:12px 14px}
+  .art{width:46px;height:46px;border-radius:var(--r-sm);flex:none;
+    background:linear-gradient(140deg,var(--zinc-700),var(--zinc-900));
+    border:1px solid var(--hairline);display:grid;place-items:center;color:var(--zinc-500)}
+  html[data-theme="light"] .art{background:linear-gradient(140deg,var(--zinc-200),var(--zinc-300))}
+  .art svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7}
+  .np .t{font-size:14px;font-weight:500;letter-spacing:-.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .np .s{font-size:12.5px;color:var(--muted-fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prog{height:2px;background:var(--muted);border-radius:999px;margin:0 14px 12px;overflow:hidden}
+  .prog i{display:block;height:100%;width:38%;background:var(--accent);border-radius:999px}
+  .ctr{display:flex;align-items:center;gap:18px;padding:0 14px 13px;color:var(--muted-fg)}
+  .ctr button{background:none;border:0;color:inherit;display:grid;place-items:center;cursor:pointer;padding:0}
+  .ctr button:hover{color:var(--ink)}
+  .ctr svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ctr .main{width:34px;height:34px;border-radius:999px;background:var(--ink);color:var(--page);flex:none}
+  .ctr .main svg{fill:currentColor;stroke:none;width:14px;height:14px}
+
+  /* ── shelf ──────────────────────────────────────────────── */
+  .shelfhd{display:flex;align-items:center;justify-content:space-between;margin:0 4px 8px}
+  .shelfhd h3{margin:0;font-size:17px;font-weight:600;letter-spacing:-.4px}
+  .seeall{font-family:var(--mono);font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;
+    color:var(--muted-fg);border:1px solid var(--hairline);border-radius:999px;
+    padding:5px 10px;background:var(--muted);cursor:pointer}
+  .seeall:hover{color:var(--ink);border-color:var(--hairline-strong)}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .tile{cursor:pointer}
+  .tile .ph{aspect-ratio:1;border-radius:var(--r-sm);border:1px solid var(--hairline);
+    background:linear-gradient(150deg,var(--zinc-800),var(--zinc-900));display:grid;place-items:center;color:var(--zinc-600)}
+  html[data-theme="light"] .tile .ph{background:linear-gradient(150deg,var(--zinc-100),var(--zinc-200));color:var(--zinc-400)}
+  .tile:hover .ph{border-color:var(--hairline-strong)}
+  .tile .ph svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .tile .tt{font-size:12px;margin-top:6px;font-weight:500;letter-spacing:-.1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tile .ss{font-family:var(--mono);font-size:10px;letter-spacing:.4px;color:var(--muted-fg);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* ── bottom dock ────────────────────────────────────────── */
+  .dock{
+    position:sticky;bottom:0;margin-top:26px;display:flex;
+    background:color-mix(in srgb,var(--page) 88%,transparent);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--hairline);
+    padding:9px 6px 4px;border-radius:0 0 var(--r) var(--r);
+  }
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+    background:none;border:0;color:var(--muted-fg);cursor:pointer;padding:4px 0}
+  .tab .ico{width:44px;height:26px;border-radius:999px;display:grid;place-items:center;transition:background .18s,color .18s}
+  .tab svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+  .tab span{font-family:var(--mono);font-size:9.5px;letter-spacing:.7px;text-transform:uppercase}
+  .tab.on{color:var(--accent)}
+  .tab.on .ico{background:color-mix(in srgb,var(--accent) 14%,transparent)}
+
+  .foot{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;
+    color:var(--muted-fg);text-align:center;margin:20px 0 0}
+  .foot b{color:var(--accent);font-weight:500}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="pagebar">
+    <div class="eyebrow">LastWave <span style="color:var(--muted-fg)">//</span> v5.3.0</div>
+    <button class="themebtn" id="theme">toggle theme</button>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>Good evening,<br>Tanmay</h1>
+    <div class="rule"></div>
+    <div class="statusline"><i class="dot"></i> <span id="date">wednesday, 12 nov · 20:58</span></div>
+  </div>
+
+  <!-- now playing -->
+  <div class="card">
+    <div class="np">
+      <div class="art"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="txt" style="flex:1;min-width:0">
+        <div class="t">Midnight City</div>
+        <div class="s">M83 · Hurry Up, We're Dreaming</div>
+      </div>
+      <div class="vpill">flac 24/96</div>
+    </div>
+    <div class="prog"><i></i></div>
+    <div class="ctr">
+      <button title="shuffle"><svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button title="previous"><svg viewBox="0 0 24 24"><path d="M19 20 9 12l10-8v16zM5 19V5"/></svg></button>
+      <button class="main" title="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+      <button title="next"><svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM19 5v14"/></svg></button>
+      <button title="repeat"><svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></button>
+    </div>
+  </div>
+
+  <!-- shelf -->
+  <div class="section">
+    <div class="shelfhd">
+      <h3>Jump back in</h3>
+      <button class="seeall">see all</button>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></div>
+        <div class="tt">After Hours</div><div class="ss">the weeknd</div>
+      </div>
+      <div class="tile">
+        <div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></div>
+        <div class="tt">Random Access</div><div class="ss">daft punk</div>
+      </div>
+      <div class="tile">
+        <div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></div>
+        <div class="tt">Blonde</div><div class="ss">frank ocean</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- settings rows -->
+  <div class="section">
+    <div class="slabel">appearance</div>
+    <div class="card">
+      <div class="row">
+        <div class="chip"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="txt"><div class="t">Silent Programmer UI</div><div class="s">zinc monochrome · IBM Plex type</div></div>
+        <div class="sw on"><i></i></div>
+      </div>
+      <div class="row">
+        <div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z"/></svg></div>
+        <div class="txt"><div class="t">Pure black (AMOLED)</div><div class="s">true #000 page and cards</div></div>
+        <div class="sw"><i></i></div>
+      </div>
+      <div class="row">
+        <div class="chip"><svg viewBox="0 0 24 24"><path d="m4 4 7.5 16 2.5-6.5L20.5 11z"/></svg></div>
+        <div class="txt"><div class="t">Accent</div><div class="s">emerald · single accent only</div></div>
+        <span class="chev"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
+      </div>
+      <div class="row">
+        <div class="chip"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
+        <div class="txt"><div class="t">App language</div><div class="s">English (India)</div></div>
+        <span class="chev"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- identity card -->
+  <div class="section">
+    <div class="slabel">about</div>
+    <div class="card" style="padding:16px">
+      <div class="idcard">
+        <div class="avatar"><svg viewBox="0 0 24 24"><path d="M3 14v-4M7 18V6M11 16V8M15 20V4M19 15V9"/></svg></div>
+        <div style="flex:1;min-width:0">
+          <div class="nm">LastWave</div>
+          <div class="hd">@silent_programmer</div>
+        </div>
+        <span class="vpill">v5.3.0</span>
+      </div>
+      <div class="rule" style="margin:15px 0 13px"></div>
+      <div class="statusline"><i class="dot"></i> <span style="text-transform:none;letter-spacing:.2px;font-family:var(--sans);font-size:13.5px;color:var(--ink)">Developed by Tanmay aka Silent Programmer</span></div>
+      <div style="font-size:12.5px;color:var(--muted-fg);padding-left:13px;margin-top:5px">Silent Programmer Edition · GPL-3.0</div>
+    </div>
+  </div>
+
+  <div class="foot">developer <b>tanmay</b> aka silent programmer</div>
+
+  <!-- dock -->
+  <div class="dock">
+    <button class="tab on">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span>
+      <span>feed</span>
+    </button>
+    <button class="tab">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20V8"/></svg></span>
+      <span>stats</span>
+    </button>
+    <button class="tab">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="16" r="2.5"/></svg></span>
+      <span>library</span>
+    </button>
+    <button class="tab">
+      <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/></svg></span>
+      <span>you</span>
+    </button>
+  </div>
+
+</div>
+<script>
+  const root = document.documentElement;
+  document.getElementById('theme').onclick = () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  };
+  const d = new Date();
+  const dateTxt = d.toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'short'}).toLowerCase()
+    + ' · ' + d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('date').textContent = dateTxt;
+  // toggle switches
+  document.querySelectorAll('.sw').forEach(s => s.onclick = e => { e.stopPropagation(); s.classList.toggle('on'); });
+</script>
+</body>
+</html>

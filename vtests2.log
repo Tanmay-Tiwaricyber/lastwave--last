@@ -1,0 +1,111 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:prepareNativeBridge UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preDebugBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:parseDebugLocalResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugKotlin UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:javaPreCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:kspDebugKotlin UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :app:hiltSyncDebug UP-TO-DATE
+> Task :app:hiltAggregateDepsDebug UP-TO-DATE
+> Task :app:hiltJavaCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:writeDebugAarMetadata UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugManifest UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:mapDebugSourceSetPaths UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugLibraryResources UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:transformDebugClassesWithAsm UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:kspDebugUnitTestKotlin SKIPPED
+
+> Task :app:compileDebugUnitTestKotlin
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:146:34 Condition is always 'false'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:291:88 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:307:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:323:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:336:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:364:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:381:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:383:89 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:407:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:449:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:483:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:549:89 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:hiltSyncDebugUnitTest
+> Task :app:hiltAggregateDepsDebugUnitTest UP-TO-DATE
+> Task :app:hiltJavaCompileDebugUnitTest NO-SOURCE
+> Task :app:transformDebugUnitTestClassesWithAsm
+> Task :audio:decent-usb-audio-driver:processDebugJavaRes UP-TO-DATE
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+> Task :app:testDebugUnitTest
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 1s
+48 actionable tasks: 3 executed, 45 up-to-date
+EXIT=0

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LastWave v5.8.0 — Hearing profile, the three states</title>
+<style>
+  :root{
+    --bg:#0b0d12; --card:#161a23; --card2:#1c2130; --line:#2a3143;
+    --ink:#eef2fb; --dim:#9aa6bf; --accent:#79d2ff; --good:#7ee0a8; --warn:#ffb4a2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:28px 18px 60px}
+  h1{font-size:22px;margin:0 0 4px}
+  p.lead{color:var(--dim);margin:0 0 26px;max-width:980px}
+  .row{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+  .phone{width:342px;background:var(--card);border:1px solid var(--line);border-radius:30px;
+    padding:14px 12px 18px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .cap{font-size:12.5px;color:var(--dim);text-align:center;margin:9px 4px 0}
+  .bar{display:flex;align-items:center;gap:10px;padding:4px 4px 12px}
+  .bar .t{font-size:16px;font-weight:600}
+  .back{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--dim);font-size:13px}
+  .card{background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:10px}
+  .card h2{font-size:14.5px;margin:0 0 6px}
+  .card p{margin:0 0 8px;color:var(--dim);font-size:13px}
+  ul{margin:0;padding:0;list-style:none}
+  li{display:flex;gap:7px;color:var(--dim);font-size:12.6px;margin:5px 0}
+  li b{color:var(--ink);font-weight:500}
+  .dot{color:var(--accent)}
+  .btn{display:block;width:100%;text-align:center;background:var(--accent);color:#05131d;
+    border-radius:14px;padding:11px 0;font-weight:650;font-size:14px;margin-top:4px}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);font-weight:500}
+  .two{display:flex;gap:8px}
+  .kv{display:flex;justify-content:space-between;font-size:12.6px;color:var(--dim);margin:3px 0}
+  .kv b{color:var(--ink);font-weight:550}
+  .meter{height:6px;background:#232a3b;border-radius:4px;overflow:hidden;margin:9px 0 3px}
+  .meter i{display:block;height:100%;background:var(--accent);border-radius:4px}
+  .ok{color:var(--good)} .no{color:var(--warn)}
+  svg{display:block;width:100%;height:auto}
+  .grid{stroke:#2a3143;stroke-width:1}
+  .curve{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round}
+  .pt{fill:var(--accent)}
+  .lbl{fill:#9aa6bf;font-size:8.5px}
+  .band{display:flex;justify-content:space-between;font-size:12.2px;color:var(--dim);
+    padding:4px 0;border-bottom:1px dashed #232a3b}
+  .band:last-child{border-bottom:0}
+  .band b{color:var(--ink);font-weight:550}
+  .chip{font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:2px 7px;color:var(--dim)}
+  .switch{width:36px;height:20px;border-radius:999px;background:var(--accent);position:relative}
+  .switch i{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#05131d}
+  .switch.off{background:#2a3143}.switch.off i{left:2px;right:auto;background:#8e9ab4}
+  h3.note{font-size:13px;color:var(--dim);font-weight:600;margin:26px 0 8px}
+  .foot{max-width:980px;color:var(--dim);font-size:12.6px}
+  .foot code{background:#141822;border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+</style>
+</head>
+<body>
+<h1>Hearing profile — before, during, after</h1>
+<p class="lead">LastWave v5.8.0. Settings → Audio → <b>Hearing profile</b>. Three states of the
+one screen that holds it. Mocked here in HTML; the shipping UI is the same layout in Compose,
+same copy, same numbers.</p>
+
+<div class="row">
+
+  <div>
+    <div class="phone">
+      <div class="bar"><div class="back">‹</div><div class="t">Hearing profile</div></div>
+
+      <div class="card">
+        <h2>Measure your own correction</h2>
+        <p>LastWave plays a quiet tone at each frequency, in one ear at a time, and asks whether
+        you heard it. Bands you hear less well are lifted a little; bands that are fine are left
+        alone. About four minutes.</p>
+        <ul>
+          <li><span class="dot">•</span><span>Use headphones, in a quiet room, at low volume. Music is paused for you.</span></li>
+          <li><span class="dot">•</span><span><b>Not a hearing test in the medical sense.</b> No calibrated level, no audiogram — it measures the difference between bands on this phone, through these ear-tips.</span></li>
+          <li><span class="dot">•</span><span>If a band is genuinely gone the app will not find it; it corrects within a few dB and caps the lift at +6 dB per band.</span></li>
+          <li><span class="dot">•</span><span>Sudden or one-sided hearing loss, or tinnitus: see a doctor before adjusting anything.</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Before you start</h2>
+        <div class="kv"><span>Output</span><b>Sony WF-1000XM5</b></div>
+        <div class="kv"><span>Device volume</span><b class="ok">42% • fine</b></div>
+        <div class="kv"><span>Prior profile</span><b>Pixel Buds Pro</b></div>
+        <div class="btn">Start the test</div>
+      </div>
+      <div class="cap">Nothing measured yet: the screen is the explanation, then a gate.</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="phone">
+      <div class="bar"><div class="back">‹</div><div class="t">Hearing profile</div></div>
+      <div class="card">
+        <h2>Did you hear that?</h2>
+        <p style="margin-bottom:2px">4 kHz &nbsp;•&nbsp; left ear &nbsp;•&nbsp; step 11 of 16</p>
+        <div class="meter"><i style="width:62%"></i></div>
+        <div class="kv"><span>level</span><b>−41 dBFS</b></div>
+        <div class="two" style="margin-top:12px">
+          <span class="btn" style="flex:1">Heard it</span>
+          <span class="btn ghost" style="flex:1">Not heard</span>
+        </div>
+        <div class="two" style="margin-top:8px">
+          <span class="btn ghost" style="flex:1">Play again</span>
+          <span class="btn ghost" style="flex:1">Redo band</span>
+          <span class="btn ghost" style="flex:1">Skip</span>
+        </div>
+        <p style="margin-top:10px">Bands come 1 kHz first, then ascending, left ear then right. No
+        answer after six seconds counts as “not heard”. “Play again”
+        repeats the same level and does <b>not</b> move the measurement.</p>
+        <div class="btn ghost" style="margin-top:2px">Stop (keeps what was measured)</div>
+      </div>
+      <div class="card">
+        <h2>So far</h2>
+        <div class="band"><span>250 Hz · L</span><b>−47.0 dB</b></div>
+        <div class="band"><span>250 Hz · R</span><b>−46.2 dB</b></div>
+        <div class="band"><span>500 Hz · L</span><b>−45.0 dB</b></div>
+        <div class="band"><span>500 Hz · R</span><b>−44.1 dB</b></div>
+        <div class="band"><span>1 kHz · L</span><b>−43.0 dB</b></div>
+        <div class="band"><span>1 kHz · R</span><b>−41.4 dB</b></div>
+        <div class="band"><span>2 kHz · L</span><b>−38.2 dB</b></div>
+        <div class="band"><span>2 kHz · R</span><b>−37.0 dB</b></div>
+        <div class="band"><span>3 kHz · L</span><b class="no">never heard</b></div>
+      </div>
+      <div class="cap">Running. Thresholds are relative to the quietest band this ear found.</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="phone">
+      <div class="bar"><div class="back">‹</div><div class="t">Hearing profile</div></div>
+      <div class="card">
+        <h2>What the test found</h2>
+        <p>Correction ready · high-frequency moderate loss</p>
+        <svg viewBox="0 0 300 96" role="img" aria-label="gain curve">
+          <line class="grid" x1="0" y1="88" x2="300" y2="88"/>
+          <line class="grid" x1="0" y1="64" x2="300" y2="64"/>
+          <line class="grid" x1="0" y1="40" x2="300" y2="40"/>
+          <line class="grid" x1="0" y1="16" x2="300" y2="16"/>
+          <text class="lbl" x="2" y="13">+8 dB</text>
+          <text class="lbl" x="2" y="61">+3 dB</text>
+          <text class="lbl" x="2" y="85">0</text>
+          <path class="curve" d="M8,88 L60,86 L100,74 L140,44 L180,20 L220,18 L260,26 L292,34"/>
+          <circle class="pt" cx="60" cy="86" r="2.6"/><circle class="pt" cx="100" cy="74" r="2.6"/>
+          <circle class="pt" cx="140" cy="44" r="2.6"/><circle class="pt" cx="180" cy="20" r="2.6"/>
+          <circle class="pt" cx="220" cy="18" r="2.6"/><circle class="pt" cx="260" cy="26" r="2.6"/>
+          <text class="lbl" x="52" y="95">250</text><text class="lbl" x="96" y="95">500</text>
+          <text class="lbl" x="134" y="95">1k</text><text class="lbl" x="172" y="95">2k</text>
+          <text class="lbl" x="212" y="95">4k</text><text class="lbl" x="252" y="95">6k</text>
+        </svg>
+        <div class="kv"><span>Strength</span><b>100%</b></div>
+        <div class="meter"><i style="width:100%"></i></div>
+        <p>Half-gain is the hearing-aid convention: give back about half of what is missing.
+        Full compensation sounds wrong by the end of the day.</p>
+        <div class="band"><span>4 kHz</span><b>L −31.4&nbsp;&nbsp;R −30.2&nbsp;&nbsp;loss 11.4 dB</b></div>
+        <div class="band"><span>2 kHz</span><b>L −38.2&nbsp;&nbsp;R −37.0&nbsp;&nbsp;loss 4.8 dB</b></div>
+        <div class="band"><span>1 kHz</span><b>L −43.0&nbsp;&nbsp;R −41.4&nbsp;&nbsp;loss 1.6 dB</b></div>
+        <div class="band"><span>250 Hz</span><b>L −47.0&nbsp;&nbsp;R −46.2&nbsp;&nbsp;loss 0.0 dB</b></div>
+        <p style="margin-top:6px">4 bands could not be measured and were left out — not counted as
+        fine hearing.</p>
+        <p style="color:var(--warn)">3 kHz · L never heard · 3 kHz · R never heard · 6 kHz · L never
+        heard · 6 kHz · R never heard</p>
+        <div class="two" style="margin-top:6px">
+          <span class="btn" style="flex:1">Save and use</span>
+        </div>
+        <div class="two" style="margin-top:8px">
+          <span class="btn ghost" style="flex:1">Save only</span>
+          <span class="btn ghost" style="flex:1">Discard</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="kv" style="align-items:center"><span><b>Correction</b><br><span style="font-size:11.5px;color:var(--dim)">6 bands • 10 filters • preamp −2.4 dB</span></span>
+          <span class="switch"><i></i></span></div>
+        <div class="kv"><span>Measured on</span><b>Pixel Buds Pro (in-ear)</b></div>
+        <p style="margin-top:8px;color:#9ec9ff;font-size:12px">You are on Sony WF-1000XM5. Re-run
+        it here if you use these more often — a curve measured through one seal is the wrong curve
+        through another.</p>
+        <div style="margin-top:8px">
+          <div class="band"><span>pixel buds pro · 6 bands <span class="chip">in use</span></span><b></b></div>
+          <div class="band"><span>sony wf-1000xm5 · 8 bands</span><b><a>use</a> &nbsp; <a>forget</a></b></div>
+        </div>
+        <div class="two" style="margin-top:8px">
+          <span class="btn ghost" style="flex:1">Re-run</span>
+          <span class="btn ghost" style="flex:1">Delete profile</span>
+        </div>
+        <div style="margin-top:9px"><span class="chip">blends with AutoEQ</span> <span class="chip">one curve per device</span> <span class="chip">never a cut</span></div>
+      </div>
+      <div class="cap">Result, then the row it leaves behind in Settings → Audio.</div>
+    </div>
+  </div>
+</div>
+
+<h3 class="note">How the settings row reads</h3>
+<div class="foot">
+  <p><code>Hearing profile — Not tested • takes about 4 minutes</code><br>
+  <code>Hearing profile — On • Correction ready · high-frequency moderate loss</code><br>
+  <code>Hearing profile — Off • Nothing to correct</code></p>
+  <p>Numbers above are from the test that ships in
+  <code>app/src/test/java/com/lastwave/app/data/hearing/HearingProfileTest.kt</code>: a simulated
+  listener with fixed thresholds per band, run through the real staircase, the real curve maths and
+  the real biquad fitter. The part no test here can cover is a human ear, a quiet room, and whether
+  a given phone keeps the silent channel silent.</p>
+</div>
+</body>
+</html>

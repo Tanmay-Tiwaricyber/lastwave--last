@@ -1,0 +1,543 @@
+package com.lastwave.app.data.music
+
+import android.content.Context
+import android.net.Uri
+import android.util.Log
+import java.lang.reflect.InvocationTargetException
+import java.lang.reflect.Method
+import java.lang.reflect.Modifier
+import java.security.KeyStore
+import java.util.UUID
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
+import java.util.concurrent.ConcurrentHashMap
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
+import kotlin.coroutines.resume
+import kotlin.jvm.functions.Function1
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.json.Json
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
+import com.lastwave.app.data.ytmusic.YtMusicAuthManager
+import javax.inject.Inject
+import javax.inject.Singleton
+
+/**
+ * Small compatibility boundary for InnerTubeX. The published artifact
+ * is built with a newer Kotlin metadata version than the app, so this adapter
+ * calls its public API reflectively while keeping the rest of the player typed.
+ */
+@Singleton
+class InnerTubeXStreamExtractor @Inject constructor(
+    private val ytAuth: YtMusicAuthManager,
+    @dagger.hilt.android.qualifiers.ApplicationContext private val context: Context,
+) {
+    private val failedProfilesUntil = ConcurrentHashMap<String, Long>()
+    private val runtime: RuntimeStack? by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        runCatching { createRuntime() }
+            .onFailure { Log.w(TAG, "InnerTubeX unavailable; legacy resolver remains fallback", it) }
+            .getOrNull()
+    }
+
+    suspend fun resolve(
+        videoId: String,
+        visitorData: String?,
+        authScope: String,
+        maxBitrateBps: Int? = null,
+    ): YouTubeAudioStream? = withContext(Dispatchers.IO) {
+        val stack = runtime ?: return@withContext null
+        try {
+            val connection = ytAuth.connection.value
+            setProperty(stack.innerTube, "VisitorData", visitorData)
+            setProperty(stack.innerTube, "Cookie", ytAuth.cookieHeaderValue())
+            setProperty(stack.innerTube, "UseLoginForBrowse", connection.isConnected)
+
+            val hints = newInstance("com.metrolist.innertubex.extraction.ContentHints")
+            val withCapabilities = hints.javaClass.methods.firstOrNull {
+                it.name == "withStreamCapabilities" && it.parameterCount == 3
+            } ?: return@withContext null
+            // (allowHls, allowSabr, allowBoundedRange). The Media3 graph consumes
+            // HTTP/HLS URLs, so SABR stays off. Bounded ranges are ON, as in
+            // Metrolist: ChunkedRangeDataSource fetches every googlevideo URL in
+            // <=512 KB ranges, which is exactly what the token-free ANDROID_VR
+            // clients need to play a whole song. With it off, InnerTubeX
+            // skipped those clients entirely.
+            val constrainedHints = withCapabilities.invoke(hints, true, false, true)
+            val quality = if (maxBitrateBps == null) "HIGH" else "LOW"
+            val audioQuality = enumValue("com.metrolist.innertubex.extraction.AudioQuality", quality)
+            val now = System.currentTimeMillis()
+            failedProfilesUntil.entries.removeIf { it.value <= now }
+            val excludedProfiles = failedProfilesUntil
+                .filter { (key, expiry) -> key.startsWith("$videoId|$authScope|") && expiry > now }
+                .mapTo(mutableSetOf()) { it.key.substringAfterLast('|') }
+            val extractMethod = stack.extractor.javaClass.methods.firstOrNull {
+                it.name == "extract" && it.parameterCount == 6
+            } ?: return@withContext null
+            val extracted = invokeSuspend(
+                receiver = stack.extractor,
+                method = extractMethod,
+                arguments = arrayOf(
+                    videoId,
+                    constrainedHints,
+                    excludedProfiles,
+                    audioQuality,
+                    UUID.randomUUID().toString().replace("-", ""),
+                ),
+            ) ?: return@withContext null
+            extracted.toAudioStream(videoId, authScope)?.takeIf { it.meetsBitrateLimit(maxBitrateBps) }
+        } catch (error: kotlinx.coroutines.CancellationException) {
+            throw error
+        } catch (error: LinkageError) {
+            logDiagnostics(videoId, error)
+            Log.w(TAG, "InnerTubeX extraction unavailable for ${videoId.take(32)} (${error::class.simpleName})")
+            null
+        } catch (error: Exception) {
+            logDiagnostics(videoId, error)
+            Log.w(TAG, "InnerTubeX extraction failed for ${videoId.take(32)} (${error::class.simpleName})")
+            null
+        }
+    }
+
+    /** Keep the request timestamp and the decoding script from the same watch-page config. */
+    internal suspend fun fetchCipherContext(videoId: String): PlaybackCipherContext? = withContext(Dispatchers.IO) {
+        val startedAt = android.os.SystemClock.elapsedRealtime()
+        val stack = runtime ?: return@withContext null
+        val runtimeMs = android.os.SystemClock.elapsedRealtime() - startedAt
+        val account = ytAuth.connection.value
+        try {
+            setProperty(stack.innerTube, "Cookie", ytAuth.cookieHeaderValue(account))
+            setProperty(stack.innerTube, "UseLoginForBrowse", account.isConnected)
+            val fetchConfig = stack.parser.javaClass.methods.first {
+                it.name == "fetchConfig" && it.parameterCount == 3
+            }
+            val config = invokeSuspend(stack.parser, fetchConfig, arrayOf(videoId, account.isConnected))
+                ?: return@withContext null
+            val playerUrl = readString(config, "getPlayerUrl") ?: return@withContext null
+            val timestamp = readInt(config, "getSignatureTimestamp") ?: return@withContext null
+            PlaybackCipherContext(videoId, playerUrl, timestamp, account).also {
+                it.requireMatches(videoId, ytAuth.connection.value)
+                Log.i(TAG, "stage=cipher-context ready runtimeMs=$runtimeMs totalMs=${android.os.SystemClock.elapsedRealtime() - startedAt}")
+            }
+        } catch (error: kotlinx.coroutines.CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            Log.w(TAG, "stage=cipher-context error=${error.javaClass.simpleName} cause=${error.cause?.javaClass?.simpleName}")
+            null
+        }
+    }
+
+    /**
+     * Boots the script engine and downloads/compiles the player script ahead
+     * of the first decipher, which otherwise pays seconds on the first tap.
+     */
+    internal suspend fun preloadCipher(playerUrl: String) = withContext(Dispatchers.IO) {
+        val stack = runtime ?: return@withContext
+        val startedAt = android.os.SystemClock.elapsedRealtime()
+        try {
+            val methods = stack.cipher.javaClass.methods
+            methods.firstOrNull { it.name == "prewarmEjs" && it.parameterCount == 1 }
+                ?.let { invokeSuspend(stack.cipher, it, emptyArray()) }
+            methods.firstOrNull { it.name == "preloadPlayerCode" && it.parameterCount == 2 }
+                ?.let { invokeSuspend(stack.cipher, it, arrayOf(playerUrl)) }
+            Log.i(TAG, "stage=cipher-preload ms=${android.os.SystemClock.elapsedRealtime() - startedAt}")
+        } catch (error: kotlinx.coroutines.CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            Log.w(TAG, "stage=cipher-preload error=${error.javaClass.simpleName}")
+        }
+    }
+
+    /** Local QuickJS/EJS fallback for ciphers NewPipe cannot parse. No remote cipher service. */
+    internal suspend fun decipherAudioUrls(
+        videoId: String,
+        ciphers: List<String>,
+        context: PlaybackCipherContext? = null,
+        directUrls: List<String> = emptyList(),
+    ): Map<String, String> =
+        withContext(Dispatchers.IO) {
+            if (ciphers.isEmpty() && directUrls.isEmpty()) return@withContext emptyMap()
+            Log.i(TAG, "stage=local-cipher begin")
+            val stack = runtime ?: return@withContext emptyMap()
+            Log.i(TAG, "stage=local-cipher runtime-ready")
+            try {
+                val bound = context ?: fetchCipherContext(videoId) ?: return@withContext emptyMap()
+                bound.requireMatches(videoId, ytAuth.connection.value)
+                val playerUrl = bound.playerUrl
+                Log.i(TAG, "stage=local-cipher config-ready paired=${context != null}")
+                @Suppress("UNCHECKED_CAST")
+                val serializer = companionCall(
+                    "com.metrolist.innertubex.models.response.PlayerResponse\$StreamingData\$Format",
+                    "serializer",
+                ) as DeserializationStrategy<Any>
+                val inputs = playbackCipherInputs(ciphers, directUrls)
+                // processFormats batches signatures and n challenges into one local EJS execution.
+                val formats = inputs.map { input ->
+                    Json.decodeFromString(serializer, input.toFormatJson().toString())
+                }
+                val process = stack.cipher.javaClass.methods.first {
+                    it.name == "processFormats" && it.parameterCount == 3
+                }
+                Log.i(TAG, "stage=local-cipher batch-start count=${formats.size}")
+                val batchStartedAt = android.os.SystemClock.elapsedRealtime()
+                val decoded = invokeSuspend(stack.cipher, process, arrayOf(playerUrl, formats)) as? List<*>
+                    ?: return@withContext emptyMap()
+                Log.i(TAG, "stage=local-cipher batch-ms=${android.os.SystemClock.elapsedRealtime() - batchStartedAt}")
+                bound.requireMatches(videoId, ytAuth.connection.value)
+                val result = mutableMapOf<String, String>()
+                for ((input, format) in inputs.zip(decoded)) {
+                    val url = format?.let { readString(it, "getUrl") } ?: continue
+                    val host = Uri.parse(url).host.orEmpty()
+                    if (url.startsWith("https://") && (host == "googlevideo.com" || host.endsWith(".googlevideo.com"))) {
+                        result[input.source] = url
+                    }
+                }
+                Log.i(TAG, "stage=local-cipher requested=${inputs.size} cipherCount=${ciphers.size} directCount=${directUrls.size} decoded=${result.size}")
+                result
+            } catch (error: kotlinx.coroutines.CancellationException) {
+                // A batch that outlives its caller's budget otherwise leaves no trace in diagnostics.
+                Log.w(TAG, "stage=local-cipher cancelled")
+                throw error
+            } catch (error: Exception) {
+                Log.w(TAG, "stage=local-cipher error=${error.javaClass.simpleName}")
+                emptyMap()
+            }
+        }
+
+    fun reportPlaybackFailure(videoId: String, authScope: String, clientProfile: String?) {
+        val profile = clientProfile
+            ?.removePrefix("INNERTUBEX:")
+            ?.takeIf(String::isNotBlank)
+            ?: return
+        failedProfilesUntil["$videoId|$authScope|$profile"] =
+            System.currentTimeMillis() + CLIENT_FAILURE_COOLDOWN_MS
+    }
+
+    private fun Any.toAudioStream(videoId: String, authScope: String): YouTubeAudioStream? {
+        val url = readString(this, "getAudioUrl").orEmpty()
+        if (url.isBlank() || url.startsWith("sabr:", ignoreCase = true)) return null
+        val mime = readString(this, "getMimeType")?.substringBefore(';')?.trim().orEmpty()
+        val isHls = mime.equals("application/x-mpegurl", true) || url.substringBefore('?').endsWith(".m3u8", true)
+        if (!isHls && !mime.startsWith("audio/", true)) return null
+        if (!isHls && mime.lowercase() !in setOf("audio/webm", "audio/mp4", "audio/m4a", "audio/ogg", "audio/mpeg")) return null
+        if (!url.startsWith("https://", true)) return null
+
+        val rawHeaders = (readValue(this, "getHeaders") as? Map<*, *>)
+            ?.mapNotNull { (name, value) ->
+                val key = name as? String
+                val headerValue = value as? String
+                if (key.isNullOrBlank() || headerValue.isNullOrBlank()) null else key to headerValue
+            }
+            ?.toMap()
+            .orEmpty()
+        val clientName = readString(this, "getClientName").orEmpty()
+        val profileId = readString(this, "getProfileId").orEmpty()
+        // iOS-family direct URLs need an iOS-attested GVS token we cannot
+        // supply: they stop with 403 about a minute in. Never accept one.
+        if (clientName.startsWith("IOS", ignoreCase = true) || clientName.startsWith("IPADOS", ignoreCase = true)) return null
+        val headers = rawHeaders.toMutableMap().apply {
+            if (keys.none { it.equals("User-Agent", ignoreCase = true) }) {
+                diagnosticUserAgent(readValue(this@toAudioStream, "getStreamDiagnostics"), clientName, profileId)
+                    ?.let { put("User-Agent", it) }
+            }
+        }
+        val expiresAt = extractExpiry(url) ?: instantToEpochMillis(readValue(this, "getExpiresAt"))
+        val durationMs = readValue(this, "getMediaMetadata")
+            ?.let { readLong(it, "getDurationSeconds") }
+            ?.times(1_000L)
+        val profile = profileId.ifBlank { clientName.ifBlank { "INNERTUBEX" } }
+        return YouTubeAudioStream(
+            videoId = videoId,
+            url = url,
+            itag = readInt(this, "getItag"),
+            mimeType = mime.ifBlank { null },
+            codec = if (isHls) "hls" else readString(this, "getCodecs"),
+            bitrate = readInt(this, "getBitrate") ?: 0,
+            sampleRateHz = readInt(this, "getSampleRate"),
+            durationMs = durationMs,
+            contentLength = readLong(this, "getContentLengthBytes"),
+            isAdaptive = isHls,
+            clientProfile = "INNERTUBEX:$profile",
+            authScope = authScope,
+            requestHeaders = headers,
+            expiresAtEpochMs = expiresAt ?: (System.currentTimeMillis() + UNKNOWN_STREAM_EXPIRY_TTL_MS),
+            isDrc = isDrcAudioUrl(url),
+        )
+    }
+
+    private fun createRuntime(): RuntimeStack {
+        val httpClient = createKtorHttpClient()
+        val repository = playerConfigRepository()
+        val configStore = constructWithDefaults(
+            "com.metrolist.innertubex.cipher.RemotePlayerConfigStore",
+            arrayOf(httpClient, repository),
+            defaultMask = 4,
+        )
+        val innerTube = constructWithDefaults(
+            "com.metrolist.innertubex.InnerTube",
+            arrayOf(httpClient),
+            defaultMask = 6,
+        )
+        val cipher = constructWithDefaults(
+            "com.metrolist.innertubex.cipher.YouTubeCipherService",
+            arrayOf(httpClient, configStore),
+            defaultMask = 4,
+        )
+        val parser = constructWithDefaults(
+            "com.metrolist.innertubex.extraction.YtConfigParserImpl",
+            arrayOf(httpClient, innerTube, configStore),
+            defaultMask = 24,
+        )
+        val extractor = constructWithDefaults(
+            "com.metrolist.innertubex.extraction.InnerTubeExtractor",
+            arrayOf(parser, cipher, innerTube),
+            defaultMask = 120,
+        )
+        return RuntimeStack(innerTube, extractor, parser, cipher)
+    }
+
+    /**
+     * Persistent, ENABLED player-config repository — what Metrolist ships.
+     *
+     * It was `PlayerConfigRepository.disabled()`, which turns off InnerTubeX's
+     * remote player table: getConfig() then returns null and signature/n
+     * deciphering falls back to guessing names in YouTube's script. Signed-in
+     * clients (WEB_REMIX, TVHTML5 — the only ones that serve age-restricted
+     * songs to a connected account) return CIPHERED formats, so a failed guess
+     * meant every age-restricted song failed to play and to download.
+     *
+     * The URL must sit under MetrolistGroup/faraday: RemotePlayerConfigStore
+     * rejects any other source (validatedSourceUrlOrNull) and silently stays off.
+     * Implemented as a Proxy because InnerTubeX is only reachable reflectively.
+     */
+    private fun playerConfigRepository(): Any {
+        val type = Class.forName("com.metrolist.innertubex.cipher.PlayerConfigRepository")
+        val prefs = context.getSharedPreferences(PLAYER_CONFIG_PREFS, Context.MODE_PRIVATE)
+        return java.lang.reflect.Proxy.newProxyInstance(type.classLoader, arrayOf(type)) { proxy, method, args ->
+            val value = args?.firstOrNull()
+            when (method.name) {
+                "getEnabled" -> true
+                "getSourceUrl", "getDefaultSourceUrl" -> PLAYER_CONFIG_URL
+                "getCachedJson" -> prefs.getString("json", "").orEmpty()
+                "getCachedSourceUrl" -> prefs.getString("source_url", "").orEmpty()
+                "getCachedEtag" -> prefs.getString("etag", "").orEmpty()
+                "getCachedAtMs" -> prefs.getLong("cached_at_ms", 0L)
+                "setCachedJson" -> prefs.edit().putString("json", value as String).apply().let { null }
+                "setCachedSourceUrl" -> prefs.edit().putString("source_url", value as String).apply().let { null }
+                "setCachedEtag" -> prefs.edit().putString("etag", value as String).apply().let { null }
+                "setCachedAtMs" -> prefs.edit().putLong("cached_at_ms", value as Long).apply().let { null }
+                "hashCode" -> System.identityHashCode(proxy)
+                "equals" -> proxy === value
+                "toString" -> "LastWavePlayerConfigRepository"
+                else -> null
+            }
+        }
+    }
+
+    private fun createKtorHttpClient(): Any {
+        runCatching { createOkHttpClient() }
+            .onSuccess {
+                Log.i(TAG, "Ktor OkHttp engine ready for cipher context")
+                return it
+            }
+            .onFailure { Log.w(TAG, "Ktor OkHttp engine unavailable (${it.javaClass.simpleName})") }
+        runCatching { createCioHttpClient() }
+            .onSuccess { return it }
+            .onFailure { Log.w(TAG, "CIO client with system trust unavailable (${it.javaClass.simpleName})") }
+        val candidates = listOf("io.ktor.client.HttpClientJvmKt", "io.ktor.client.HttpClientKt")
+        for (className in candidates) {
+            val method = runCatching {
+                Class.forName(className).methods.firstOrNull {
+                    it.name == "HttpClient" && Modifier.isStatic(it.modifiers) &&
+                        (it.parameterCount == 0 ||
+                            (it.parameterCount == 1 && Function1::class.java.isAssignableFrom(it.parameterTypes[0])))
+                }
+            }.getOrNull() ?: continue
+            return if (method.parameterCount == 0) {
+                method.invoke(null)
+            } else {
+                method.invoke(null, { _: Any? -> Unit })
+            }
+        }
+        error("Ktor JVM HttpClient factory was not found")
+    }
+
+    /** Use the same TLS implementation as the app's successful OkHttp API calls. */
+    private fun createOkHttpClient(): Any {
+        val engine = Class.forName("io.ktor.client.engine.okhttp.OkHttp")
+            .getField("INSTANCE")
+            .get(null)
+        val factory = Class.forName("io.ktor.client.HttpClientKt").methods.first {
+            it.name == "HttpClient" && it.parameterCount == 2 &&
+                it.parameterTypes[0].name == "io.ktor.client.engine.HttpClientEngineFactory"
+        }
+        return factory.invoke(null, engine, { _: Any? -> Unit })!!
+    }
+
+    /**
+     * CIO's TLS verifies the chain with the hostname-less checkServerTrusted and then
+     * checks the hostname itself. Android's default trust manager rejects that call
+     * whenever network_security_config has a <domain-config> (our loopback cleartext
+     * entry), which failed every InnerTubeX request with CertificateException. A trust
+     * manager built from an explicit system CA KeyStore has no per-domain config, so
+     * the chain check is accepted. (The Android engine is not an option: it closes
+     * HttpURLConnection streams from a cancel handler and crashes the process.)
+     */
+    private fun createCioHttpClient(): Any {
+        val systemCas = KeyStore.getInstance("AndroidCAStore").apply { load(null) }
+        val trustManager = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+            .apply { init(systemCas) }
+            .trustManagers
+            .filterIsInstance<X509TrustManager>()
+            .first()
+        val cio = Class.forName("io.ktor.client.engine.cio.CIO").getField("INSTANCE").get(null)
+        val factory = Class.forName("io.ktor.client.HttpClientKt").methods.first {
+            it.name == "HttpClient" && it.parameterCount == 2 &&
+                it.parameterTypes[0].name == "io.ktor.client.engine.HttpClientEngineFactory"
+        }
+        val configureClient = { clientConfig: Any? ->
+            val engine = clientConfig!!.javaClass.methods.first { it.name == "engine" && it.parameterCount == 1 }
+            val configureEngine = { engineConfig: Any? ->
+                val https = engineConfig!!.javaClass.getMethod("getHttps").invoke(engineConfig)
+                https.javaClass.getMethod("setTrustManager", TrustManager::class.java).invoke(https, trustManager)
+                Unit
+            }
+            engine.invoke(clientConfig, configureEngine)
+            Unit
+        }
+        return factory.invoke(null, cio, configureClient)!!
+    }
+
+    private suspend fun invokeSuspend(
+        receiver: Any,
+        method: Method,
+        arguments: Array<Any?>,
+    ): Any? = suspendCancellableCoroutine { continuation ->
+        val completion = object : Continuation<Any?> {
+            override val context: CoroutineContext = continuation.context
+
+            override fun resumeWith(result: Result<Any?>) {
+                continuation.resumeWith(result)
+            }
+        }
+        try {
+            val result = method.invoke(receiver, *(arguments + completion))
+            if (result !== COROUTINE_SUSPENDED && continuation.isActive) continuation.resume(result)
+        } catch (error: InvocationTargetException) {
+            if (continuation.isActive) continuation.resumeWith(Result.failure(error.targetException))
+        } catch (error: Throwable) {
+            if (continuation.isActive) continuation.resumeWith(Result.failure(error))
+        }
+    }
+
+    private fun companionCall(className: String, methodName: String): Any {
+        val companion = runCatching {
+            Class.forName(className).getField("Companion").get(null)
+        }.recoverCatching {
+            val companionClass = Class.forName("$className\$Companion")
+            val field = companionClass.declaredFields.firstOrNull {
+                it.name == "INSTANCE" || it.name == "\$\$INSTANCE" || it.name == "Companion"
+            } ?: companionClass.getField("INSTANCE")
+            field.isAccessible = true
+            field.get(null)
+        }.getOrThrow()
+        return companion.javaClass.getMethod(methodName).invoke(companion)
+    }
+
+    private fun constructWithDefaults(
+        className: String,
+        required: Array<Any?>,
+        defaultMask: Int,
+    ): Any {
+        val type = Class.forName(className)
+        val constructor = type.declaredConstructors.firstOrNull { candidate ->
+            candidate.parameterCount >= required.size + 2 &&
+                candidate.parameterTypes[candidate.parameterCount - 2] == Int::class.javaPrimitiveType &&
+                candidate.parameterTypes.last().name == "kotlin.jvm.internal.DefaultConstructorMarker" &&
+                required.withIndex().all { (index, value) ->
+                    value == null || candidate.parameterTypes[index].isAssignableFrom(value.javaClass)
+                }
+        } ?: error("No compatible constructor for $className")
+        constructor.isAccessible = true
+        val originalParameterCount = constructor.parameterCount - 2
+        val arguments = arrayOfNulls<Any?>(constructor.parameterCount)
+        required.copyInto(arguments)
+        arguments[originalParameterCount] = defaultMask
+        return constructor.newInstance(*arguments)
+    }
+
+    private fun setProperty(instance: Any, suffix: String, value: Any?) {
+        instance.javaClass.methods.firstOrNull {
+            it.name == "set$suffix" && it.parameterCount == 1
+        }?.invoke(instance, value)
+    }
+
+    private fun newInstance(className: String): Any =
+        Class.forName(className).getDeclaredConstructor().newInstance()
+
+    private fun enumValue(className: String, name: String): Any =
+        (Class.forName(className).enumConstants as Array<*>).first { (it as Enum<*>).name == name }!!
+
+    private fun readValue(instance: Any, getter: String): Any? =
+        instance.javaClass.methods.firstOrNull { it.name == getter && it.parameterCount == 0 }?.invoke(instance)
+
+    private fun readString(instance: Any, getter: String): String? = readValue(instance, getter) as? String
+
+    private fun readInt(instance: Any, getter: String): Int? = (readValue(instance, getter) as? Number)?.toInt()
+
+    private fun readLong(instance: Any, getter: String): Long? = (readValue(instance, getter) as? Number)?.toLong()
+
+    private fun diagnosticUserAgent(diagnostics: Any?, clientName: String, profileId: String): String? {
+        val attempts = readValue(diagnostics ?: return null, "getAttempts") as? Iterable<*> ?: return null
+        val match = attempts.firstOrNull { attempt ->
+            attempt != null &&
+                (readString(attempt, "getClientName") == clientName || clientName.isBlank()) &&
+                (readString(attempt, "getProfileId") == profileId || profileId.isBlank())
+        } ?: return null
+        return readString(match, "getUserAgent")?.takeIf(String::isNotBlank)
+    }
+
+    private fun logDiagnostics(videoId: String, error: Throwable) {
+        val diagnostics = readValue(error, "getDiagnostics") ?: return
+        val attempts = readValue(diagnostics, "getAttempts") as? Iterable<*> ?: return
+        attempts.forEach { attempt ->
+            if (attempt == null) return@forEach
+            Log.w(
+                TAG,
+                "stage=extract videoId=${videoId.take(32)} client=${readString(attempt, "getClientName").orEmpty()} " +
+                    "profile=${readString(attempt, "getProfileId").orEmpty()} " +
+                    "outcome=${readString(attempt, "getOutcome").orEmpty()}",
+            )
+        }
+    }
+
+    private fun extractExpiry(url: String): Long? =
+        Uri.parse(url).getQueryParameter("expire")?.toLongOrNull()?.times(1_000L)
+
+    private fun instantToEpochMillis(value: Any?): Long? {
+        value ?: return null
+        val method = value.javaClass.methods.firstOrNull {
+            it.name == "toEpochMilliseconds" && it.parameterCount == 0
+        } ?: return null
+        return (runCatching { method.invoke(value) }.getOrNull() as? Number)?.toLong()
+    }
+
+    private data class RuntimeStack(
+        val innerTube: Any,
+        val extractor: Any,
+        val parser: Any,
+        val cipher: Any,
+    )
+
+    private companion object {
+        const val TAG = "InnerTubeXStreamExtractor"
+        const val UNKNOWN_STREAM_EXPIRY_TTL_MS = 5 * 60 * 1_000L
+        const val CLIENT_FAILURE_COOLDOWN_MS = 60_000L
+        const val PLAYER_CONFIG_PREFS = "innertubex_player_config"
+        const val PLAYER_CONFIG_URL =
+            "https://raw.githubusercontent.com/MetrolistGroup/faraday/master/registry/player_configs.json"
+    }
+}

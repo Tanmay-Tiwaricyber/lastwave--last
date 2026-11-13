@@ -1,0 +1,460 @@
+package com.lastwave.app.di
+
+import android.content.Context
+import androidx.room.Room
+import androidx.room.migration.Migration
+import com.lastwave.app.data.local.db.AppDatabase
+import com.lastwave.app.data.local.db.ArtworkCacheDao
+import com.lastwave.app.data.local.db.SavedPlaylistDao
+import com.lastwave.app.data.local.db.RecommendationExclusionDao
+import com.lastwave.app.data.local.db.RelatedGraphDao
+import com.lastwave.app.data.podcast.PodcastProgressDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
+
+    private val migration4To5 = object : Migration(4, 5) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE saved_playlists ADD COLUMN customCoverUri TEXT")
+        }
+    }
+
+    private val migration5To6 = object : Migration(5, 6) {
+        // Completion no longer exists. This step stays only so databases on
+        // v5 still have a continuous, data-preserving path to the latest DB.
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) = Unit
+    }
+
+    private val migration6To7 = object : Migration(6, 7) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE saved_playlists ADD COLUMN isPinned INTEGER NOT NULL DEFAULT 0",
+            )
+        }
+    }
+
+    /** Removes the old automatic Discovery history and starts a clean,
+     * explicit-only "Don't recommend again" exclusion list. */
+    private val migration8To9 = object : Migration(8, 9) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL("DROP TABLE IF EXISTS seen_tracks")
+            database.execSQL(
+                """CREATE TABLE saved_playlists_without_completion (
+                    id INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    subtitle TEXT NOT NULL,
+                    mode TEXT NOT NULL,
+                    tracksJson TEXT NOT NULL,
+                    createdAtMillis INTEGER NOT NULL,
+                    discoverSignature TEXT,
+                    customCoverUri TEXT,
+                    isPinned INTEGER NOT NULL,
+                    PRIMARY KEY(id)
+                )""".trimIndent(),
+            )
+            database.execSQL(
+                """INSERT INTO saved_playlists_without_completion
+                    (id, title, subtitle, mode, tracksJson, createdAtMillis,
+                     discoverSignature, customCoverUri, isPinned)
+                    SELECT id, title, subtitle, mode, tracksJson, createdAtMillis,
+                           discoverSignature, customCoverUri, isPinned
+                    FROM saved_playlists""".trimIndent(),
+            )
+            database.execSQL("DROP TABLE saved_playlists")
+            database.execSQL(
+                "ALTER TABLE saved_playlists_without_completion RENAME TO saved_playlists",
+            )
+            database.execSQL(
+                """CREATE TABLE IF NOT EXISTS recommendation_exclusions (
+                    trackKey TEXT NOT NULL,
+                    excludedAtMillis INTEGER NOT NULL,
+                    PRIMARY KEY(trackKey)
+                )""".trimIndent(),
+            )
+        }
+    }
+
+    /** Adds display metadata so exclusions can be managed individually. */
+    private val migration9To10 = object : Migration(9, 10) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE recommendation_exclusions ADD COLUMN trackName TEXT NOT NULL DEFAULT ''",
+            )
+            database.execSQL(
+                "ALTER TABLE recommendation_exclusions ADD COLUMN artistName TEXT NOT NULL DEFAULT ''",
+            )
+        }
+    }
+
+    private val migration7To8 = object : Migration(7, 8) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                """CREATE TABLE IF NOT EXISTS downloaded_tracks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    title TEXT NOT NULL,
+                    artist TEXT NOT NULL,
+                    album TEXT NOT NULL,
+                    artworkUrl TEXT,
+                    filePath TEXT NOT NULL,
+                    mediaStoreUri TEXT,
+                    fileSizeBytes INTEGER NOT NULL,
+                    formatBadge TEXT NOT NULL,
+                    durationMs INTEGER NOT NULL,
+                    bitrateKbps INTEGER,
+                    isLossless INTEGER NOT NULL,
+                    hasLyrics INTEGER NOT NULL,
+                    syncedLyrics TEXT,
+                    plainLyrics TEXT,
+                    lrcFilePath TEXT,
+                    downloadedAtMillis INTEGER NOT NULL
+                )""".trimIndent(),
+            )
+        }
+    }
+
+    private fun migrateDownloadedTracksToLosslessAndUniqueKey(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+        val cursor = database.query("PRAGMA table_info(downloaded_tracks)")
+        val existingColumns = mutableSetOf<String>()
+        cursor.use { c ->
+            val nameIndex = c.getColumnIndex("name")
+            while (c.moveToNext()) {
+                existingColumns.add(c.getString(nameIndex))
+            }
+        }
+        if (existingColumns.isEmpty()) return
+
+        database.execSQL(
+            """CREATE TABLE IF NOT EXISTS downloaded_tracks_v12 (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                trackKey TEXT NOT NULL DEFAULT '',
+                title TEXT NOT NULL,
+                artist TEXT NOT NULL,
+                album TEXT NOT NULL DEFAULT '',
+                artworkUrl TEXT,
+                filePath TEXT NOT NULL,
+                mediaStoreUri TEXT,
+                fileSizeBytes INTEGER NOT NULL DEFAULT 0,
+                formatBadge TEXT NOT NULL DEFAULT 'AUDIO',
+                durationMs INTEGER NOT NULL DEFAULT 0,
+                bitrateKbps INTEGER,
+                isLossless INTEGER NOT NULL DEFAULT 0,
+                hasLyrics INTEGER NOT NULL DEFAULT 0,
+                syncedLyrics TEXT,
+                plainLyrics TEXT,
+                lrcFilePath TEXT,
+                downloadedAtMillis INTEGER NOT NULL DEFAULT 0
+            )""".trimIndent(),
+        )
+
+        val hasLossless = existingColumns.contains("isLossless")
+        val hasQobuz = existingColumns.contains("isQobuz")
+        val hasTrackKey = existingColumns.contains("trackKey")
+
+        val losslessExpr = when {
+            hasLossless -> "isLossless"
+            hasQobuz -> "isQobuz"
+            else -> "0"
+        }
+        val trackKeyExpr = when {
+            hasTrackKey -> "COALESCE(NULLIF(trackKey, ''), LOWER(TRIM(artist)) || '_' || LOWER(TRIM(title)))"
+            else -> "LOWER(TRIM(artist)) || '_' || LOWER(TRIM(title))"
+        }
+
+        database.execSQL(
+            """INSERT OR REPLACE INTO downloaded_tracks_v12 (
+                id, trackKey, title, artist, album, artworkUrl, filePath, mediaStoreUri,
+                fileSizeBytes, formatBadge, durationMs, bitrateKbps, isLossless,
+                hasLyrics, syncedLyrics, plainLyrics, lrcFilePath, downloadedAtMillis
+            ) SELECT
+                id, $trackKeyExpr, title, artist, album, artworkUrl, filePath, mediaStoreUri,
+                fileSizeBytes, formatBadge, durationMs, bitrateKbps, $losslessExpr,
+                hasLyrics, syncedLyrics, plainLyrics, lrcFilePath, downloadedAtMillis
+            FROM downloaded_tracks""".trimIndent(),
+        )
+
+        database.execSQL(
+            """DELETE FROM downloaded_tracks_v12
+                WHERE id NOT IN (
+                    SELECT MAX(id) FROM downloaded_tracks_v12 GROUP BY trackKey
+                )""".trimIndent(),
+        )
+
+        database.execSQL("DROP TABLE downloaded_tracks")
+        database.execSQL("ALTER TABLE downloaded_tracks_v12 RENAME TO downloaded_tracks")
+        database.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_downloaded_tracks_trackKey ON downloaded_tracks(trackKey)")
+    }
+
+    private fun verifyAndRepairSavedPlaylists(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+        val cursor = database.query("PRAGMA table_info(saved_playlists)")
+        val columns = mutableSetOf<String>()
+        cursor.use { c ->
+            val nameIndex = c.getColumnIndex("name")
+            while (c.moveToNext()) {
+                columns.add(c.getString(nameIndex))
+            }
+        }
+        if (columns.isEmpty()) {
+            database.execSQL(
+                """CREATE TABLE IF NOT EXISTS saved_playlists (
+                    id INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    subtitle TEXT NOT NULL,
+                    mode TEXT NOT NULL,
+                    tracksJson TEXT NOT NULL,
+                    createdAtMillis INTEGER NOT NULL,
+                    discoverSignature TEXT,
+                    customCoverUri TEXT,
+                    isPinned INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY(id)
+                )""".trimIndent(),
+            )
+            return
+        }
+        if (!columns.contains("customCoverUri")) {
+            database.execSQL("ALTER TABLE saved_playlists ADD COLUMN customCoverUri TEXT")
+        }
+        if (!columns.contains("isPinned")) {
+            database.execSQL("ALTER TABLE saved_playlists ADD COLUMN isPinned INTEGER NOT NULL DEFAULT 0")
+        }
+        if (!columns.contains("discoverSignature")) {
+            database.execSQL("ALTER TABLE saved_playlists ADD COLUMN discoverSignature TEXT")
+        }
+    }
+
+    private val migration10To11 = object : Migration(10, 11) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            migrateDownloadedTracksToLosslessAndUniqueKey(database)
+            verifyAndRepairSavedPlaylists(database)
+        }
+    }
+
+    private val migration11To12 = object : Migration(11, 12) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            migrateDownloadedTracksToLosslessAndUniqueKey(database)
+            verifyAndRepairSavedPlaylists(database)
+        }
+    }
+
+    private val migration12To13 = object : Migration(12, 13) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `song_play_stats` (
+                    `trackKey` TEXT NOT NULL PRIMARY KEY,
+                    `title` TEXT NOT NULL DEFAULT '',
+                    `artist` TEXT NOT NULL DEFAULT '',
+                    `videoId` TEXT,
+                    `artworkUrl` TEXT,
+                    `totalPlayTimeMs` INTEGER NOT NULL DEFAULT 0,
+                    `playCount` INTEGER NOT NULL DEFAULT 0,
+                    `skipCount` INTEGER NOT NULL DEFAULT 0,
+                    `lastPlayedAtMillis` INTEGER NOT NULL DEFAULT 0
+                )
+                """.trimIndent(),
+            )
+        }
+    }
+
+    private val migration13To14 = object : Migration(13, 14) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `related_graph_edges` (
+                    `sourceVideoId` TEXT NOT NULL,
+                    `relatedVideoId` TEXT NOT NULL,
+                    `title` TEXT NOT NULL DEFAULT '',
+                    `artist` TEXT NOT NULL DEFAULT '',
+                    `album` TEXT,
+                    `artworkUrl` TEXT,
+                    `durationSeconds` INTEGER,
+                    `seenCount` INTEGER NOT NULL DEFAULT 1,
+                    `firstSeenAtMillis` INTEGER NOT NULL,
+                    `lastSeenAtMillis` INTEGER NOT NULL,
+                    PRIMARY KEY(`sourceVideoId`, `relatedVideoId`)
+                )
+                """.trimIndent(),
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_related_graph_edges_relatedVideoId` ON `related_graph_edges` (`relatedVideoId`)",
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_related_graph_edges_lastSeenAtMillis` ON `related_graph_edges` (`lastSeenAtMillis`)",
+            )
+        }
+    }
+
+    private val migration14To15 = object : Migration(14, 15) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `podcast_progress` (
+                    `videoId` TEXT NOT NULL,
+                    `showId` TEXT,
+                    `positionMs` INTEGER NOT NULL DEFAULT 0,
+                    `durationMs` INTEGER NOT NULL DEFAULT 0,
+                    `completed` INTEGER NOT NULL DEFAULT 0,
+                    `updatedAtMillis` INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY(`videoId`)
+                )
+                """.trimIndent(),
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_podcast_progress_showId` ON `podcast_progress` (`showId`)",
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_podcast_progress_updatedAtMillis` ON `podcast_progress` (`updatedAtMillis`)",
+            )
+        }
+    }
+
+    /**
+     * v5.4.0 — LastWave Wrapped storage. Both tables start empty: Wrapped
+     * counts listens from the moment the feature ships, and the marker table
+     * seeds itself on the first recorded listen.
+     */
+    private val migration15To16 = object : Migration(15, 16) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `listen_events` (
+                    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `title` TEXT NOT NULL,
+                    `artist` TEXT NOT NULL,
+                    `album` TEXT,
+                    `videoId` TEXT,
+                    `artworkUrl` TEXT,
+                    `trackKey` TEXT NOT NULL,
+                    `listenedMs` INTEGER NOT NULL,
+                    `playedAtMillis` INTEGER NOT NULL,
+                    `hourOfDay` INTEGER NOT NULL,
+                    `completed` INTEGER NOT NULL
+                )
+                """.trimIndent(),
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_listen_events_playedAtMillis` ON `listen_events` (`playedAtMillis`)",
+            )
+            database.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_listen_events_trackKey` ON `listen_events` (`trackKey`)",
+            )
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `wrapped_markers` (
+                    `key` TEXT NOT NULL,
+                    `value` INTEGER NOT NULL,
+                    PRIMARY KEY(`key`)
+                )
+                """.trimIndent(),
+            )
+        }
+    }
+
+    /**
+     * v5.7.0 - cached melodies for "sing to find". Pure derived data: an empty
+     * table only means the first search re-reads the library, so the upgrade is
+     * one CREATE TABLE and nothing else.
+     */
+    private val migration16To17 = object : Migration(16, 17) {
+        override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+            database.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `melody_signatures` (
+                    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `trackKey` TEXT NOT NULL,
+                    `intervals` BLOB NOT NULL,
+                    `noteFrames` BLOB NOT NULL,
+                    `frameSeconds` REAL NOT NULL,
+                    `durationSeconds` REAL NOT NULL,
+                    `noteCount` INTEGER NOT NULL,
+                    `stamp` INTEGER NOT NULL,
+                    `updatedAtMillis` INTEGER NOT NULL
+                )
+                """.trimIndent(),
+            )
+            database.execSQL(
+                "CREATE UNIQUE INDEX IF NOT EXISTS `index_melody_signatures_trackKey` ON `melody_signatures` (`trackKey`)",
+            )
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, "lastwave.db")
+            // PlaylistRepository mirrors playlists to public JSON before
+            // future schema changes can rebuild Room, then restores that
+            // mirror if the database opens empty. Artwork is cache.
+            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigrationOnDowngrade()
+            .addMigrations(
+                migration4To5,
+                migration5To6,
+                migration6To7,
+                migration7To8,
+                migration8To9,
+                migration9To10,
+                migration10To11,
+                migration11To12,
+                migration12To13,
+                migration13To14,
+                migration14To15,
+                migration15To16,
+                migration16To17,
+            )
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideArtworkCacheDao(database: AppDatabase): ArtworkCacheDao = database.artworkCacheDao()
+
+    @Provides
+    @Singleton
+    fun provideRecommendationExclusionDao(database: AppDatabase): RecommendationExclusionDao =
+        database.recommendationExclusionDao()
+
+    @Provides
+    @Singleton
+    fun provideSavedPlaylistDao(database: AppDatabase): SavedPlaylistDao = database.savedPlaylistDao()
+
+    @Provides
+    @Singleton
+    fun provideDownloadedTrackDao(database: AppDatabase): com.lastwave.app.data.local.db.DownloadedTrackDao =
+        database.downloadedTrackDao()
+
+    @Provides
+    @Singleton
+    fun provideMelodySignatureDao(database: AppDatabase): com.lastwave.app.data.local.db.MelodySignatureDao =
+        database.melodySignatureDao()
+
+    @Provides
+    @Singleton
+    fun provideSongPlayStatsDao(database: AppDatabase): com.lastwave.app.data.local.db.SongPlayStatsDao =
+        database.songPlayStatsDao()
+
+    @Provides
+    @Singleton
+    fun provideListenEventDao(database: AppDatabase): com.lastwave.app.data.local.db.ListenEventDao =
+        database.listenEventDao()
+
+    @Provides
+    @Singleton
+    fun provideWrappedMarkerDao(database: AppDatabase): com.lastwave.app.data.local.db.WrappedMarkerDao =
+        database.wrappedMarkerDao()
+
+    @Provides
+    @Singleton
+    fun provideRelatedGraphDao(database: AppDatabase): RelatedGraphDao =
+        database.relatedGraphDao()
+
+    @Provides
+    @Singleton
+    fun providePodcastProgressDao(database: AppDatabase): PodcastProgressDao =
+        database.podcastProgressDao()
+}

@@ -1,0 +1,2 @@
+/home/user/gradle_run.sh: line 7: ./gradlew: Permission denied
+EXIT=126

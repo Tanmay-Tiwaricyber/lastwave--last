@@ -1,0 +1,1848 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:prepareNativeBridge
+> Task :app:preBuild
+> Task :app:preRawReleaseBuild
+
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDependentOption.cmake:84 (message):
+C/C++:   Policy CMP0127 is not set: cmake_dependent_option() supports full Condition
+C/C++:   Syntax.  Run "cmake --help-policy CMP0127" for policy details.  Use the
+C/C++:   cmake_policy command to set the policy and suppress this warning.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/CMakeLists.txt:72 (cmake_dependent_option)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CheckIncludeFiles.cmake:122 (message):
+C/C++:   Policy CMP0075 is not set: Include file check macros honor
+C/C++:   CMAKE_REQUIRED_LIBRARIES.  Run "cmake --help-policy CMP0075" for policy
+C/C++:   details.  Use the cmake_policy command to set the policy and suppress this
+C/C++:   warning.
+C/C++:   CMAKE_REQUIRED_LIBRARIES is set to:
+C/C++:     m;
+C/C++:   For compatibility with CMake 3.11 and below this check is ignoring it.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/CMakeLists.txt:146 (check_include_files)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/data-io.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/dbesi0.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/vr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning:
+C/C++:   Manually-specified variables were not used by the project:
+C/C++:     CMAKE_POLICY_VERSION_MINIMUM
+
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a]
+C/C++: ninja: Entering directory `/home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a'
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [2/26] Building CXX object CMakeFiles/lastwave_audio.dir/DspProcessor.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [3/26] Building CXX object CMakeFiles/lastwave_audio.dir/AudioEngine.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [4/26] Building CXX object CMakeFiles/lastwave_audio.dir/DirectOutputStream.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [5/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEq.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [6/26] Building CXX object CMakeFiles/lastwave_audio.dir/NativeBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [7/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEqBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [8/26] Building CXX object CMakeFiles/lastwave_audio.dir/SecretsBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:116:26: warning: implicit conversion changes signedness: 'int' to 'size_t' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   116 |         tail[pad_to + (7 - i)] = (uint8_t)(total_bits >> (i * 8));
+C/C++:       |                     ~  ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:123:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   123 |         out[i * 4]     = (uint8_t)(state[i] >> 24);
+C/C++:       |         ~~~ ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:124:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   124 |         out[i * 4 + 1] = (uint8_t)(state[i] >> 16);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:125:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   125 |         out[i * 4 + 2] = (uint8_t)(state[i] >> 8);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:126:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   126 |         out[i * 4 + 3] = (uint8_t)(state[i]);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:142:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   142 |         i_buf[i] = k_block[i] ^ 0x36;
+C/C++:       |         ~~~~~ ^
+C/C++: 6 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/automix/TransientPreservingStretcher.cpp:113:61: warning: implicit conversion changes signedness: 'size_t' (aka 'unsigned long') to 'difference_type' (aka 'long') [-Wsign-conversion]
+C/C++:   113 |         std::vector<float> remaining(inputBuffer_.begin() + offset, inputBuffer_.end());
+C/C++:       |                                                           ~ ^~~~~~
+C/C++: 1 warning generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [11/26] Building CXX object CMakeFiles/lastwave_audio.dir/dsd/DsdJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [12/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/AutoMixJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [13/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/soxr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/soxr.c:634:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   634 |   bool separated = !!(p->io_spec.itype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/soxr.c:656:82: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   656 | static size_t soxr_output_1ch(soxr_t p, unsigned i, soxr_buf_t dest, size_t len, bool separated)
+C/C++:       |                                                                                  ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/soxr.c:676:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   676 |   bool separated = !!(p->io_spec.otype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/soxr.c:704:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   704 |   bool was_flushing;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/soxr.c:759:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   759 |   bool flush_requested = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 5 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [15/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/dbesi0.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [16/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/filter.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 8 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [18/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/data-io.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [19/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:192:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   192 |   bool f_domain_m = abs(3-M) == 1 && Fs <= 1;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:283:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   283 |   bool const maintain_3dB_pt = !!(q_spec->flags & SOXR_MAINTAIN_3DB_PT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:290:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   290 |   bool upsample=false, rational=false, iOpt=!(r_spec->flags&SOXR_NOSMALLINTOPT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:291:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   291 |   bool lq_bits= (q_spec->flags & SOXR_PROMOTE_TO_LQ)? bits <= 16 : bits == 16;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:292:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   292 |   bool lq_Fp0 = (q_spec->flags & SOXR_PROMOTE_TO_LQ)? Fp0<=lq_bw0 : Fp0==lq_bw0;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:498:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:498:44: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |                                            ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:501:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   501 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.c:520:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   520 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 11 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [21/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr32.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [24/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/vr32.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/vr32.c:202:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   202 |   bool is_d; /* true: downsampling at x2 rate; false: upsampling at 1x rate. */
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/vr32.c:338:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   338 | static bool set_step_step(stream_t * p, double io_ratio, int slew_len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/vr32.c:377:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   377 | static bool do_input_stage(rate_t * p, int stage_num, int sign, int min_stage_num)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/arm64-v8a/_deps/soxr_source-src/src/vr32.c:394:5: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   394 |     bool should_be_fast = p->stage_inc;
+C/C++:       |     ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 4 warnings generated.
+
+> Task :app:configureCMakeRelWithDebInfo[armeabi-v7a]
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDependentOption.cmake:84 (message):
+C/C++:   Policy CMP0127 is not set: cmake_dependent_option() supports full Condition
+C/C++:   Syntax.  Run "cmake --help-policy CMP0127" for policy details.  Use the
+C/C++:   cmake_policy command to set the policy and suppress this warning.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/CMakeLists.txt:72 (cmake_dependent_option)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CheckIncludeFiles.cmake:122 (message):
+C/C++:   Policy CMP0075 is not set: Include file check macros honor
+C/C++:   CMAKE_REQUIRED_LIBRARIES.  Run "cmake --help-policy CMP0075" for policy
+C/C++:   details.  Use the cmake_policy command to set the policy and suppress this
+C/C++:   warning.
+C/C++:   CMAKE_REQUIRED_LIBRARIES is set to:
+C/C++:     m;
+C/C++:   For compatibility with CMake 3.11 and below this check is ignoring it.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/CMakeLists.txt:146 (check_include_files)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/data-io.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/dbesi0.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/vr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning:
+C/C++:   Manually-specified variables were not used by the project:
+C/C++:     CMAKE_POLICY_VERSION_MINIMUM
+
+> Task :app:buildCMakeRelWithDebInfo[armeabi-v7a]
+C/C++: ninja: Entering directory `/home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a'
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [2/26] Building CXX object CMakeFiles/lastwave_audio.dir/DspProcessor.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [3/26] Building CXX object CMakeFiles/lastwave_audio.dir/AudioEngine.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [4/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEq.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [5/26] Building CXX object CMakeFiles/lastwave_audio.dir/DirectOutputStream.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [6/26] Building CXX object CMakeFiles/lastwave_audio.dir/NativeBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [7/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEqBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [8/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/TransientPreservingStretcher.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/automix/TransientPreservingStretcher.cpp:113:61: warning: implicit conversion changes signedness: 'size_t' (aka 'unsigned int') to 'difference_type' (aka 'int') [-Wsign-conversion]
+C/C++:   113 |         std::vector<float> remaining(inputBuffer_.begin() + offset, inputBuffer_.end());
+C/C++:       |                                                           ~ ^~~~~~
+C/C++: 1 warning generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:116:26: warning: implicit conversion changes signedness: 'int' to 'size_t' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   116 |         tail[pad_to + (7 - i)] = (uint8_t)(total_bits >> (i * 8));
+C/C++:       |                     ~  ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:123:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   123 |         out[i * 4]     = (uint8_t)(state[i] >> 24);
+C/C++:       |         ~~~ ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:124:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   124 |         out[i * 4 + 1] = (uint8_t)(state[i] >> 16);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:125:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   125 |         out[i * 4 + 2] = (uint8_t)(state[i] >> 8);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:126:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   126 |         out[i * 4 + 3] = (uint8_t)(state[i]);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:142:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   142 |         i_buf[i] = k_block[i] ^ 0x36;
+C/C++:       |         ~~~~~ ^
+C/C++: 6 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [11/26] Building CXX object CMakeFiles/lastwave_audio.dir/dsd/DsdJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [12/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/AutoMixJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [13/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/LinkwitzRileyCrossover.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [14/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/soxr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/soxr.c:634:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   634 |   bool separated = !!(p->io_spec.itype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/soxr.c:656:82: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   656 | static size_t soxr_output_1ch(soxr_t p, unsigned i, soxr_buf_t dest, size_t len, bool separated)
+C/C++:       |                                                                                  ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/soxr.c:676:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   676 |   bool separated = !!(p->io_spec.otype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/soxr.c:704:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   704 |   bool was_flushing;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/soxr.c:759:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   759 |   bool flush_requested = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 5 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [16/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/filter.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 8 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [18/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/LufsContourNormalizer.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [19/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/data-io.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [20/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr32.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:192:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   192 |   bool f_domain_m = abs(3-M) == 1 && Fs <= 1;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:283:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   283 |   bool const maintain_3dB_pt = !!(q_spec->flags & SOXR_MAINTAIN_3DB_PT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:290:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   290 |   bool upsample=false, rational=false, iOpt=!(r_spec->flags&SOXR_NOSMALLINTOPT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:291:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   291 |   bool lq_bits= (q_spec->flags & SOXR_PROMOTE_TO_LQ)? bits <= 16 : bits == 16;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:292:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   292 |   bool lq_Fp0 = (q_spec->flags & SOXR_PROMOTE_TO_LQ)? Fp0<=lq_bw0 : Fp0==lq_bw0;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:498:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:498:44: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |                                            ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:501:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   501 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.c:520:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   520 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 11 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [23/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr64.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/vr32.c:202:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   202 |   bool is_d; /* true: downsampling at x2 rate; false: upsampling at 1x rate. */
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/vr32.c:338:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   338 | static bool set_step_step(stream_t * p, double io_ratio, int slew_len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/vr32.c:377:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   377 | static bool do_input_stage(rate_t * p, int stage_num, int sign, int min_stage_num)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/armeabi-v7a/_deps/soxr_source-src/src/vr32.c:394:5: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   394 |     bool should_be_fast = p->stage_inc;
+C/C++:       |     ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 4 warnings generated.
+
+> Task :app:configureCMakeRelWithDebInfo[x86]
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDependentOption.cmake:84 (message):
+C/C++:   Policy CMP0127 is not set: cmake_dependent_option() supports full Condition
+C/C++:   Syntax.  Run "cmake --help-policy CMP0127" for policy details.  Use the
+C/C++:   cmake_policy command to set the policy and suppress this warning.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/CMakeLists.txt:72 (cmake_dependent_option)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CheckIncludeFiles.cmake:122 (message):
+C/C++:   Policy CMP0075 is not set: Include file check macros honor
+C/C++:   CMAKE_REQUIRED_LIBRARIES.  Run "cmake --help-policy CMP0075" for policy
+C/C++:   details.  Use the cmake_policy command to set the policy and suppress this
+C/C++:   warning.
+C/C++:   CMAKE_REQUIRED_LIBRARIES is set to:
+C/C++:     m;
+C/C++:   For compatibility with CMake 3.11 and below this check is ignoring it.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/CMakeLists.txt:146 (check_include_files)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/data-io.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/dbesi0.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/vr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning:
+C/C++:   Manually-specified variables were not used by the project:
+C/C++:     CMAKE_POLICY_VERSION_MINIMUM
+
+> Task :app:buildCMakeRelWithDebInfo[x86]
+C/C++: ninja: Entering directory `/home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86'
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [2/26] Building CXX object CMakeFiles/lastwave_audio.dir/DspProcessor.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [3/26] Building CXX object CMakeFiles/lastwave_audio.dir/AudioEngine.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [4/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEq.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [5/26] Building CXX object CMakeFiles/lastwave_audio.dir/DirectOutputStream.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [6/26] Building CXX object CMakeFiles/lastwave_audio.dir/NativeBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [7/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEqBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [8/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/TransientPreservingStretcher.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/automix/TransientPreservingStretcher.cpp:113:61: warning: implicit conversion changes signedness: 'size_t' (aka 'unsigned int') to 'difference_type' (aka 'int') [-Wsign-conversion]
+C/C++:   113 |         std::vector<float> remaining(inputBuffer_.begin() + offset, inputBuffer_.end());
+C/C++:       |                                                           ~ ^~~~~~
+C/C++: 1 warning generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [10/26] Building CXX object CMakeFiles/lastwave_audio.dir/SecretsBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:116:26: warning: implicit conversion changes signedness: 'int' to 'size_t' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   116 |         tail[pad_to + (7 - i)] = (uint8_t)(total_bits >> (i * 8));
+C/C++:       |                     ~  ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:123:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   123 |         out[i * 4]     = (uint8_t)(state[i] >> 24);
+C/C++:       |         ~~~ ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:124:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   124 |         out[i * 4 + 1] = (uint8_t)(state[i] >> 16);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:125:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   125 |         out[i * 4 + 2] = (uint8_t)(state[i] >> 8);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:126:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   126 |         out[i * 4 + 3] = (uint8_t)(state[i]);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:142:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned int') [-Wsign-conversion]
+C/C++:   142 |         i_buf[i] = k_block[i] ^ 0x36;
+C/C++:       |         ~~~~~ ^
+C/C++: 6 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [12/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/AutoMixJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [13/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/LinkwitzRileyCrossover.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [14/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/soxr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/soxr.c:634:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   634 |   bool separated = !!(p->io_spec.itype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/soxr.c:656:82: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   656 | static size_t soxr_output_1ch(soxr_t p, unsigned i, soxr_buf_t dest, size_t len, bool separated)
+C/C++:       |                                                                                  ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/soxr.c:676:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   676 |   bool separated = !!(p->io_spec.otype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/soxr.c:704:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   704 |   bool was_flushing;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/soxr.c:759:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   759 |   bool flush_requested = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 5 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [16/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/filter.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 8 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [18/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/LufsContourNormalizer.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [19/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/fft4g64.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [20/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:192:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   192 |   bool f_domain_m = abs(3-M) == 1 && Fs <= 1;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:283:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   283 |   bool const maintain_3dB_pt = !!(q_spec->flags & SOXR_MAINTAIN_3DB_PT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:290:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   290 |   bool upsample=false, rational=false, iOpt=!(r_spec->flags&SOXR_NOSMALLINTOPT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:291:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   291 |   bool lq_bits= (q_spec->flags & SOXR_PROMOTE_TO_LQ)? bits <= 16 : bits == 16;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:292:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   292 |   bool lq_Fp0 = (q_spec->flags & SOXR_PROMOTE_TO_LQ)? Fp0<=lq_bw0 : Fp0==lq_bw0;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:498:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:498:44: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |                                            ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:501:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   501 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.c:520:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   520 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 11 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [24/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/vr32.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/vr32.c:202:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   202 |   bool is_d; /* true: downsampling at x2 rate; false: upsampling at 1x rate. */
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/vr32.c:338:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   338 | static bool set_step_step(stream_t * p, double io_ratio, int slew_len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/vr32.c:377:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   377 | static bool do_input_stage(rate_t * p, int stage_num, int sign, int min_stage_num)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86/_deps/soxr_source-src/src/vr32.c:394:5: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   394 |     bool should_be_fast = p->stage_inc;
+C/C++:       |     ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 4 warnings generated.
+
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDependentOption.cmake:84 (message):
+C/C++:   Policy CMP0127 is not set: cmake_dependent_option() supports full Condition
+C/C++:   Syntax.  Run "cmake --help-policy CMP0127" for policy details.  Use the
+C/C++:   cmake_policy command to set the policy and suppress this warning.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/CMakeLists.txt:72 (cmake_dependent_option)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/.toolchain/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CheckIncludeFiles.cmake:122 (message):
+C/C++:   Policy CMP0075 is not set: Include file check macros honor
+C/C++:   CMAKE_REQUIRED_LIBRARIES.  Run "cmake --help-policy CMP0075" for policy
+C/C++:   details.  Use the cmake_policy command to set the policy and suppress this
+C/C++:   warning.
+C/C++:   CMAKE_REQUIRED_LIBRARIES is set to:
+C/C++:     m;
+C/C++:   For compatibility with CMake 3.11 and below this check is ignoring it.
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/CMakeLists.txt:146 (check_include_files)
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/data-io.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/dbesi0.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr64.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning (dev) at /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/CMakeLists.txt:79 (add_library):
+C/C++:   Policy CMP0115 is not set: Source file extensions must be explicit.  Run
+C/C++:   "cmake --help-policy CMP0115" for policy details.  Use the cmake_policy
+C/C++:   command to set the policy and suppress this warning.
+C/C++:   File:
+C/C++:     /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/vr32.c
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+C/C++: CMake Warning:
+C/C++:   Manually-specified variables were not used by the project:
+C/C++:     CMAKE_POLICY_VERSION_MINIMUM
+
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+C/C++: ninja: Entering directory `/home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64'
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [2/26] Building CXX object CMakeFiles/lastwave_audio.dir/DspProcessor.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [3/26] Building CXX object CMakeFiles/lastwave_audio.dir/AudioEngine.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [4/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEq.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [5/26] Building CXX object CMakeFiles/lastwave_audio.dir/DirectOutputStream.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [6/26] Building CXX object CMakeFiles/lastwave_audio.dir/NativeBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [7/26] Building CXX object CMakeFiles/lastwave_audio.dir/ParametricEqBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [8/26] Building CXX object CMakeFiles/lastwave_audio.dir/SecretsBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:116:26: warning: implicit conversion changes signedness: 'int' to 'size_t' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   116 |         tail[pad_to + (7 - i)] = (uint8_t)(total_bits >> (i * 8));
+C/C++:       |                     ~  ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:123:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   123 |         out[i * 4]     = (uint8_t)(state[i] >> 24);
+C/C++:       |         ~~~ ~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:124:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   124 |         out[i * 4 + 1] = (uint8_t)(state[i] >> 16);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:125:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   125 |         out[i * 4 + 2] = (uint8_t)(state[i] >> 8);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:126:19: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   126 |         out[i * 4 + 3] = (uint8_t)(state[i]);
+C/C++:       |         ~~~ ~~~~~~^~~
+C/C++: /home/user/LastWave-native/app/src/main/cpp/SecretsBridge.cpp:142:15: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]
+C/C++:   142 |         i_buf[i] = k_block[i] ^ 0x36;
+C/C++:       |         ~~~~~ ^
+C/C++: 6 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/src/main/cpp/automix/TransientPreservingStretcher.cpp:113:61: warning: implicit conversion changes signedness: 'size_t' (aka 'unsigned long') to 'difference_type' (aka 'long') [-Wsign-conversion]
+C/C++:   113 |         std::vector<float> remaining(inputBuffer_.begin() + offset, inputBuffer_.end());
+C/C++:       |                                                           ~ ^~~~~~
+C/C++: 1 warning generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [11/26] Building CXX object CMakeFiles/lastwave_audio.dir/dsd/DsdJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [12/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/LinkwitzRileyCrossover.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [13/26] Building CXX object CMakeFiles/lastwave_audio.dir/automix/AutoMixJniBridge.cpp.o
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [14/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/soxr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/soxr.c:634:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   634 |   bool separated = !!(p->io_spec.itype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/soxr.c:656:82: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   656 | static size_t soxr_output_1ch(soxr_t p, unsigned i, soxr_buf_t dest, size_t len, bool separated)
+C/C++:       |                                                                                  ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/soxr.c:676:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   676 |   bool separated = !!(p->io_spec.otype & SOXR_SPLIT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/soxr.c:704:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   704 |   bool was_flushing;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/soxr.c:759:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   759 |   bool flush_requested = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 5 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [16/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/filter.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:28:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:31:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    31 | static bool UPDATE_FFT_CACHE(int len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:59:33: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    59 | static void DONE_WITH_FFT_CACHE(bool is_writer)
+C/C++:       |                                 ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:68:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    68 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/filter.c:45:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/fft4g_cache.h:75:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:    75 |   bool is_writer = UPDATE_FFT_CACHE(len);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 8 warnings generated.
+C/C++: clang++: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [18/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/data-io.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [19/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr32.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr32.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [21/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/cr.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:18:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:192:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   192 |   bool f_domain_m = abs(3-M) == 1 && Fs <= 1;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:283:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   283 |   bool const maintain_3dB_pt = !!(q_spec->flags & SOXR_MAINTAIN_3DB_PT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:290:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   290 |   bool upsample=false, rational=false, iOpt=!(r_spec->flags&SOXR_NOSMALLINTOPT);
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:291:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   291 |   bool lq_bits= (q_spec->flags & SOXR_PROMOTE_TO_LQ)? bits <= 16 : bits == 16;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:292:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   292 |   bool lq_Fp0 = (q_spec->flags & SOXR_PROMOTE_TO_LQ)? Fp0<=lq_bw0 : Fp0==lq_bw0;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:498:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:498:44: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   498 | static bool stage_process(stage_t * stage, bool flushing)
+C/C++:       |                                            ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:501:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   501 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.c:520:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   520 |   bool done = false;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 11 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: [23/26] Building C object _deps/soxr_source-build/src/CMakeFiles/soxr.dir/vr32.c.o
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/vr32.c:202:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   202 |   bool is_d; /* true: downsampling at x2 rate; false: upsampling at 1x rate. */
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/vr32.c:338:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   338 | static bool set_step_step(stream_t * p, double io_ratio, int slew_len)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/vr32.c:377:8: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   377 | static bool do_input_stage(rate_t * p, int stage_num, int sign, int min_stage_num)
+C/C++:       |        ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/vr32.c:394:5: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   394 |     bool should_be_fast = p->stage_inc;
+C/C++:       |     ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 4 warnings generated.
+C/C++: clang: warning: -Wl,-z,max-page-size=16384: 'linker' input unused [-Wunused-command-line-argument]
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.h:104:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   104 |   bool       is_input;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr64.c:8:
+C/C++: In file included from /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr-core.c:15:
+C/C++: /home/user/LastWave-native/app/.cxx/RelWithDebInfo/27n68224/x86_64/_deps/soxr_source-src/src/cr.h:116:3: warning: '_Bool' is a C99 extension [-Wc99-extensions]
+C/C++:   116 |   bool       use_hi_prec_clock;
+C/C++:       |   ^
+C/C++: /home/user/.toolchain/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/19/include/stdbool.h:20:14: note: expanded from macro 'bool'
+C/C++:    20 | #define bool _Bool
+C/C++:       |              ^
+C/C++: 2 warnings generated.
+
+> Task :app:preReleaseBuild
+> Task :app:mergeReleaseJniLibFolders
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preRawReleaseBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :audio:decent-usb-audio-driver:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :audio:decent-usb-audio-driver:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :audio:decent-usb-audio-driver:buildCMakeRelWithDebInfo[armeabi-v7a]
+> Task :audio:decent-usb-audio-driver:configureCMakeRelWithDebInfo[x86]
+> Task :audio:decent-usb-audio-driver:buildCMakeRelWithDebInfo[x86]
+> Task :audio:decent-usb-audio-driver:configureCMakeRelWithDebInfo[x86_64]
+> Task :audio:decent-usb-audio-driver:buildCMakeRelWithDebInfo[x86_64]
+> Task :audio:decent-usb-audio-driver:preReleaseBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:mergeReleaseJniLibFolders
+> Task :audio:decent-usb-audio-driver:mergeReleaseNativeLibs
+> Task :audio:decent-usb-audio-driver:copyReleaseJniLibsProjectOnly
+> Task :app:mergeReleaseNativeLibs
+> Task :app:stripReleaseDebugSymbols
+> Task :app:extractReleaseNativeSymbolTables
+> Task :app:mergeReleaseNativeDebugMetadata
+> Task :audio:decent-usb-audio-driver:prepareReleaseArtProfile
+> Task :app:mergeReleaseArtProfile
+
+> Task :app:expandReleaseL8ArtProfileWildcards
+Warning in /home/user/.toolchain/gradle/caches/modules-2/files-2.1/com.android.tools/desugar_jdk_libs_nio/2.0.4/a9b91b6b670542e124e3bac0eeb11a94c4fd04ae/desugar_jdk_libs_nio-2.0.4.jar:sun/nio/cs/UTF_8.class:
+Type `sun.nio.cs.Unicode` was not found, it is required for default or static interface methods desugaring of `sun.nio.cs.UTF_8`
+
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateReleaseResources FROM-CACHE
+> Task :audio:decent-usb-audio-driver:packageReleaseResources
+> Task :audio:decent-usb-audio-driver:processReleaseNavigationResources FROM-CACHE
+> Task :audio:decent-usb-audio-driver:parseReleaseLocalResources FROM-CACHE
+> Task :audio:decent-usb-audio-driver:generateReleaseRFile FROM-CACHE
+
+> Task :audio:decent-usb-audio-driver:compileReleaseKotlin
+w: file:///home/user/LastWave-native/audio/decent-usb-audio-driver/src/main/kotlin/com/decent/usbaudio/UsbAudioPermissionHelper.kt:38:29 'fun <T : Parcelable!> getParcelableExtra(p0: String!): T?' is deprecated. Deprecated in Java.
+
+> Task :audio:decent-usb-audio-driver:javaPreCompileRelease FROM-CACHE
+> Task :audio:decent-usb-audio-driver:compileReleaseJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:mergeReleaseGeneratedProguardFiles
+> Task :audio:decent-usb-audio-driver:exportReleaseConsumerProguardFiles
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateReleaseBuildConfig
+> Task :app:generateReleaseResources FROM-CACHE
+> Task :app:packageReleaseResources
+> Task :app:processReleaseNavigationResources FROM-CACHE
+> Task :app:parseReleaseLocalResources FROM-CACHE
+> Task :app:generateReleaseRFile FROM-CACHE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarRelease
+> Task :app:kspReleaseKotlin
+> Task :app:compileReleaseKotlin
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:347:70 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:349:27 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/addon/HybridMediaServer.kt:371:46 'val parms: (Mutable)Map<String!, String!>!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/artwork/OkHttpArtworkCall.kt:14:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:699:50 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:819:61 Unnecessary safe call on a non-null receiver of type 'Long'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:943:90 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1062:62 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1063:74 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1381:59 Unnecessary safe call on a non-null receiver of type 'YouTubeAudioStream'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1623:54 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1896:47 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1896:53 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedDrmRef'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1902:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStorage.kt:869:36 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStreaming.kt:235:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStreaming.kt:329:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/generate/RecommendationEngine.kt:394:37 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/jam/JamRepository.kt:498:32 Unnecessary non-null assertion (!!) on a non-null receiver of type 'ErrorPayload'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/AppLanguage.kt:126:31 'constructor(p0: String!): Locale' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:498:21 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:704:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/lossless/LosslessMusicApi.kt:325:51 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApi.kt:336:38 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApi.kt:2300:38 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApiAccount.kt:590:38 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApiParsers.kt:781:30 Unnecessary safe call on a non-null receiver of type 'JsonArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:19:8 This class is not recommended for use in Kotlin. Use 'kotlin.Function1' instead.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:356:73 This class is not recommended for use in Kotlin. Use 'kotlin.Function1' instead.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:359:20 Java type mismatch: inferred type is 'Any?', but 'Any' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:447:16 Java type mismatch: inferred type is 'Any?', but 'Any' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/YouTubeStreamExtractor.kt:100:46 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/YouTubeStreamExtractor.kt:110:54 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/YouTubeStreamExtractor.kt:312:26 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/AlacDashManifestParser.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleDrmFactory.kt:66:47 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:117:29 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:117:67 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:120:29 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:124:37 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/repository/AlbumRepository.kt:164:74 Unnecessary safe call on a non-null receiver of type 'AlbumPageData'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/repository/ThemeRepository.kt:292:64 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/video/SyncedVideoRepository.kt:377:114 Unnecessary safe call on a non-null receiver of type 'YouTubeMusicTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicHistorySyncManager.kt:139:34 Elvis operator (?:) always returns the left operand of non-nullable type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicHistorySyncManager.kt:157:13 Condition is always 'false'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicLibraryManager.kt:450:43 Elvis operator (?:) always returns the left operand of non-nullable type 'Int'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicLibraryManager.kt:455:57 Elvis operator (?:) always returns the left operand of non-nullable type 'Int'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicSyncManager.kt:92:18 This declaration is in a preview state and can be changed in a backwards-incompatible manner with a best-effort migration. Its usage should be marked with '@kotlinx.coroutines.FlowPreview' or '@OptIn(kotlinx.coroutines.FlowPreview::class)' if you accept the drawback of relying on preview API
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicSyncManager.kt:275:20 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicSyncManager.kt:281:18 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:24:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:32:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:36:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:46:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:86:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:97:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:232:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:239:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:246:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:266:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:294:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:323:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:365:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:394:14 'fun fallbackToDestructiveMigration(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:395:14 'fun fallbackToDestructiveMigrationOnDowngrade(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/ExclusiveUsbOutput.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/ExclusiveUsbOutput.kt:55:27 This class is not recommended for use in Kotlin. Use 'kotlin.Any' instead.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/ExclusiveUsbOutput.kt:646:40 Unnecessary safe call on a non-null receiver of type 'UsbInterface'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/InternalDirectOutput.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/LoudnessNormalizer.kt:140:20 'class VorbisComment : Any, Metadata.Entry' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/LoudnessNormalizer.kt:148:39 'field value: String' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/LoudnessNormalizer.kt:148:44 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt:231:25 'static field WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt:239:40 'static field FLAG_HANDLES_MEDIA_BUTTONS: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt:240:44 'static field FLAG_HANDLES_TRANSPORT_CONTROLS: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceCar.kt:216:22 'fun setErrorMessage(p0: CharSequence!): PlaybackStateCompat.Builder!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:338:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:339:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:340:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:341:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:342:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:343:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:407:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:408:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:409:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:410:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:412:37 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:425:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1340:49 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1406:53 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1435:62 Elvis operator (?:) always returns the left operand of non-nullable type 'Throwable'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1684:22 'fun setAudioCapabilities(p0: AudioCapabilities): DefaultAudioSink.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1876:34 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:5342:26 Condition is always 'false'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:6086:38 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:8832:108 Unnecessary safe call on a non-null receiver of type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayerAutomix.kt:538:61 Unnecessary safe call on a non-null receiver of type 'EqualizerSettings'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayerQueue.kt:357:33 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/NativeProcessingAudioSink.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:121:63 Unnecessary safe call on a non-null receiver of type 'IntArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:122:65 Unnecessary safe call on a non-null receiver of type 'IntArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:136:64 Unnecessary safe call on a non-null receiver of type 'UsbDacInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:137:64 Unnecessary safe call on a non-null receiver of type 'UsbDacInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:148:32 Unnecessary safe call on a non-null receiver of type 'UsbDacInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/cast/CastStreamServer.kt:26:37 'static field WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/cast/CastStreamServer.kt:116:35 'val allNetworks: Array<(out) Network!>' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:116:24 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:117:44 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:119:27 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:120:9 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/EdgeToEdge.kt:93:19 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/EdgeToEdge.kt:94:19 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/EdgeToEdge.kt:97:23 'var isStatusBarContrastEnforced: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ExpressiveHeader.kt:130:37 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:394:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:609:57 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:635:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:715:61 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:897:38 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackDetailsSheet.kt:246:51 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackDetailsSheet.kt:641:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackMiniTraySheet.kt:207:46 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackMiniTraySheet.kt:248:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/feed/FeedCards.kt:622:53 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/feed/FeedScreen.kt:398:45 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/home/FriendProfileScreen.kt:149:45 'val Icons.Filled.OpenInNew: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.OpenInNew.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/home/HomeViewModel.kt:388:64 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/JamScreen.kt:141:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/JamScreen.kt:942:80 'val Icons.Filled.Send: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Send.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:120:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:212:17 'fun TabRow(selectedTabIndex: Int, modifier: Modifier = ..., containerColor: Color = ..., contentColor: Color = ..., indicator: ComposableFunction1<List<TabPosition>, Unit> = ..., divider: ComposableFunction0<Unit> = ..., tabs: ComposableFunction0<Unit>): Unit' is deprecated. Replaced with PrimaryTabRow and SecondaryTabRow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:221:38 'fun Modifier.tabIndicatorOffset(currentTabPosition: TabPosition): Modifier' is deprecated. Solely for use alongside deprecated TabRowDefaults.Indicator method. For recommended PrimaryIndicator and SecondaryIndicator methods, please use TabIndicatorScope.tabIndicatorOffset method.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:862:51 'val Icons.Filled.Send: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Send.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/match/SingToFindViewModel.kt:217:38 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SingToFindViewModel.Outcome.Matched'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:653:43 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:806:43 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:907:43 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:998:58 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:1040:39 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AudioControlsSheet.kt:453:91 'val Icons.Filled.VolumeMute: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeMute.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AudioControlsSheet.kt:453:120 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/CanvasArtworkPlayer.kt:295:41 Unnecessary safe call on a non-null receiver of type 'TextureView'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:457:51 Unnecessary safe call on a non-null receiver of type 'WindowInsetsControllerCompat'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:477:51 Unnecessary safe call on a non-null receiver of type 'WindowInsetsControllerCompat'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:479:29 Unnecessary safe call on a non-null receiver of type 'Activity'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:1036:95 'val Icons.Filled.ArrowBack: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ArrowBack.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/MiniPlayer.kt:466:25 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/ModernLyricsView.kt:232:44 Unnecessary safe call on a non-null receiver of type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/ModernLyricsView.kt:654:46 Elvis operator (?:) always returns the left operand of non-nullable type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/PlayerControls.kt:599:79 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/PlayerControls.kt:686:48 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/PlayerControls.kt:1003:84 Redundant call of conversion method.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/QueuePanel.kt:578:63 'fun rememberSwipeToDismissBoxState(initialValue: SwipeToDismissBoxValue = ..., confirmValueChange: (SwipeToDismissBoxValue) -> Boolean = ..., positionalThreshold: (Float) -> Float = ...): SwipeToDismissBoxState' is deprecated. confirmValueChange is deprecated without replacement. Rather than relying on a callback to veto state changes, the anchor set should not include disallowed anchors. See androidx.compose.foundation.samples.AnchoredDraggableDynamicAnchorsSample for an example of using dynamic anchors over confirmValueChange.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/SignalPathDialog.kt:449:46 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/SignalPathDialog.kt:460:66 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/SyncedVideoDialog.kt:204:51 Unnecessary safe call on a non-null receiver of type 'WindowInsetsControllerCompat'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/VolumeSlider.kt:154:79 'val Icons.Filled.VolumeMute: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeMute.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/VolumeSlider.kt:154:108 'val Icons.Filled.VolumeDown: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeDown.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/VolumeSlider.kt:264:48 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/LocalMusicHub.kt:866:80 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/LocalMusicHub.kt:1523:45 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistCards.kt:159:50 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:177:40 This declaration is in a preview state and can be changed in a backwards-incompatible manner with a best-effort migration. Its usage should be marked with '@kotlinx.coroutines.FlowPreview' or '@OptIn(kotlinx.coroutines.FlowPreview::class)' if you accept the drawback of relying on preview API
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:494:98 Unnecessary safe call on a non-null receiver of type 'SavedPlaylist'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/CookieLoginDialog.kt:45:28 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/DownloadsCards.kt:401:59 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/DownloadsCards.kt:409:59 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ExternalPlaylistImportScreen.kt:104:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ExternalPlaylistImportScreen.kt:400:84 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ExternalPlaylistImportScreen.kt:532:59 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:172:179 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:178:175 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:185:169 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ModulesViewModel.kt:39:10 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsAccountsSection.kt:327:35 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsAccountsSection.kt:390:35 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsAccountsSection.kt:518:43 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:335:29 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:734:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1101:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1116:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1142:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1234:57 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1240:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1251:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1262:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1273:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1274:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:87 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1287:58 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1312:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1323:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1356:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1385:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1386:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1388:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1394:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1742:57 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1753:57 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1782:53 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1844:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2052:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2062:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2270:40 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2484:45 'when' is exhaustive so 'else' is redundant here.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:352:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:369:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:420:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1006:41 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1040:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1091:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1288:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1305:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsViewModel.kt:939:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsYouTubeSheets.kt:527:54 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsYouTubeSheets.kt:669:54 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SpotifyLoginScreen.kt:251:61 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SpotifyLoginScreen.kt:306:37 'var databaseEnabled: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubeImportSheet.kt:88:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubeImportSheet.kt:174:38 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubeLoginScreen.kt:145:34 'var databaseEnabled: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubePlaylistImportScreen.kt:124:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubePlaylistImportScreen.kt:210:62 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/theme/Theme.kt:103:24 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/theme/Theme.kt:104:24 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/theme/Theme.kt:108:28 'var isStatusBarContrastEnforced: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/widget/wave/WaveWidgetViews.kt:28:33 'fun <T : Parcelable!> getParcelableArrayList(p0: String?): ArrayList<T!>?' is deprecated. Deprecated in Java.
+
+> Task :app:javaPreCompileRelease FROM-CACHE
+> Task :app:compileReleaseJavaWithJavac
+> Task :audio:decent-usb-audio-driver:bundleLibRuntimeToJarRelease
+> Task :app:hiltSyncRelease
+> Task :app:hiltAggregateDepsRelease
+> Task :app:hiltJavaCompileRelease
+> Task :audio:decent-usb-audio-driver:writeReleaseAarMetadata
+> Task :app:checkReleaseAarMetadata
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:compileReleaseNavigationResources FROM-CACHE
+> Task :app:mergeReleaseResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease FROM-CACHE
+> Task :audio:decent-usb-audio-driver:extractDeepLinksRelease FROM-CACHE
+> Task :audio:decent-usb-audio-driver:processReleaseManifest FROM-CACHE
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :audio:decent-usb-audio-driver:mapReleaseSourceSetPaths
+> Task :audio:decent-usb-audio-driver:compileReleaseLibraryResources
+> Task :app:processReleaseResources
+> Task :app:transformReleaseClassesWithAsm
+> Task :app:expandReleaseArtProfileWildcards
+> Task :app:extractProguardFiles
+> Task :app:mergeReleaseGeneratedProguardFiles
+> Task :app:processReleaseJavaRes
+> Task :audio:decent-usb-audio-driver:processReleaseJavaRes
+> Task :app:mergeReleaseJavaResource
+> Task :app:mergeReleaseStartupProfile
+> Task :app:minifyReleaseWithR8
+> Task :app:produceReleaseComposeMapping
+> Task :app:reportReleaseComposeMappingErrors
+> Task :app:mergeReleaseComposeMapping
+> Task :app:l8DexDesugarLibRelease
+Warning in /home/user/.toolchain/gradle/caches/modules-2/files-2.1/com.android.tools/desugar_jdk_libs_nio/2.0.4/a9b91b6b670542e124e3bac0eeb11a94c4fd04ae/desugar_jdk_libs_nio-2.0.4.jar:sun/nio/cs/UTF_8.class:
+Type `sun.nio.cs.Unicode` was not found, it is required for default or static interface methods desugaring of `sun.nio.cs.UTF_8`
+
+> Task :app:compileReleaseArtProfile
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateReleaseAssets UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:mergeReleaseAssets
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:convertShrunkResourcesToBinaryRelease
+> Task :app:optimizeReleaseResources
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:assembleRelease
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 28m 50s
+95 actionable tasks: 81 executed, 14 from cache
+EXIT=0

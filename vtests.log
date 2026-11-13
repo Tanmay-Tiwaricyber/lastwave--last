@@ -1,0 +1,158 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:prepareNativeBridge UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preDebugBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:parseDebugLocalResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugKotlin UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:javaPreCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:kspDebugKotlin
+
+> Task :app:compileDebugKotlin
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:428:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:665:57 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:691:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:783:61 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:965:38 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackMiniTraySheet.kt:217:46 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackMiniTraySheet.kt:258:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac
+> Task :audio:decent-usb-audio-driver:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :app:hiltSyncDebug
+> Task :app:hiltAggregateDepsDebug UP-TO-DATE
+> Task :app:hiltJavaCompileDebug
+> Task :audio:decent-usb-audio-driver:writeDebugAarMetadata UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugManifest UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:mapDebugSourceSetPaths UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugLibraryResources UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:transformDebugClassesWithAsm
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin SKIPPED
+> Task :app:compileDebugUnitTestKotlin
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/addon/HybridStartupTest.kt:179:90 Expression is unused.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/autoeq/AutoEqTest.kt:139:22 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/music/PlaybackCandidateRaceTest.kt:31:42 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/music/PlaybackCandidateRaceTest.kt:85:42 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/music/PlaybackCandidateRaceTest.kt:96:42 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/music/PlaybackCandidateRaceTest.kt:108:42 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/music/PlaybackCandidateRaceTest.kt:118:44 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/music/TextMatchTest.kt:36:27 'constructor(p0: String!, p1: String!): Locale' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/plugin/SegmentedDashBridgeBadgeTest.kt:16:8 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:280:88 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:296:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:312:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:325:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:354:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:371:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:373:89 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:397:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:440:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:474:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:540:89 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/ui/player/lyricsshare/ShareIntentTest.kt:61:39 'fun <T : Parcelable!> getParcelableExtra(p0: String!): T?' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/ui/player/lyricsshare/ShareIntentTest.kt:66:38 'fun <T : Parcelable!> getParcelableExtra(p0: String!): T?' is deprecated. Deprecated in Java.
+
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:hiltSyncDebugUnitTest
+> Task :app:hiltAggregateDepsDebugUnitTest UP-TO-DATE
+> Task :app:hiltJavaCompileDebugUnitTest NO-SOURCE
+> Task :app:transformDebugUnitTestClassesWithAsm
+> Task :audio:decent-usb-audio-driver:processDebugJavaRes UP-TO-DATE
+
+> Task :app:testDebugUnitTest
+
+AppUpdateManagerTest > updateButton_refusesAnApkThatIsNotNewerThanThisBuild FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:312
+
+AppUpdateManagerTest > updateButton_downloadsVerifiesAndBecomesReadyToInstall FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:239
+
+AppUpdateManagerTest > updateButton_refusesAnArchiveThePlatformCannotRead FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:296
+
+AppUpdateManagerTest > aNewerReleaseIsOfferedAgainAfterADismissal FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:175
+
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+> Task :app:testDebugUnitTest
+
+108 tests completed, 4 failed
+
+> Task :app:testDebugUnitTest FAILED
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:testDebugUnitTest'.
+> There were failing tests. See the report at: file:///home/user/LastWave-native/app/build/reports/tests/testDebugUnitTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 3m 5s
+48 actionable tasks: 10 executed, 38 up-to-date
+EXIT=1

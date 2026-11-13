@@ -1,0 +1,13 @@
+#!/bin/bash
+# usage: gradle_run.sh <logfile> <gradle args...>
+# 2 GB sandbox: requires the 4 GB swapfile (see setup_toolchain.sh notes).
+LOG=$1; shift
+cd /home/user/LastWave-native
+source /home/user/build_env.sh
+chmod +x ./gradlew 2>/dev/null
+sh ./gradlew "$@" --no-daemon --console=plain --no-configuration-cache --no-parallel --max-workers=1 \
+  -Dorg.gradle.vfs.watch=false \
+  -Pkotlin.daemon.jvmargs="-Xmx3000m -XX:MaxMetaspaceSize=640m -XX:+UseParallelGC" \
+  -Dorg.gradle.jvmargs="-Xmx1500m -XX:MaxMetaspaceSize=512m -XX:+UseParallelGC -Dfile.encoding=UTF-8" \
+  > "$LOG" 2>&1
+echo "EXIT=$?" >> "$LOG"

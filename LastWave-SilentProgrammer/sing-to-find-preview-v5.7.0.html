@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LastWave v5.7.0 — Sing to find</title>
+<style>
+  :root{
+    --bg:#0b0d12; --panel:#151922; --panel2:#1c2130; --line:#262c3b;
+    --ink:#e9ecf4; --muted:#98a1b6; --brand:#7c6cff; --brand2:#3ddc97;
+    --warn:#ffb454;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:34px 20px 60px;background:radial-gradient(1200px 700px at 20% -10%,#191f34 0%,var(--bg) 55%);
+       color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:-.3px}
+  h1 span{color:var(--brand)}
+  p.lede{color:var(--muted);margin:0 0 26px;max-width:70ch}
+  .row{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+  .phone{width:330px;background:var(--panel);border:1px solid var(--line);border-radius:30px;
+         padding:14px 14px 18px;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+  .cap{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin:0 4px 9px}
+  .bar{display:flex;align-items:center;gap:10px;padding:6px 4px 12px}
+  .bar b{font-size:16px;font-weight:600}
+  .ic{width:26px;height:26px;display:grid;place-items:center;color:var(--muted)}
+  .note{font-size:12.5px;color:var(--muted);margin:0 4px 12px}
+  .card{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:16px;margin:0 4px 12px}
+  .mic{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;margin:2px auto 10px;
+       background:#232a3d;transition:.2s}
+  .mic.on{background:linear-gradient(160deg,var(--brand),#4a3fd0);box-shadow:0 0 0 8px rgba(124,108,255,.14)}
+  .mic.big{width:96px;height:96px;background:linear-gradient(160deg,var(--brand),#4a3fd0)}
+  svg{display:block}
+  .ctr{text-align:center}
+  .lbl{font-size:12.5px;color:var(--muted);text-align:center;margin:2px 0 12px}
+  .btns{display:flex;gap:10px;justify-content:center}
+  .btn{border-radius:999px;padding:9px 18px;font-size:13.5px;border:1px solid transparent;cursor:default}
+  .btn.solid{background:var(--brand);color:#fff}
+  .btn.ghost{border-color:#39415a;color:var(--ink)}
+  .meter{height:5px;border-radius:99px;background:#242b3d;overflow:hidden;margin:12px 4px 6px}
+  .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--brand2),var(--brand));border-radius:99px}
+  .time{font-size:11.5px;color:var(--muted);text-align:center;margin:0 4px 4px}
+  .heard{font-size:12px;color:var(--brand2);text-align:center;margin:10px 4px 0;letter-spacing:.02em}
+  .res{display:flex;align-items:center;gap:12px;border-radius:16px;padding:11px 12px;margin:0 4px 9px;
+       background:var(--panel2);border:1px solid var(--line)}
+  .res.top{background:linear-gradient(120deg,rgba(124,108,255,.28),rgba(61,220,151,.10));border-color:#4b47a8}
+  .art{width:40px;height:40px;border-radius:10px;flex:0 0 auto;background:linear-gradient(140deg,#3b3560,#1f4d47)}
+  .res .t{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .res .s{font-size:11.5px;color:var(--muted)}
+  .pct{margin-left:auto;font-variant-numeric:tabular-nums;font-size:12.5px;color:var(--brand2);white-space:nowrap}
+  .play{width:32px;height:32px;border-radius:50%;background:#0f1220;display:grid;place-items:center;flex:0 0 auto}
+  .verdict{font-size:13.5px;font-weight:600;margin:2px 6px 9px}
+  .ok{color:var(--brand2)}
+  ul.why{margin:6px 0 0 18px;padding:0;color:var(--muted);font-size:13px}
+  ul.why li{margin:0 0 6px}
+  .foot{margin-top:28px;color:var(--muted);font-size:12.5px;max-width:75ch}
+</style>
+</head>
+<body>
+  <h1>Sing to find <span>· v5.7.0</span></h1>
+  <p class="lede">Three states of the new screen, drawn here in HTML for review.
+  On the phone it is Compose with the app's theme; this shows the layout, the
+  wording and what the matcher reports.</p>
+
+  <div class="row">
+
+    <div class="phone">
+      <p class="cap">1 · Ready</p>
+      <div class="bar"><span class="ic">←</span><b>Sing to find</b></div>
+      <p class="note">Hum or sing eight notes or so of the part you remember. LastWave compares the tune
+      with the songs on this phone — downloads and imported audio — and starts the one that fits, from the
+      phrase you sang.</p>
+      <div class="card ctr">
+        <div class="mic">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z"/></svg>
+        </div>
+        <div class="lbl">Tap to sing</div>
+        <div class="btns"><span class="btn solid">Sing</span><span class="btn ghost">Read tunes</span></div>
+        <div class="lbl" style="margin-top:12px">128 songs with a tune read</div>
+      </div>
+      <p class="note" style="text-align:center">Nothing is recorded until you press the button.<br>
+      The audio never leaves the phone.</p>
+    </div>
+
+    <div class="phone">
+      <p class="cap">2 · Listening</p>
+      <div class="bar"><span class="ic">←</span><b>Sing to find</b><span class="ic" style="margin-left:auto">■</span></div>
+      <p class="note">Hum or sing eight notes or so of the part you remember…</p>
+      <div class="card ctr">
+        <div class="mic big on">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+        </div>
+        <div class="meter"><i style="width:62%"></i></div>
+        <div class="time">4.6 s of 12 · tap to stop</div>
+      </div>
+      <p class="note" style="text-align:center">The meter is there so you can see it hearing you —
+      a flat bar means sing up, not that the song is missing.</p>
+    </div>
+
+    <div class="phone">
+      <p class="cap">3 · Found it</p>
+      <div class="bar"><span class="ic">←</span><b>Sing to find</b><span class="ic" style="margin-left:auto">■</span></div>
+      <div class="card ctr" style="padding:12px">
+        <div class="mic on" style="width:52px;height:52px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/></svg>
+        </div>
+        <div class="heard">Heard: A4 · C5 · B4 · A4 · G4 · E4 · A4</div>
+      </div>
+      <p class="verdict ok">That sounds like <em>Midnight Ferry</em> — playing from 0:58</p>
+      <div class="res top">
+        <div class="art"></div>
+        <div style="min-width:0">
+          <div class="t">Midnight Ferry</div>
+          <div class="s">Kavi Sen · downloaded</div>
+        </div>
+        <span class="pct">97%</span>
+      </div>
+      <div class="res">
+        <div class="art" style="background:linear-gradient(140deg,#25415e,#4a2f57)"></div>
+        <div style="min-width:0"><div class="t">Harbour Light</div><div class="s">Reema Talwar</div></div>
+        <span class="pct" style="color:var(--muted)">71%</span>
+        <span class="play">▶</span>
+      </div>
+      <div class="res">
+        <div class="art" style="background:linear-gradient(140deg,#41382b,#264038)"></div>
+        <div style="min-width:0"><div class="t">Monsoon Tape</div><div class="s">Aarav Dutt</div></div>
+        <span class="pct" style="color:var(--muted)">64%</span>
+        <span class="play">▶</span>
+      </div>
+      <ul class="why">
+        <li>Auto-play needs a match over 86%, <b>every</b> sung note matched, and a clear lead — otherwise you tap.</li>
+        <li>Percentages compare tunes, not recordings: key, octave and tempo are ignored on purpose.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="foot">Only downloaded / imported audio is searched — reading a stream just to index it is not
+  something the app does, and a catalogue-wide “hum any song on the internet” needs a fingerprint service
+  LastWave has no access to. The first search after a download runs the tune read (one pass per song), then
+  it is cached in the database. Database schema goes 16 → 17 with one new table.</p>
+</body>
+</html>

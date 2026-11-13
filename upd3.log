@@ -1,0 +1,441 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:prepareNativeBridge UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preDebugBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:parseDebugLocalResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugKotlin UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:javaPreCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:kspDebugKotlin
+> Task :app:compileDebugKotlin
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:347:70 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:349:27 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/addon/HybridMediaServer.kt:371:46 'val parms: (Mutable)Map<String!, String!>!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/artwork/OkHttpArtworkCall.kt:14:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:699:50 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:819:61 Unnecessary safe call on a non-null receiver of type 'Long'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:943:90 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1062:62 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1063:74 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1381:59 Unnecessary safe call on a non-null receiver of type 'YouTubeAudioStream'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1623:54 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1896:47 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1896:53 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedDrmRef'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1902:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStorage.kt:869:36 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStreaming.kt:235:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStreaming.kt:329:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/generate/RecommendationEngine.kt:394:37 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/jam/JamRepository.kt:498:32 Unnecessary non-null assertion (!!) on a non-null receiver of type 'ErrorPayload'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/AppLanguage.kt:126:31 'constructor(p0: String!): Locale' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:498:21 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:704:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/lossless/LosslessMusicApi.kt:325:51 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApi.kt:336:38 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApi.kt:2300:38 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApiAccount.kt:590:38 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApiParsers.kt:781:30 Unnecessary safe call on a non-null receiver of type 'JsonArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:19:8 This class is not recommended for use in Kotlin. Use 'kotlin.Function1' instead.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:356:73 This class is not recommended for use in Kotlin. Use 'kotlin.Function1' instead.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:359:20 Java type mismatch: inferred type is 'Any?', but 'Any' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/InnerTubeXStreamExtractor.kt:447:16 Java type mismatch: inferred type is 'Any?', but 'Any' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/YouTubeStreamExtractor.kt:100:46 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/YouTubeStreamExtractor.kt:110:54 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/music/YouTubeStreamExtractor.kt:312:26 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/AlacDashManifestParser.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleDrmFactory.kt:66:47 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:117:29 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:117:67 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:120:29 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/plugin/ModuleManager.kt:124:37 Unnecessary safe call on a non-null receiver of type 'ProviderEncInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/repository/AlbumRepository.kt:164:74 Unnecessary safe call on a non-null receiver of type 'AlbumPageData'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/repository/ThemeRepository.kt:292:64 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/update/AppUpdateManager.kt:460:45 Unnecessary non-null assertion (!!) on a non-null receiver of type 'ByteArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/video/SyncedVideoRepository.kt:377:114 Unnecessary safe call on a non-null receiver of type 'YouTubeMusicTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicHistorySyncManager.kt:139:34 Elvis operator (?:) always returns the left operand of non-nullable type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicHistorySyncManager.kt:157:13 Condition is always 'false'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicLibraryManager.kt:450:43 Elvis operator (?:) always returns the left operand of non-nullable type 'Int'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicLibraryManager.kt:455:57 Elvis operator (?:) always returns the left operand of non-nullable type 'Int'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicSyncManager.kt:92:18 This declaration is in a preview state and can be changed in a backwards-incompatible manner with a best-effort migration. Its usage should be marked with '@kotlinx.coroutines.FlowPreview' or '@OptIn(kotlinx.coroutines.FlowPreview::class)' if you accept the drawback of relying on preview API
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicSyncManager.kt:275:20 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicSyncManager.kt:281:18 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:24:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:32:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:36:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:46:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:86:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:97:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:232:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:239:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:246:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:266:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:294:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:323:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:365:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:394:14 'fun fallbackToDestructiveMigration(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:395:14 'fun fallbackToDestructiveMigrationOnDowngrade(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/ExclusiveUsbOutput.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/ExclusiveUsbOutput.kt:55:27 This class is not recommended for use in Kotlin. Use 'kotlin.Any' instead.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/ExclusiveUsbOutput.kt:646:40 Unnecessary safe call on a non-null receiver of type 'UsbInterface'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/InternalDirectOutput.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/LoudnessNormalizer.kt:140:20 'class VorbisComment : Any, Metadata.Entry' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/LoudnessNormalizer.kt:148:39 'field value: String' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/LoudnessNormalizer.kt:148:44 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt:231:25 'static field WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt:239:40 'static field FLAG_HANDLES_MEDIA_BUTTONS: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt:240:44 'static field FLAG_HANDLES_TRANSPORT_CONTROLS: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceCar.kt:216:22 'fun setErrorMessage(p0: CharSequence!): PlaybackStateCompat.Builder!' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:338:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:339:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:340:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:341:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:342:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:343:48 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:407:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:408:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:409:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:410:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:412:37 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlaybackServiceNotification.kt:425:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1340:49 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1406:53 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1435:62 Elvis operator (?:) always returns the left operand of non-nullable type 'Throwable'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1684:22 'fun setAudioCapabilities(p0: AudioCapabilities): DefaultAudioSink.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1876:34 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:5342:26 Condition is always 'false'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:6086:38 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:8832:108 Unnecessary safe call on a non-null receiver of type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayerAutomix.kt:538:61 Unnecessary safe call on a non-null receiver of type 'EqualizerSettings'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayerQueue.kt:357:33 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/NativeProcessingAudioSink.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:121:63 Unnecessary safe call on a non-null receiver of type 'IntArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:122:65 Unnecessary safe call on a non-null receiver of type 'IntArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:136:64 Unnecessary safe call on a non-null receiver of type 'UsbDacInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:137:64 Unnecessary safe call on a non-null receiver of type 'UsbDacInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/UsbDacMonitor.kt:148:32 Unnecessary safe call on a non-null receiver of type 'UsbDacInfo'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/cast/CastStreamServer.kt:26:37 'static field WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/cast/CastStreamServer.kt:116:35 'val allNetworks: Array<(out) Network!>' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:116:24 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:117:44 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:119:27 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ArtworkImage.kt:120:9 This declaration needs opt-in. Its usage should be marked with '@coil.annotation.ExperimentalCoilApi' or '@OptIn(coil.annotation.ExperimentalCoilApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/EdgeToEdge.kt:93:19 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/EdgeToEdge.kt:94:19 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/EdgeToEdge.kt:97:23 'var isStatusBarContrastEnforced: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/ExpressiveHeader.kt:130:37 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:394:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:609:57 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:635:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:715:61 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:897:38 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackDetailsSheet.kt:246:51 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackDetailsSheet.kt:641:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackMiniTraySheet.kt:207:46 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackMiniTraySheet.kt:248:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/feed/FeedCards.kt:622:53 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/feed/FeedScreen.kt:398:45 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/home/FriendProfileScreen.kt:149:45 'val Icons.Filled.OpenInNew: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.OpenInNew.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/home/HomeViewModel.kt:388:64 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/JamScreen.kt:141:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/JamScreen.kt:942:80 'val Icons.Filled.Send: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Send.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:120:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:212:17 'fun TabRow(selectedTabIndex: Int, modifier: Modifier = ..., containerColor: Color = ..., contentColor: Color = ..., indicator: ComposableFunction1<List<TabPosition>, Unit> = ..., divider: ComposableFunction0<Unit> = ..., tabs: ComposableFunction0<Unit>): Unit' is deprecated. Replaced with PrimaryTabRow and SecondaryTabRow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:221:38 'fun Modifier.tabIndicatorOffset(currentTabPosition: TabPosition): Modifier' is deprecated. Solely for use alongside deprecated TabRowDefaults.Indicator method. For recommended PrimaryIndicator and SecondaryIndicator methods, please use TabIndicatorScope.tabIndicatorOffset method.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/jam/LastWaveJamSheet.kt:862:51 'val Icons.Filled.Send: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Send.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/match/SingToFindViewModel.kt:217:38 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SingToFindViewModel.Outcome.Matched'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:653:43 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:806:43 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:907:43 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:998:58 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AddToPlaylistDialog.kt:1040:39 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AudioControlsSheet.kt:453:91 'val Icons.Filled.VolumeMute: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeMute.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/AudioControlsSheet.kt:453:120 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/CanvasArtworkPlayer.kt:295:41 Unnecessary safe call on a non-null receiver of type 'TextureView'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:457:51 Unnecessary safe call on a non-null receiver of type 'WindowInsetsControllerCompat'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:477:51 Unnecessary safe call on a non-null receiver of type 'WindowInsetsControllerCompat'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:479:29 Unnecessary safe call on a non-null receiver of type 'Activity'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/FullPlayer.kt:1036:95 'val Icons.Filled.ArrowBack: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ArrowBack.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/MiniPlayer.kt:466:25 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/ModernLyricsView.kt:232:44 Unnecessary safe call on a non-null receiver of type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/ModernLyricsView.kt:654:46 Elvis operator (?:) always returns the left operand of non-nullable type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/PlayerControls.kt:599:79 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/PlayerControls.kt:686:48 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/PlayerControls.kt:1003:84 Redundant call of conversion method.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/QueuePanel.kt:578:63 'fun rememberSwipeToDismissBoxState(initialValue: SwipeToDismissBoxValue = ..., confirmValueChange: (SwipeToDismissBoxValue) -> Boolean = ..., positionalThreshold: (Float) -> Float = ...): SwipeToDismissBoxState' is deprecated. confirmValueChange is deprecated without replacement. Rather than relying on a callback to veto state changes, the anchor set should not include disallowed anchors. See androidx.compose.foundation.samples.AnchoredDraggableDynamicAnchorsSample for an example of using dynamic anchors over confirmValueChange.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/SignalPathDialog.kt:449:46 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/SignalPathDialog.kt:460:66 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/SyncedVideoDialog.kt:204:51 Unnecessary safe call on a non-null receiver of type 'WindowInsetsControllerCompat'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/VolumeSlider.kt:154:79 'val Icons.Filled.VolumeMute: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeMute.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/VolumeSlider.kt:154:108 'val Icons.Filled.VolumeDown: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeDown.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/player/VolumeSlider.kt:264:48 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/LocalMusicHub.kt:866:80 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/LocalMusicHub.kt:1523:45 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistCards.kt:159:50 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:177:40 This declaration is in a preview state and can be changed in a backwards-incompatible manner with a best-effort migration. Its usage should be marked with '@kotlinx.coroutines.FlowPreview' or '@OptIn(kotlinx.coroutines.FlowPreview::class)' if you accept the drawback of relying on preview API
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:494:98 Unnecessary safe call on a non-null receiver of type 'SavedPlaylist'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/CookieLoginDialog.kt:45:28 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/DownloadsCards.kt:401:59 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/DownloadsCards.kt:409:59 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ExternalPlaylistImportScreen.kt:104:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ExternalPlaylistImportScreen.kt:400:84 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ExternalPlaylistImportScreen.kt:532:59 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:172:179 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:178:175 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:185:169 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ModulesViewModel.kt:39:10 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsAccountsSection.kt:327:35 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsAccountsSection.kt:390:35 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsAccountsSection.kt:518:43 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:336:29 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:740:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1107:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1122:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1148:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1250:57 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1256:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1267:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1278:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1289:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1290:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:87 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1303:58 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1317:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1328:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1339:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1372:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1401:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1402:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1404:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1410:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1758:57 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1769:57 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1798:53 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1860:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2068:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2078:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2301:40 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2515:45 'when' is exhaustive so 'else' is redundant here.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:354:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:371:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:439:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1025:41 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1059:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1110:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1307:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1324:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsViewModel.kt:950:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsYouTubeSheets.kt:527:54 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsYouTubeSheets.kt:669:54 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SpotifyLoginScreen.kt:251:61 'val Icons.Filled.Logout: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Logout.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SpotifyLoginScreen.kt:306:37 'var databaseEnabled: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubeImportSheet.kt:88:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubeImportSheet.kt:174:38 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubeLoginScreen.kt:145:34 'var databaseEnabled: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubePlaylistImportScreen.kt:124:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/YouTubePlaylistImportScreen.kt:210:62 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/theme/Theme.kt:103:24 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/theme/Theme.kt:104:24 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/theme/Theme.kt:108:28 'var isStatusBarContrastEnforced: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/widget/wave/WaveWidgetViews.kt:28:33 'fun <T : Parcelable!> getParcelableArrayList(p0: String?): ArrayList<T!>?' is deprecated. Deprecated in Java.
+
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac
+> Task :audio:decent-usb-audio-driver:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :app:hiltSyncDebug
+> Task :app:hiltAggregateDepsDebug UP-TO-DATE
+> Task :app:hiltJavaCompileDebug
+> Task :audio:decent-usb-audio-driver:writeDebugAarMetadata UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugManifest UP-TO-DATE
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :audio:decent-usb-audio-driver:mapDebugSourceSetPaths UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugLibraryResources UP-TO-DATE
+> Task :app:processDebugResources
+> Task :app:transformDebugClassesWithAsm
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin SKIPPED
+> Task :app:compileDebugUnitTestKotlin
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:219:5 Function 'parseDigest_normalisesGitHub' without a body must be abstract.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:219:37 Syntax error: Expecting '('.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:219:37 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:9 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:19 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:20 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:33 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:34 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:45 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:46 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:47 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:54 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:55 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:58 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:59 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:60 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:61 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:62 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:71 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:72 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:221:75 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:9 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:19 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:20 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:33 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:34 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:45 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:46 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:47 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:56 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:57 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:60 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:62 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:63 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:64 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:65 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:66 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:75 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:76 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:222:79 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:9 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:19 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:20 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:33 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:34 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:45 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:46 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:49 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:50 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:51 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:52 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:61 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:62 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:223:65 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:9 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:19 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:20 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:33 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:34 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:45 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:46 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:47 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:54 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:55 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:58 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:59 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:62 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:63 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:64 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:65 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:66 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:72 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:226:73 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:9 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:19 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:20 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:33 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:34 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:45 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:46 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:47 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:62 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:63 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:64 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:65 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:66 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:72 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:227:73 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:9 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:19 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:20 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:33 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:34 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:45 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:46 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:50 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:51 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:52 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:53 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:59 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:228:60 Syntax error: Expecting member declaration.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:414:20 Unresolved reference 'asset'.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:414:44 Unresolved reference 'isTrue'.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:415:20 Unresolved reference 'asset'.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:415:51 Unresolved reference 'isFalse'.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:416:20 Unresolved reference 'asset'.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:416:44 Unresolved reference 'isTrue'.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/UpdateReleaseTest.kt:418:1 Syntax error: Expecting a top level declaration.
+
+> Task :app:compileDebugUnitTestKotlin FAILED
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.btapi.BuildToolsApiCompilationWork
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 8m 11s
+42 actionable tasks: 13 executed, 29 up-to-date
+EXIT=1

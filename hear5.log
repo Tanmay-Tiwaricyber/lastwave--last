@@ -1,0 +1,162 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:prepareNativeBridge UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preDebugBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:parseDebugLocalResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugKotlin UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:javaPreCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:kspDebugKotlin
+
+> Task :app:compileDebugKotlin
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:336:29 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:736:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1103:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1118:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1144:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1246:57 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1252:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1263:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1274:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1286:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1297:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1297:87 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1299:58 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1313:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1324:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1335:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1368:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1397:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1398:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1400:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1406:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1754:57 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1765:57 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1794:53 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1856:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2064:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2074:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2282:40 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2496:45 'when' is exhaustive so 'else' is redundant here.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:353:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:370:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:438:41 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1024:41 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1058:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1109:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1306:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt:1323:41 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+
+> Task :app:javaPreCompileDebug
+> Task :app:compileDebugJavaWithJavac
+> Task :audio:decent-usb-audio-driver:bundleLibRuntimeToJarDebug
+> Task :app:hiltSyncDebug
+> Task :app:hiltAggregateDepsDebug
+> Task :app:hiltJavaCompileDebug
+> Task :audio:decent-usb-audio-driver:writeDebugAarMetadata
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:compileDebugNavigationResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :audio:decent-usb-audio-driver:extractDeepLinksDebug
+> Task :audio:decent-usb-audio-driver:processDebugManifest
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :audio:decent-usb-audio-driver:mapDebugSourceSetPaths
+> Task :audio:decent-usb-audio-driver:compileDebugLibraryResources
+> Task :app:processDebugResources
+> Task :app:transformDebugClassesWithAsm
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin SKIPPED
+> Task :app:compileDebugUnitTestKotlin
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/hearing/HearingProfileTest.kt:50:53 None of the following candidates is applicable:
+
+fun <T : Comparable<T>, R : ClosedRange<T>, Iterable<T>> R.contains(element: T?): Boolean:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T : Comparable<T>, R : ClosedRange<T>, Iterable<T>> R.contains(element: T?): Boolean
+
+fun <T : Comparable<T>, R : OpenEndRange<T>, Iterable<T>> R.contains(element: T?): Boolean:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T : Comparable<T>, R : OpenEndRange<T>, Iterable<T>> R.contains(element: T?): Boolean
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/hearing/HearingProfileTest.kt:51:54 None of the following candidates is applicable:
+
+fun <T : Comparable<T>, R : ClosedRange<T>, Iterable<T>> R.contains(element: T?): Boolean:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T : Comparable<T>, R : ClosedRange<T>, Iterable<T>> R.contains(element: T?): Boolean
+
+fun <T : Comparable<T>, R : OpenEndRange<T>, Iterable<T>> R.contains(element: T?): Boolean:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T : Comparable<T>, R : OpenEndRange<T>, Iterable<T>> R.contains(element: T?): Boolean
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/hearing/HearingProfileTest.kt:199:26 Cannot infer type for type parameter 'R'. Specify it explicitly.
+e: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/hearing/HearingProfileTest.kt:199:39 Unresolved reference 'gainDb'.
+
+> Task :app:compileDebugUnitTestKotlin FAILED
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.btapi.BuildToolsApiCompilationWork
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 2m 48s
+42 actionable tasks: 27 executed, 15 up-to-date
+EXIT=1

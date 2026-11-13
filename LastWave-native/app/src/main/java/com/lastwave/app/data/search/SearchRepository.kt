@@ -1,0 +1,382 @@
+package com.lastwave.app.data.search
+
+import androidx.compose.runtime.Immutable
+import com.lastwave.app.data.generate.GenerateJson
+import com.lastwave.app.data.generate.GeneratedTrack
+import com.lastwave.app.data.generate.LocalAudioFormats
+import com.lastwave.app.data.localmusic.LocalOfflineRepository
+import com.lastwave.app.data.playlist.PlaylistRepository
+import com.lastwave.app.data.local.SessionPreferences
+import com.lastwave.app.data.local.awaitLoadedSession
+import com.lastwave.app.data.music.InnerTubeMusicApi
+import com.lastwave.app.data.music.YouTubeMusicTrack
+import com.lastwave.app.data.network.LastFmApiService
+import com.lastwave.app.data.repository.RelatedGraphRepository
+import kotlinx.coroutines.CancellationException
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonObject
+import com.lastwave.app.data.music.YOUTUBE_WEB_USER_AGENT
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.JsonArray
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.net.URLEncoder
+import javax.inject.Inject
+import javax.inject.Singleton
+
+enum class SearchTab { TRACKS, LOCAL, PODCASTS, ARTISTS, ALBUMS, PLAYLISTS, USERS }
+
+@Immutable
+data class SearchResultItem(
+    val name: String,
+    val artist: String? = null,
+    val url: String = "",
+    val listeners: String? = null,
+    val artworkUrl: String? = null,
+    val subtitle: String? = null,
+    val videoId: String? = null,
+    val entityId: String? = null,
+    val durationMs: Long? = null,
+    val showId: String? = null,
+    val trackNumber: Int? = null,
+)
+
+/**
+ * Account-free YouTube Music search for songs, artists, albums and playlists,
+ * plus instant offline search across indexed device audio and offline playlists.
+ */
+@Singleton
+class SearchRepository @Inject constructor(
+    private val api: LastFmApiService,
+    private val sessionPreferences: SessionPreferences,
+    private val innerTube: InnerTubeMusicApi,
+    private val relatedGraph: RelatedGraphRepository,
+    private val http: OkHttpClient,
+    private val playlistRepository: PlaylistRepository,
+    private val localOfflineRepository: LocalOfflineRepository,
+) {
+    private val json = Json { ignoreUnknownKeys = true }
+    private val searchCache = object : LinkedHashMap<String, List<SearchResultItem>>(80, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, List<SearchResultItem>>?): Boolean {
+            return size > 80
+        }
+    }
+    private val cacheLock = Any()
+
+    suspend fun getSuggestions(query: String): List<String> = withContext(Dispatchers.IO) {
+        val trimmed = query.trim()
+        if (trimmed.isBlank()) return@withContext emptyList()
+        val urls = listOf(
+            "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${URLEncoder.encode(trimmed, "UTF-8")}",
+            "https://suggestqueries-clients6.youtube.com/complete/search?client=firefox&ds=yt&q=${URLEncoder.encode(trimmed, "UTF-8")}",
+        )
+        for (url in urls) {
+            val request = Request.Builder()
+                .url(url)
+                .header("User-Agent", YOUTUBE_WEB_USER_AGENT)
+                .build()
+            try {
+                http.newCall(request).execute().use { response ->
+                    if (!response.isSuccessful) return@use
+                    val body = response.body?.string() ?: return@use
+                    val array = json.parseToJsonElement(body) as? JsonArray ?: return@use
+                    if (array.size < 2) return@use
+                    val suggestions = array[1] as? JsonArray ?: return@use
+                    val parsed = suggestions.mapNotNull { (it as? JsonPrimitive)?.content }
+                    if (parsed.isNotEmpty()) return@withContext parsed
+                }
+            } catch (_: Exception) {
+                // Try alternate suggestion endpoint
+            }
+        }
+        emptyList()
+    }
+
+    suspend fun search(tab: SearchTab, query: String): List<SearchResultItem> {
+        val trimmed = query.trim()
+        if (trimmed.isBlank()) return emptyList()
+        val cacheKey = "${tab.name}:${trimmed.lowercase()}"
+        if (tab != SearchTab.LOCAL) {
+            synchronized(cacheLock) {
+                searchCache[cacheKey]?.let { return it }
+            }
+        }
+
+        val results = when (tab) {
+            SearchTab.TRACKS -> innerTube.searchSongs(trimmed).map { track ->
+                SearchResultItem(
+                    name = track.title,
+                    artist = track.artist,
+                    artworkUrl = track.artworkUrl,
+                    subtitle = track.album,
+                    videoId = track.videoId,
+                    entityId = track.videoId,
+                    durationMs = track.durationSeconds?.takeIf { it > 0 }?.times(1_000L),
+                )
+            }
+            SearchTab.LOCAL -> searchLocal(trimmed)
+            SearchTab.ARTISTS -> innerTube.searchArtists(trimmed).map { artist ->
+                SearchResultItem(
+                    name = artist.name,
+                    artworkUrl = artist.artworkUrl,
+                    subtitle = artist.subtitle,
+                    entityId = artist.browseId,
+                )
+            }
+            SearchTab.ALBUMS -> {
+                val albums = innerTube.searchAlbums(trimmed)
+                val finalAlbums = if (albums.isEmpty() && !trimmed.lowercase().contains("album")) {
+                    innerTube.searchAlbums("$trimmed album")
+                } else albums
+                finalAlbums.map { album ->
+                    SearchResultItem(
+                        name = album.name,
+                        artist = album.artist,
+                        artworkUrl = album.artworkUrl,
+                        subtitle = album.subtitle,
+                        entityId = album.browseId,
+                    )
+                }
+            }
+            SearchTab.PLAYLISTS -> innerTube.searchPlaylists(trimmed).map { playlist ->
+                SearchResultItem(
+                    name = playlist.title,
+                    artist = playlist.author,
+                    artworkUrl = playlist.artworkUrl,
+                    subtitle = playlist.author?.takeIf(String::isNotBlank) ?: "YouTube Music playlist",
+                    entityId = playlist.id,
+                )
+            }
+            SearchTab.PODCASTS -> innerTube.searchPodcasts(trimmed).map { episode ->
+                SearchResultItem(
+                    name = episode.title,
+                    artist = episode.showTitle ?: "Podcast",
+                    artworkUrl = episode.artworkUrl,
+                    subtitle = listOfNotNull(episode.showTitle, episode.publishedLabel)
+                        .filter(String::isNotBlank)
+                        .joinToString(" • ")
+                        .ifBlank { "Podcast" },
+                    videoId = episode.videoId,
+                    entityId = episode.videoId,
+                    durationMs = episode.durationMs,
+                    showId = episode.showId,
+                )
+            }
+            // No shared key: user search needs a personal key, otherwise empty.
+            SearchTab.USERS -> {
+                val key = sessionPreferences.awaitLoadedSession().apiKey
+                if (key.isBlank()) emptyList() else lookupUser(key, trimmed)
+            }
+        }.filter { it.name.isNotBlank() }
+
+        if (tab != SearchTab.LOCAL && results.isNotEmpty()) {
+            synchronized(cacheLock) {
+                searchCache[cacheKey] = results
+            }
+        }
+        return results
+    }
+
+    private suspend fun searchLocal(query: String): List<SearchResultItem> {
+        val localTracks = playlistRepository.getLocalSongs()?.tracks.orEmpty()
+        val offlinePlaylists = localOfflineRepository.playlists.value
+        val artByUrl = localTracks.associateBy({ it.url }, { it.artworkUrl })
+
+        val matchingTracks = localTracks
+            .filter { track ->
+                track.name.contains(query, ignoreCase = true) ||
+                    track.artist.contains(query, ignoreCase = true) ||
+                    track.album.orEmpty().contains(query, ignoreCase = true) ||
+                    track.albumArtist.orEmpty().contains(query, ignoreCase = true)
+            }
+            .sortedBy { track ->
+                when {
+                    track.name.startsWith(query, ignoreCase = true) -> 0
+                    track.name.contains(query, ignoreCase = true) -> 1
+                    track.artist.startsWith(query, ignoreCase = true) -> 2
+                    else -> 3
+                }
+            }
+            .take(60)
+            .map { track ->
+                val ext = LocalAudioFormats.extensionOf(track.url).uppercase().takeIf { it.isNotBlank() }
+                SearchResultItem(
+                    name = track.name,
+                    artist = track.artist,
+                    url = track.url,
+                    artworkUrl = track.artworkUrl,
+                    subtitle = listOfNotNull(track.album?.takeIf { it.isNotBlank() }, ext).joinToString(" • "),
+                    entityId = track.url,
+                    durationMs = track.durationMs,
+                    trackNumber = track.trackNumber,
+                )
+            }
+
+        val matchingPlaylists = offlinePlaylists
+            .filter { pl -> pl.name.contains(query, ignoreCase = true) }
+            .take(15)
+            .map { pl ->
+                val art = pl.trackUrls.firstNotNullOfOrNull { artByUrl[it] }
+                SearchResultItem(
+                    name = pl.name,
+                    artist = "Offline playlist",
+                    artworkUrl = art,
+                    subtitle = "${pl.trackUrls.size} tracks",
+                    entityId = "offline_playlist:${pl.id}",
+                )
+            }
+
+        return matchingTracks + matchingPlaylists
+    }
+
+    suspend fun localTracksForOfflinePlaylist(playlistId: String): List<GeneratedTrack> {
+        val pl = localOfflineRepository.playlists.value.firstOrNull { it.id == playlistId } ?: return emptyList()
+        val tracksByUrl = playlistRepository.getLocalSongs()?.tracks.orEmpty().associateBy { it.url }
+        return pl.trackUrls.mapNotNull { url -> tracksByUrl[url] }
+    }
+
+    /** Returns the native-playable tracks behind a YT Music artist/album result. */
+    suspend fun songsFor(item: SearchResultItem): List<YouTubeMusicTrack> =
+        item.entityId?.takeIf(String::isNotBlank)?.let { innerTube.browseSongs(it) }.orEmpty()
+
+    /**
+     * Builds playback continuation for a selected search result without
+     * changing the visible search results. Similar tracks come from Last.fm;
+     * an artist search is only a fallback when that graph is unavailable.
+     * Titles are deliberately unique so covers/remakes of the searched song
+     * cannot fill the queue.
+     */
+    suspend fun similarSongsFor(item: SearchResultItem, limit: Int = 25): List<GeneratedTrack> =
+        withContext(Dispatchers.IO) {
+            val seedTitle = item.name.trim()
+            val seedArtist = item.artist.orEmpty().trim()
+            val videoId = item.videoId
+            if (seedTitle.isBlank()) return@withContext emptyList()
+
+            val related = if (!videoId.isNullOrBlank()) {
+                try {
+                    relatedGraph.relatedFor(videoId, limit = limit * 2, prefetchStreams = false, forceNetwork = true)
+                } catch (_: Exception) {
+                    emptyList()
+                }
+            } else {
+                emptyList()
+            }
+
+            val candidates = if (related.isNotEmpty()) {
+                related.map { track ->
+                    GeneratedTrack(
+                        name = track.title,
+                        artist = track.artist,
+                        artworkUrl = track.artworkUrl,
+                        album = track.album,
+                        url = "https://music.youtube.com/watch?v=${track.videoId}",
+                    )
+                }
+            } else {
+                // No shared key: without a personal key there is no Last.fm
+                // fallback — the YT radio above (empty here) is the result.
+                val apiKey = sessionPreferences.awaitLoadedSession().apiKey
+                if (apiKey.isBlank()) {
+                    emptyList()
+                } else try {
+                    val response = api.get(
+                        mapOf(
+                            "method" to "track.getsimilar",
+                            "track" to seedTitle,
+                            "artist" to seedArtist,
+                            "limit" to (limit * 3).coerceAtMost(100).toString(),
+                            "api_key" to apiKey,
+                            "format" to "json",
+                            "autocorrect" to "1",
+                        ),
+                    )
+                    val body = response.body()?.string()
+                    if (!response.isSuccessful || body.isNullOrBlank()) {
+                        emptyList()
+                    } else {
+                        val root = json.parseToJsonElement(body).jsonObject
+                        GenerateJson.normalise(root["similartracks"]?.jsonObject?.get("track"))
+                    }
+                } catch (error: CancellationException) {
+                    throw error
+                } catch (_: Exception) {
+                    emptyList()
+                }
+            }
+
+            val seedTitleKey = queueTitleKey(seedTitle)
+            val seedTitleLower = seedTitle.lowercase()
+            val seenTitles = mutableSetOf(seedTitleKey)
+            val artistCounts = mutableMapOf<String, Int>()
+
+            candidates.filter { candidate ->
+                val title = candidate.name.trim()
+                val titleLower = title.lowercase()
+                val titleKey = queueTitleKey(title)
+                val artistKey = candidate.artist.trim().lowercase()
+                val artistCount = artistCounts[artistKey] ?: 0
+
+                val isDisallowed = titleLower.contains("mashup") || titleLower.contains("jukebox") ||
+                    titleLower.contains("megamix") || titleLower.contains("all songs") ||
+                    titleLower.contains("nonstop") || titleLower.contains("slowed") ||
+                    titleLower.contains("compilation")
+                val isSameSong = titleKey == seedTitleKey || titleLower == seedTitleLower
+
+                val keep = !isDisallowed && !isSameSong &&
+                    titleKey.isNotBlank() &&
+                    candidate.artist.isNotBlank() &&
+                    artistCount < 3 &&
+                    seenTitles.add(titleKey)
+
+                if (keep) artistCounts[artistKey] = artistCount + 1
+                keep
+            }.take(limit)
+        }
+
+    private suspend fun lookupUser(key: String, username: String): List<SearchResultItem> {
+        val response = api.get(
+            mapOf(
+                "method" to "user.getinfo",
+                "user" to username.trim(),
+                "api_key" to key,
+                "format" to "json",
+            ),
+        )
+        val body = response.body()?.string() ?: return emptyList()
+        if (!response.isSuccessful) return emptyList()
+        val user = json.parseToJsonElement(body).jsonObject["user"]?.jsonObject ?: return emptyList()
+        val name = (user["name"] as? JsonPrimitive)?.content.orEmpty()
+        if (name.isBlank()) return emptyList()
+        val images = user["image"]?.let { GenerateJson.asObjectList(it) }.orEmpty()
+        val avatarUrl = images.lastOrNull {
+            (it["#text"] as? JsonPrimitive)?.content?.isNotBlank() == true
+        }?.get("#text")?.let { (it as? JsonPrimitive)?.content }
+        val realName = (user["realname"] as? JsonPrimitive)?.content
+        val playcount = (user["playcount"] as? JsonPrimitive)?.content
+        return listOf(
+            SearchResultItem(
+                name = name,
+                artist = realName?.takeIf(String::isNotBlank),
+                url = (user["url"] as? JsonPrimitive)?.content.orEmpty(),
+                listeners = playcount,
+                artworkUrl = avatarUrl,
+            ),
+        )
+    }
+
+    private fun queueTitleKey(title: String): String = title
+        .lowercase()
+        .replace(TITLE_VARIANT, " ")
+        .replace(NON_TITLE_CHARACTER, "")
+
+    private companion object {
+        val TITLE_VARIANT = Regex(
+            """\s*[\[(][^)\]]*\b(?:official|video|audio|lyrics?|cover|karaoke|remaster(?:ed)?|live|version|edit|mix|slowed|reverb)[^)\]]*[])]""",
+            RegexOption.IGNORE_CASE,
+        )
+        val NON_TITLE_CHARACTER = Regex("[^\\p{L}\\p{N}]+")
+    }
+}

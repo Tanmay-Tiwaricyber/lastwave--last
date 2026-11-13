@@ -1,0 +1,449 @@
+# Changelog
+
+## [5.2.0] - 2026-11-12
+
+### ✨ What's New
+
+* **Signature Liquid Glass Navigation Bar:** A new refractive glass selector lets you tap or drag between Feed, Stats and Library, with fluid motion and support for both navigation layouts. Available on **Android 13+** with **Settings → Appearance & Visuals → Liquid Glass** enabled.
+* **Local Music Hub & Library:** The Playlists tab is now **Library**, with a dedicated Local Songs hub for browsing songs, albums, artists and folders. Create offline playlists, keep local likes, search your device music, and view embedded or `.lrc` lyrics. Local playback now also supports **DSD (DSF / DFF) and AIFF** files.
+* **Adaptive Streaming & Per-Network Quality:** Keep listening on slower mobile connections with **Auto** streaming quality, which adjusts to your connection speed and buffer health to help reduce buffering. Choose separate quality settings for Wi-Fi and mobile data; mobile Auto stays within your Wi-Fi selection. The new **Settings → Audio & Playback → Auto upgrade to Hi-Res** toggle lets you control automatic lossless upgrades.
+* **Vietnamese Language Support:** Added Vietnamese to the app's language options.
+
+---
+
+### ⚡ Improved
+
+* **Performance & Background Resource Usage:** Reduced unnecessary redraws, CPU work and playback wakeups throughout the app. Hidden animations and background YouTube library polling now pause when they are not needed, while progress updates follow the visible player to keep playback responsive with less overhead.
+* **Smoother Scrolling & Player Opening:** Optimized Home shelves, artwork backgrounds, loading shimmers, downloads lists and mini-player gestures. The full player is prepared before its opening animation, reducing the initial stutter when expanding Now Playing.
+* **Faster Startup & Smarter Cache Controls:** Moved artwork cache scans and storage calculations off the main thread. Artwork and streamed audio now share one configurable cache budget, with limits up to **4 GB**, while saved downloads remain separate.
+* **Faster, Cleaner Quality Switching:** Improved stream alignment and sample-rate handling for mid-song quality changes, with faster repeat switches and a reliable **"Upgrading to" / "Switching to"** indicator. Refined handoffs also reduce jumps and crackling during lossless upgrades.
+* **Glass Headers, Artwork Themes & Synced Videos:** Content now scrolls beneath glass headers across more screens, and artist/album pages use unified full-bleed artwork. Now Playing artwork blends into the wallpaper theme with better color selection for monochrome covers. Synced music videos have improved matching and correct fullscreen landscape proportions.
+
+---
+
+### 🛠️ Fixed
+
+* **YouTube Music Playback Stopping Around 59 Seconds:** Fixed the stream and retry issues that could leave a song stuck around **59 seconds / one minute**. Playback now uses bounded media requests and can refresh expired or rejected stream URLs mid-song. Failed YouTube downloads also retry with a freshly resolved stream.
+* **VPN & Age-Restricted Playback:** Improved recovery through VPN/network drops, signed-in age-restricted stream resolution, and YouTube request retries so a failed request does not break later searches or playback.
+* **USB DAC, Loudness & Spatial Audio:** Fixed delayed volume changes on exclusive USB output, corrected loudness normalization and Dolby gain, and improved Cayin RU3 clock/feedback handling and spatial-audio routing. Added ALAC DASH playback support and improved selection of full-volume YouTube audio streams.
+* **Shuffle, Likes & Playlist Sync:** Shuffle now prioritizes unplayed songs. Fixed duplicate-song removal and saved playlist ordering, restored reliable connected YouTube playlist deletion, and combined local/YouTube likes into one heart button. Spotify playlist counts and live sync are more reliable.
+* **Search, Imports & Downloads:** Fixed stale search results and playlist previews, incorrect recording selection from track menus, and imports using a different playlist from the reviewed preview. Custom download folders retain their access permissions.
+* **Account & UI Stability:** Fixed false Last.fm logouts, older-Android notification and startup crashes, stale cover art, and several pagination and floating-control issues. Lyrics sharing keeps the selected song consistent, and player volume, lyric offsets and sleep-timer interactions now behave correctly.
+
+## [Unreleased]
+
+### Added & Improved
+- **Recommendation Provider Switch:** Settings → Spotify now offers a recommendation provider choice. Pick Spotify to seed Home shelves, Quick Picks, radio, Discover and mixes from your Spotify taste; the switch applies everywhere and invalidates the cached home feed. Spotify only supplies the seeds — tracks are matched back to playable YouTube Music, and any failure or empty answer silently keeps the YouTube Music graph, so playback never breaks.
+
+## [5.0.0] - 2026-10-30
+
+### Added & Improved
+- **LastWave Jam (Listen Together & Live Chat):** Host or join real-time synchronized listening rooms with friends, featuring low-latency playback sync, shared queue control, and built-in live room chat.
+- **Synced Music & Podcast Videos (With Lossless Audio):** Watch full Official Music Videos and video podcasts directly inside the player via a native high-frame-rate video surface, seamlessly synchronized to your active Hi-Res Lossless FLAC or Opus audio stream without sacrificing audio fidelity.
+- **Native Spotify Integration & Canvas:** Connect your Spotify account for native one-tap playlist and liked-track transfers alongside looping high-resolution Spotify Canvas visuals inside Now Playing.
+- **Full Podcast Support:** Browse, stream, and follow podcast shows and episodes with dedicated episode queues, chapter navigation, and persistent playback progress.
+- **Harmonic Automixing & Enhanced Crossfade:** Added intelligent beat- and tempo-aware automixing with upgraded dual-deck crossfade transitions for seamless, gap-free track blending.
+- **Overhauled Homepage & Discovery Algorithm:** Redesigned the Home screen with a dynamic YouTube Music–style feed backed by an upgraded recommendation and taste-matching engine for smarter daily mixes, quick picks, and personalized shelves.
+
+### Changed & Fixed
+- **Bit-Perfect & Zero-Distortion Audio Fixes:** Resolved USB DAC Exclusive Mode routing issues, hardware sample rate handshakes, and FLAC/PCM clipping or distortion artifacts across devices for a clean, untouched signal path.
+- **Refined Lyrics UI & Sync Stability:** Upgraded the real-time synchronized lyrics interface with smoother scroll physics, cleaner typography, improved word-by-word karaoke timing alignment, and higher overall rendering stability.
+- **Performance, Stability & Bug Fixes:** Eliminated idle recomposition overhead, scroll hitches, and UI glitches across the app alongside extensive under-the-hood stability and memory optimizations.
+- **Version Bump:** Bumped version to 5.0.0 (versionCode 27).
+
+## [4.3.1] - 2026-10-18
+
+### Added & Improved
+- **YouTube Music Cookie Login:** Support for raw `Cookie` headers, Netscape `cookies.txt`, and browser extension JSON exports with clipboard paste helpers and real-time validation (matching Desktop).
+- **Poweramp-Style Signal Path Redesign:** Reorganized the Output Detector dialog into Poweramp's 5-stage pipeline flow (Source $\to$ DSP $\to$ Volume Control $\to$ Output $\to$ Output Device) with status cards.
+- **Smart Feed Queues & Continuation:** Tapping any track in feed shelves now starts context-aware radio (`startRadio = true`) for dynamic playback, while "Play All" and "Shuffle" continuously auto-extend queues.
+- **Discovery Recommendation Quality:** Added strict deduplication against listening history and saved playlists, capped artists to 1 per batch, and removed raw history feed injection.
+- **Faster Feed Loading:** Eliminated blocking artist page network fetches, added in-memory artist caching, and bounded discovery graph queries with timeouts for near-instant rendering.
+
+### Changed & Fixed
+- **Crossfade Audio Focus:** Fixed pause loop in standby player handoff by preventing ExoPlayer focus manager collisions.
+- **USB DAC Bit-Perfect Alignment:** Aligned bit-perfect detection with Poweramp definitions and protected against read-only direct buffer crashes.
+- **Version Bump:** Bumped version to 4.3.1 (versionCode 26).
+
+## [4.3.0] - 2026-10-17
+
+### Added & Improved
+- **Share Lyrics Card:** Select up to 5 lines from synced or plain lyrics to generate styled lyric cards. Choose between Song Mode (album art header + track metadata + lyrics) and Lyrics Mode (clean typography), customize with dynamic palette extraction (cover tones, dominant, muted, dark, accent, or LastWave Lime), and export via the system share sheet or save directly to Pictures/LastWave with full multilingual font rendering (Latin, Devanagari, Arabic, CJK).
+- **Lyrics Romanization & Translation:** Added inline romanization and real-time translation support for non-Latin scripts directly within the lyrics view.
+- **Expanded Lyrics Providers:** Integrated additional lyrics sources for broader catalog coverage, higher match rates, and more reliable synced timestamps.
+- **Faster Playback & Multi-Provider Addons:** Optimized stream initialization for faster playback startup and introduced simultaneous multi-provider addon support for an expanded, unified library.
+- **Motion Lyrics Background:** Added dynamic, fluid motion canvas backgrounds synchronized to the active album art inside the lyrics screen.
+- **UAC1 & USB DAC Bit-Perfect Fixes:** Resolved UAC1 compatibility issues, improved hardware sample rate handshakes, and stabilized bit-perfect USB DAC audio routing.
+- **Local Device Library Support:** Added full on-device audio scanning, metadata parsing, and seamless local song playback right alongside your streaming library.
+- **100% Localization Coverage:** Complete translation across all 12 supported locales.
+- **Dynamic APK Variant Selection:** Automatically detects device architecture and system version to download the appropriate APK variant (universal, uncompressed, or android7).
+- **Audio Fallback:** Falls back to stereo lossless when Dolby Atmos is unavailable.
+
+### Changed & Fixed
+- **Version Bump:** Bumped version to 4.3.0 (versionCode 25).
+
+## [4.2.4] - 2026-10-05
+
+### Added & Improved
+- **Resource Usage & Smooth UI:** Optimized rendering pipelines, reduced background resource contention, and smoothed UI interactions.
+- **Fast YouTube Search:** Restored instant 2-pass YouTube search resolution, eliminating multi-stage search fallback delays.
+- **Dolby Atmos Downloads:** Aligned spatial audio capability detection in `TrackDownloadManager` with `MusicPlayer`'s system `Spatializer` check, resolving Atmos download skips on Android 12L+ devices.
+- **DASH Manifest Parser Robustness:** Added resilient XML attribute matching, case-insensitive tag handling, and strict URL scheme checks to prevent malformed segment URLs during segmented downloads.
+- **Playback Warmup & Retry Gating:** Implemented first-song OPUS warmup and tap-to-retry gating to prevent premature auto-skips on transient stream hiccups.
+
+### Changed & Fixed
+- **Bit-Perfect Audio Issues:** Resolved bit-perfect DAC routing, format lockups, and hardware sample rate mismatches.
+- **Lyrics Sync:** Stabilized lyrics synchronization, eliminated drift, and improved word-by-word timing alignment.
+- **Stretchy Cover Arts:** Fixed stretchy full-bleed cover art visual artifacts, canvas fade transitions, and fluid backdrop rendering.
+- **Version Bump:** Bumped version to 4.2.4 (versionCode 24).
+
+## [4.2.3] - 2026-10-03
+
+### Added
+- **Stretchy Artwork Fade:** Implemented responsive stretchy artwork fade on Now Playing full bleed view, vertically stretching and smoothly dissolving into the dark backdrop with an offscreen gradient mask and dark scrim.
+- **Addon Bit Depth & Clock Rate Extraction:** Parsed bit depth and clock rate metadata across camelCase and snake_case properties from addons, preserving source-reported 24-bit depth on standard 44.1/48kHz tracks.
+
+### Changed & Fixed
+- **Settings Reorganization:** Relocated System Audio Effects from Appearance to Audio → Output & Loudness right beside Equalizer.
+- **Version Bump:** Bumped version to 4.2.3 (versionCode 23).
+
+## [4.2.2] - 2026-09-27
+
+### Added
+- **System Audio Effects mode (Experimental, default OFF):** publishes the audio session for external equalizer apps and OEM Dolby, flattens in-app DSP airtight on mixer routes, auto-suspends on bit-perfect / USB exclusive.
+- **Diagnostics capture:** crash-guard log and startup trail included in the diagnostics export; startup stage breadcrumbs for instant-kill diagnosis.
+
+### Fixed
+- **Settings organization:** Equalizer and Studio Clarity moved to Audio → Output & Loudness, liquid glass to Appearance, Experimental reindexed.
+- **Playlist duplication races:** serialized add/remove, auto-suffix same-title siblings, monotonic ids.
+- **Atmos honesty:** JOC-only capability check plus spatial-manifest veto with step-down cascade to stereo / Opus.
+- **Hi-res reporting:** sample-rate driven 24-bit depth inference across resolve, quality pill, signal path, and track details.
+- **Lyrics readability:** lyrics-tab blur boost plus readability veil; adaptive transport row no longer clips Next on small screens.
+- **Build:** missing YouTubeMusicTrack import, composable-safe backdrop guard.
+
+## [4.2.1] - 2026-09-26
+
+### Added
+- **True Bit-Perfect Audio Pipeline:** Introduced true bit-perfect hardware output with native C++ round-to-nearest-even conversion (`lrintf` / `llround`) in `usb-audio-output.cpp`, eliminating 1-LSB negative sample truncation on 24-bit FLAC streams. Added direct C++ integer bit-depth packing to bypass JVM conversion overhead.
+- **Dual-Crystal UAC2 Hardware Clock Switching:** Integrated automatic parsing of UAC2 `CLOCK_SOURCE` and `CLOCK_SELECTOR` descriptors to switch dynamically between 44.1 kHz and 48 kHz oscillator families on supported DACs. Added smart Soxr resampling fallback for single-crystal DACs.
+- **Expanded Lyrics Ecosystem:** Added support for Apple Music, Better Lyrics, Bini, Musixmatch, and SimpMusic lyrics providers, accompanied by TTML Rich Sync syllable parsing and word-by-word karaoke line splitting.
+- **Fluid Artwork Background & Large Widget:** Added animated fluid gradient mesh backgrounds to the player sheet and introduced a new Large Now Playing home screen widget.
+
+### Changed & Improved
+- **Audio Download Matching Precision:** Overhauled the download matching engine to apply strict artist penalties, expected duration validation (within 5 seconds), and direct video ID routing from track menus, preventing cross-artist mismatches during downloads.
+- **Signal Path Diagnostics:** Signal path dialog now displays exact DAC resampled status, original source bit depth (preventing 32-bit float decoder representation from masking track depth), active hardware sample rates, and detailed USB exclusive open failure diagnostics.
+- **Volume & Output Unity Gain:** Removed the restrictive `ignoreStreamMusicMax` cap in `ExclusiveUsbOutput` so 100% volume consistently achieves true 1.0f unity gain.
+
+### Fixed
+- **YouTube Liked Music & Playlist Crash:** Fixed a fatal `LazyColumn` key collision and layout edge-reorder crash when opening connected YouTube playlists (`LM` / `yt_liked`). Replaced unstable keys with synchronized, collision-proof occurrence suffixes and guarded layout info reads during progressive track streaming.
+- **USB Audio Timing & Glitches:** Corrected exclusive output timing to eliminate buzzing, forward-seek audio cutoffs, runaway seekbar animations, and pause spinner hangs.
+- **Player UI Fixes:** Resolved seekbar buffering clock glitches, repeat-one track skipping, and pill button white-out visual issues.
+
+## [4.2.0] - 2026-09-23
+
+### Added
+- **Dolby Atmos Playback:** Added Dolby Atmos playback support for compatible devices and audio configurations, providing an enhanced spatial audio experience.
+- **Enhanced Liquid Glass:** Completely reworked the Liquid Glass system. The previous implementation was primarily a translucent blur effect; the new implementation introduces significantly improved depth, translucency, reflections, layering, highlights, and overall visual polish for a more refined glass experience.
+- **Playlist Downloads:** Added support for downloading complete playlists for offline listening, making it easier to manage and save large collections.
+- **True Bit-Perfect Playback:** Improved bit-perfect playback with untouched DAC routing, preserving the audio output path without unnecessary modification or processing.
+- **YouTube Recommendation Algorithm:** The entire recommendation system has been shifted from Last.fm to YouTube, providing a new recommendation backend while making Last.fm completely optional.
+- **Guest Login:** Added Guest Login, allowing users to use LastWave without creating or connecting an account.
+- **Native Spotify & Apple Music Playlist Import:** Added native playlist importing from Spotify and Apple Music, allowing users to bring their existing playlists directly into LastWave.
+
+### Changed & Improved
+- **Playback & Audio Improvements:** Improved playback reliability, audio handling, DAC behavior, and various edge cases across the playback pipeline.
+- **UI & Performance Improvements:** Refined multiple parts of the interface with improved responsiveness, animations, visual consistency, and overall performance.
+- **Under-the-Hood Improvements:** A large number of architectural, performance, reliability, and quality-of-life improvements have been made throughout the app.
+
+### Fixed
+- **Stability & Bug Fixes:** Fixed numerous reported issues across playback, downloads, recommendations, authentication, UI, and background behavior.
+
+## Unreleased
+
+### Fixed
+- **Playback continuing after LastWave was swiped from Recents.**
+  `MusicPlaybackService.onTaskRemoved()` was a no-op that relied on
+  `android:stopWithTask="true"`, but the service deliberately stays a
+  media-playback foreground service whenever a track is loaded (even paused),
+  and Android does not stop a foreground service on task removal. Task removal
+  is now handled explicitly: playback stops and the service, cast session,
+  notification and wake/wifi locks are torn down, while the last queue is kept
+  restorable for the next launch. A new Audio & Playback toggle — "Stop
+  Playback When Swiped Away", on by default — preserves background playback
+  for users who want it.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt`,
+  `app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt`,
+  `app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt`,
+  `app/src/main/java/com/lastwave/app/ui/settings/SettingsViewModel.kt`,
+  `app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt`,
+  `app/src/main/java/com/lastwave/app/ui/settings/SettingsSearchIndex.kt`,
+  `app/src/main/res/values/strings.xml`,
+  `app/src/main/AndroidManifest.xml`
+
+### Added
+- **One-tap "Save album to library" on the album detail screen (#79).**
+  Previously an album could only be kept by adding its songs one by one to
+  a custom playlist. The album hero now has a save button that stores all
+  tracks via `PlaylistRepository`, mirroring the feed playlist detail's
+  save flow (saving / saved / error states). Shared-playlist pages already
+  had this via the feed detail screen.
+
+  Follow-up: the button now detects an already-saved album on every load
+  (reopening shows "Saved to library") and saving is idempotent — a
+  same-title library copy with overlapping tracks is reused instead of
+  stacking duplicates when the tracklist loads progressively.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/ui/album/AlbumViewModel.kt`
+  `app/src/main/java/com/lastwave/app/ui/album/AlbumDetailScreen.kt`
+  `app/src/main/java/com/lastwave/app/data/playlist/PlaylistRepository.kt` (`findByTitle`)
+
+### Fixed
+- **Search returning no results for Cyrillic / non-Latin queries (#102).**
+  Title/artist matching used a Latin-only word pattern (`[^a-z0-9]+`),
+  reducing every non-Latin query to blank, and the Songs-filtered search had
+  no fallback when the filter matched nothing. Matching now uses a
+  Unicode-aware pattern (letters + numbers from any script) with
+  locale-independent case folding, and an empty filtered search retries once
+  unfiltered. Matching helpers were extracted to `TextMatch` with unit tests
+  covering Cyrillic, CJK and Arabic input.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/data/music/TextMatch.kt` (new),
+  `app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApi.kt`,
+  `app/src/test/java/com/lastwave/app/data/music/TextMatchTest.kt` (new)
+
+### Fixed
+- **Home-screen widget stuck on the previous song (#94).**
+  Two publishers wrote the same widget snapshot with independent dedup
+  guards: the playback service (authoritative, fires on every player-state
+  transition) and the scrobble listener (watches all media sessions,
+  including our own, on an async binder timeline). During a track change
+  the listener could still see the previous track's session metadata and
+  overwrite the fresh snapshot last, with nothing re-firing afterwards.
+  The listener now yields while our own session is active and otherwise
+  only elects external packages, and snapshot write + refresh in
+  `WidgetUpdater` is mutex-serialized against interleaved publishers.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/service/MediaScrobbleListenerService.kt`
+  `app/src/main/java/com/lastwave/app/widget/WidgetUpdater.kt`
+
+### Fixed
+- **Logged-out YouTube Music playlists collapsing to a dead "Tap Retry" error.**
+  `InnerTubeMusicApi.fetchPlaylist()` treated ANY single continuation-page
+  failure (rate-limit/offline blip while paging a large playlist) as a total
+  failure and returned null — discarding tracks already loaded — so the
+  detail screen showed `Error` and every retry re-fetched from scratch into
+  the same failure. Continuation failures now keep the collected prefix and
+  return it with `isComplete = false` (null is kept only when zero tracks
+  loaded, preserving every caller's existing contract); failures are logged
+  to logcat under `LastWavePlaylist` with browseId + stage for diagnosis.
+  `FeedPlaylistDetailViewModel` shows truncated results with an inline
+  "Some tracks couldn't load. Retry." affordance instead of the dead error,
+  and `YtMusicLibraryManager` no longer poisons the disk cache / track
+  count with truncated snapshots (null count forces a network refresh next
+  open).
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/data/music/InnerTubeMusicApi.kt`
+  `app/src/main/java/com/lastwave/app/ui/feed/FeedPlaylistDetailViewModel.kt`
+  `app/src/main/java/com/lastwave/app/data/ytmusic/YtMusicLibraryManager.kt`
+
+### Author: musaibbhat120605
+**Date:** September 16, 2026
+
+###Musaib Bhat will step down as the developer of LastWave on 16 September 2026. His contributions have been invaluable, and his work will always remain a cornerstone for our community.
+
+#### Added
+- **SongPlayStatsEntity + SongPlayStatsDao** — local per-track listening stats (total play time, skip count, play count, last played).
+- **SongPlayStatsRepository** — records listened time and skips.
+- **LocalTasteSuggestionEngine** — local, Last.fm-free recommendation engine (ported scoring model: play time, skip penalty, liked bonus, recency, time-of-day), seeded via existing `InnerTubeMusicApi.fetchRelatedSongs`.
+- **Room migration 12 → 13** — creates `song_play_stats` table without wiping existing data.
+
+#### Changed
+- **MusicPlayer.kt** — hooks `onMediaItemTransition` to record listened duration and detect skips (non-AUTO transition + <85% played).
+- **AppDatabase.kt / DatabaseModule.kt** — registers the new entity/DAO, bumps DB version, adds migration.
+- **FeedScreen.kt** — redesigned `QuickTilesGrid`/`QuickTileCard` (Liked Songs / Mix / New Releases): equal-width scrollable cards with per-type gradient icons, replacing the old grid-chunked layout that left an orphaned half-row.
+
+#### Not yet wired
+- `LocalTasteSuggestionEngine.run()` isn't called from any screen yet — integration notes are in the file itself (Feed's discover section or as a Last.fm fallback in `GenerateRepository`).
+
+### Fixed
+- **Player state and cached track lost after leaving the app in the background with nothing playing.** (Fix by [@musaibbhat120605](https://github.com/musaibbhat120605))
+
+  `MusicPlaybackService.onTaskRemoved()` unconditionally called
+  `musicPlayer.stopAndClear()` whenever the task left Recents — even when
+  nothing was playing. `stopAndClear()` wipes both the in-memory player
+  state and the persisted session in SharedPreferences
+  (`clearPersistedPlaybackSession()`), so the next launch had nothing to
+  restore: the player appeared closed and the last track wasn't cached,
+  regardless of battery-optimization settings.
+
+  Fixed by (1) skipping the stop entirely when something is actively
+  playing, so playback isn't killed just because the task left Recents,
+  and (2) giving `stopAndClear()` an optional `clearSession` parameter
+  (default `true`, unchanged for every other call site) so the
+  paused/idle case can stop the service without deleting the persisted
+  session — leaving it restorable on the next launch.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/playback/MusicPlaybackService.kt`,
+  `app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt`
+
+- **Songs silently disappearing from the Home listing during background polling.** (Fix by [@musaibbhat120605](https://github.com/musaibbhat120605))
+
+  `HomeViewModel`'s 12-second background refresh loop merged newly
+  polled recent tracks with the existing in-memory history and then
+  truncated the **entire combined list** to `HOME_TRACK_HISTORY_CAP`
+  (500 entries). `loadNextPage()` (triggered by scrolling) appends
+  paginated tracks without any cap of its own — so once a user
+  scrolled far enough to load more than 500 tracks, the very next
+  background poll would silently drop everything past position 500,
+  including tracks the user had just scrolled into view seconds
+  earlier. This made songs appear to randomly vanish from the Home
+  listing with no user action to explain it.
+
+  Fixed by making the background poll's cap dynamic: it now only
+  bounds organic growth from polling (`max(HOME_TRACK_HISTORY_CAP,
+  currentListSize)`), so it can never truncate below what pagination
+  has already legitimately loaded into view.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/ui/home/HomeViewModel.kt`
+
+- **Duplicate/overlapping "now playing" notification on Android 10 (One UI 2.x).**
+  `buildNotification()` used `Notification.DecoratedMediaCustomViewStyle`
+  with a `MediaSession` attached, alongside a fully custom `RemoteViews`
+  player (own artwork, title, artist, transport buttons). On Android 10 +
+  Samsung One UI 2.x, SystemUI's older media-notification renderer drew
+  its own full media chrome as a second layer instead of just framing the
+  custom view, producing two overlapping players in the notification
+  shade/quick controls.
+
+  Now version-gated: Android 11+ keeps `DecoratedMediaCustomViewStyle`
+  with the session attached as before; Android 10 and below uses
+  `Notification.DecoratedCustomViewStyle` (no session tag on the
+  notification itself). Lock screen controls, Bluetooth, Android Auto,
+  and the in-app widget are unaffected, since they all read from
+  `mediaSession` directly rather than this notification's `Style` object.
+
+### Added
+- **Offline playback priority across all screens (Fixes #31).**
+  `MusicPlayer.resolveTrackAudioStream()` now checks the local Room database (`DownloadedTrackDao`) and verifies file presence on disk before attempting remote network resolution (Lossless / YouTube Music / InnerTube). When a track has already been downloaded, LastWave plays the local media file directly without making network calls, enabling seamless offline playback across Home, Search, Playlists, Album, and Artist screens and saving cellular data when online.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt`
+
+- **Download state awareness and duplicate download prevention.**
+  - Added `DownloadedTrackDao.findByTrackKey` and deduplication checks in `TrackDownloadManager.downloadTrack` to prevent duplicate download jobs, redundant network requests, and duplicate files (e.g. `(1).flac`) in MediaStore.
+  - The 3-dot context menu sheet (`TrackContextMenuSheet`) now dynamically reflects the track's status (`Downloaded` with check icon, `Downloading…`, or `Download (Max Quality)`), giving instant visual feedback and preventing accidental re-downloads.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/data/local/db/DownloadedTrackDao.kt`
+  `app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt`
+  `app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt`
+
+- **Direct navigation from download notifications to the Downloads screen.**
+  `TrackDownloadManager` now fires pending intents with `ACTION_VIEW_DOWNLOADS` targeting `DownloadsScreen` (`AppRoute.Downloads`). Integrated an `AppRouteNavigator` singleton and `AppRouteNavBridge` into `NavGraph` and `MainActivity` so tapping download notifications opens the Downloads screen directly instead of only bringing the app to the foreground.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt`
+  `app/src/main/java/com/lastwave/app/MainActivity.kt`
+  `app/src/main/java/com/lastwave/app/ui/navigation/AppRouteNavigator.kt`
+  `app/src/main/java/com/lastwave/app/ui/navigation/NavGraph.kt`
+
+## 2026-09-02 — musaibbhat120605
+
+### Fixed
+- **WebM/Opus downloads not showing metadata in external players/file managers.**
+  `AudioTagWriter.embedIntoWebm()` previously appended the `Tags`/`Attachments`
+  elements at the very end of the file, after all audio `Cluster` data. This
+  produced structurally valid EBML, but many players and file managers only
+  scan the header region of a WebM/Matroska file (stopping once they reach
+  audio data) instead of reading the whole file, so the tags were effectively
+  invisible outside the app.
+
+  Metadata is now spliced in right before the first `Cluster`, matching where
+  real muxers place it:
+  - Any existing `SeekHead` is dropped instead of left with stale offsets —
+    compliant readers fall back to a normal sequential scan when it's absent.
+  - Any existing `Tags`/`Attachments` elements are removed so duplicates
+    aren't left behind.
+  - The `Segment` size field is patched to match the new layout.
+  - If a `Cues` index is present (rare for YouTube's DASH audio, but possible
+    for other muxed sources), the old end-of-file append is used instead,
+    since rewriting `Cues` byte offsets safely is out of scope for this fix.
+
+  Files changed: `app/src/main/java/com/lastwave/app/data/download/AudioTagWriter.kt`
+
+### Fixed
+- **Home screen (Last.fm) lag / stutter.**
+  `HomeUiState.visibleRows()` (filters, day-groups, sorts, and dedupes the
+  full track history) was being recomputed inline inside a Compose
+  `remember` block, which runs on the UI thread. Last.fm's now-playing and
+  recent-tracks polling ticks every 12–30 seconds, so every time a track
+  scrobbled in, this fairly expensive rebuild ran right on the frame meant
+  to update the screen, causing a visible stutter tied directly to
+  scrobbling. On top of that, the "Recent" track list was never capped, so
+  it kept growing (and getting more expensive to rebuild) the longer Home
+  stayed open in a session.
+
+  - `HomeViewModel` now recomputes the row list on a background dispatcher
+    (`Dispatchers.Default`) and exposes it as its own `StateFlow`, so the UI
+    thread just collects a finished list instead of building it.
+  - The 30-second recent-tracks poll now caps the merged track history at
+    500 entries instead of growing it indefinitely.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/ui/home/HomeViewModel.kt`,
+  `app/src/main/java/com/lastwave/app/ui/home/HomeScreen.kt`
+
+### Fixed
+- **Downloaded tracks appearing twice in the Downloads list.**
+  `TrackDownloadManager.downloadTrack()` had no check against tracks that
+  were already downloaded — it only guarded against the *same* download
+  running twice concurrently (`activeKeys`), which is cleared as soon as a
+  download finishes. Re-downloading a track you already had correctly
+  overwrote the file on disk, but `downloadedTrackDao.insert()` always
+  created a brand-new row: `DownloadedTrackEntity.id` is an
+  autoincrement primary key with no other unique constraint, so
+  `OnConflictStrategy.REPLACE` never had anything to actually collide
+  with.
+
+  - Added a normalized `trackKey` column (`"${artist}_${title}"`,
+    lowercased/trimmed) with a **unique index**, so the database itself
+    can no longer hold two rows for the same track.
+  - Migration `10 → 11` backfills `trackKey` for existing rows, deletes
+    any duplicate rows already present (keeping the most recently
+    downloaded copy of each), then creates the unique index.
+  - `downloadTrack()` now checks the database first; if the track is
+    already downloaded and its file still exists, it skips re-downloading
+    entirely instead of re-fetching and duplicating. If the file was
+    removed outside the app, it falls through and re-downloads, and the
+    unique index makes that insert safely `REPLACE` the stale row instead
+    of duplicating it.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/data/local/db/DownloadedTrackEntity.kt`,
+  `app/src/main/java/com/lastwave/app/di/DatabaseModule.kt`,
+  `app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt`
+
+### Fixed
+- **Skipping to the next track did nothing when playing from Downloads.**
+  `DownloadsViewModel.playTrack()` started playback via `MusicPlayer.play()`,
+  which always builds a single-track queue (`listOf(track)`) regardless of
+  how many tracks are downloaded. So the moment you played anything from the
+  Downloads screen, the player's queue had exactly one item — there was
+  never a "next" track to advance to, so `next()` correctly found no
+  following item and silently did nothing.
+
+  `playTrack()` now builds the full queue from every currently downloaded
+  track (in the same order shown on screen), starting at the tapped
+  track's position, via `MusicPlayer.playQueue()` instead of `play()`.
+  Next/previous now move through the rest of your downloads normally.
+
+  Files changed:
+  `app/src/main/java/com/lastwave/app/ui/settings/DownloadsViewModel.kt`

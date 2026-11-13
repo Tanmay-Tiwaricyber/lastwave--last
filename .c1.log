@@ -1,0 +1,161 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:prepareNativeBridge UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preDebugBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:parseDebugLocalResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugKotlin UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:javaPreCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:kspDebugKotlin
+
+> Task :app:compileDebugKotlin
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:24:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:32:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:36:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:46:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:86:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:97:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:232:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:239:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:246:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:266:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:294:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:323:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:365:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:394:14 'fun fallbackToDestructiveMigration(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:395:14 'fun fallbackToDestructiveMigrationOnDowngrade(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/match/SingToFindViewModel.kt:217:38 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SingToFindViewModel.Outcome.Matched'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:335:29 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:734:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1101:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1116:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1142:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1234:57 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1240:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1251:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1262:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1273:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1274:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:87 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1287:58 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1312:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1323:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1356:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1385:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1386:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1388:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1394:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1742:57 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1753:57 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1782:53 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1844:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2052:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2062:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2270:40 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2484:45 'when' is exhaustive so 'else' is redundant here.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:347:70 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:349:27 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:24:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:32:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:36:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:46:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:86:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:97:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:232:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:239:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:246:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:266:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:294:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:323:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:365:30 The corresponding parameter in the supertype 'Migration' is named 'db'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:394:14 'fun fallbackToDestructiveMigration(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/di/DatabaseModule.kt:395:14 'fun fallbackToDestructiveMigrationOnDowngrade(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:394:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:609:57 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:635:46 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:715:61 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:897:38 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/match/SingToFindViewModel.kt:217:38 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SingToFindViewModel.Outcome.Matched'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:177:40 This declaration is in a preview state and can be changed in a backwards-incompatible manner with a best-effort migration. Its usage should be marked with '@kotlinx.coroutines.FlowPreview' or '@OptIn(kotlinx.coroutines.FlowPreview::class)' if you accept the drawback of relying on preview API
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:494:98 Unnecessary safe call on a non-null receiver of type 'SavedPlaylist'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:335:29 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:734:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1101:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1116:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1142:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1234:57 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1240:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1251:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1262:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1273:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1274:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1285:87 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1287:58 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1312:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1323:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1356:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1385:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1386:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1388:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1394:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1742:57 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1753:57 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1782:53 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1844:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2052:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2062:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2270:40 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2484:45 'when' is exhaustive so 'else' is redundant here.
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 24s
+17 actionable tasks: 2 executed, 15 up-to-date
+EXIT=0

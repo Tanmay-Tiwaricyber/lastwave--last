@@ -1,0 +1,599 @@
+import java.io.File
+import java.security.KeyStore
+import java.security.MessageDigest
+import java.security.SecureRandom
+import java.util.Base64
+import java.util.Properties
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
+import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.TaskAction
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+}
+
+var nativeVaultCertPrefix = "PLACEHOLDER_REPLACE_WITH_YOUR_CERT_SHA256"
+var nativeVaultSecret = ""
+
+fun readCertSha256Hex(keystoreBytes: ByteArray?, storePassword: String, keyAlias: String): String? {
+    if (keystoreBytes == null || keystoreBytes.isEmpty()) return null
+    val digest = MessageDigest.getInstance("SHA-256")
+    val types = listOf("PKCS12", "JKS", KeyStore.getDefaultType()).distinct()
+    val pwCandidates: List<CharArray?> = if (storePassword.isEmpty()) {
+        listOf(charArrayOf(), null)
+    } else {
+        listOf(storePassword.toCharArray(), null)
+    }
+    for (ksType in types) {
+        for (pw in pwCandidates) {
+            try {
+                val ks = KeyStore.getInstance(ksType)
+                ks.load(keystoreBytes.inputStream(), pw)
+                val aliases = mutableListOf<String>()
+                val aliasEnum = ks.aliases()
+                while (aliasEnum.hasMoreElements()) aliases += aliasEnum.nextElement()
+                val cert = ks.getCertificate(keyAlias)
+                    ?: aliases.firstOrNull { it.equals(keyAlias, ignoreCase = true) }?.let { ks.getCertificate(it) }
+                    ?: aliases.mapNotNull { ks.getCertificate(it) }.firstOrNull()
+                if (cert != null) {
+                    return digest.digest(cert.encoded).joinToString("") { "%02x".format(it) }
+                }
+            } catch (_: Exception) {
+            }
+        }
+    }
+    return null
+}
+
+abstract class PrepareNativeBridgeTask : DefaultTask() {
+    @get:OutputFile
+    abstract val headerFile: RegularFileProperty
+
+    @get:Internal
+    abstract val bridgeCppFile: RegularFileProperty
+
+    @get:Input
+    abstract val certPrefix: Property<String>
+
+    @get:Input
+    abstract val stateFingerprint: Property<String>
+
+    @get:Internal
+    abstract val plainSecret: Property<String>
+
+    @TaskAction
+    fun generate() {
+        val outHeader = headerFile.get().asFile
+        val cppFile = bridgeCppFile.get().asFile
+        val cert = certPrefix.get()
+        val fp = stateFingerprint.get()
+        val secret = plainSecret.get()
+
+        if (outHeader.isFile && outHeader.useLines { it.firstOrNull()?.trim() } == "// fp:$fp") {
+            return
+        }
+
+        val existedBefore = outHeader.exists()
+        val secretBytes = secret.toByteArray(Charsets.UTF_8)
+        if (secretBytes.size > 128) {
+            throw GradleException("ADDON_CLIENT_SECRET exceeds 128-byte native buffer")
+        }
+
+        val sb = StringBuilder()
+        sb.append("// fp:").append(fp).append('\n')
+        sb.append("#pragma once\n#include <cstddef>\n#include <cstdint>\n\n")
+        sb.append("constexpr char EXPECTED_CERT_PREFIX[] = \"").append(cert).append("\";\n\n")
+
+        if (secretBytes.isEmpty()) {
+            sb.append("static const uint8_t CLIENT_SECRET_SALT[16] = {0};\n")
+            sb.append("static constexpr size_t CLIENT_SECRET_TOTAL_LEN = 0;\n")
+            sb.append("static constexpr int CLIENT_SECRET_FRAGMENT_COUNT = 0;\n")
+            sb.append("struct Fragment { const uint8_t* data; uint8_t len; uint8_t mask; };\n")
+            sb.append("static const Fragment CLIENT_SECRET_FRAGMENTS[] = { {nullptr, 0, 0} };\n")
+        } else {
+            val rng = SecureRandom()
+            val salt = ByteArray(16).also { rng.nextBytes(it) }
+            val keyBytes = if (cert.startsWith("PLACEHOLDER")) {
+                MessageDigest.getInstance("SHA-256")
+                    .digest("LASTWAVE_DEV_FALLBACK_KEY".toByteArray(Charsets.UTF_8))
+            } else {
+                cert.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+            }
+
+            val keystream = ByteArray(secretBytes.size)
+            val mac = Mac.getInstance("HmacSHA256")
+            mac.init(SecretKeySpec(keyBytes, "HmacSHA256"))
+            var generated = 0
+            var counter = 0
+            while (generated < secretBytes.size) {
+                val msg = ByteArray(salt.size + 4)
+                System.arraycopy(salt, 0, msg, 0, salt.size)
+                msg[salt.size] = ((counter ushr 24) and 0xFF).toByte()
+                msg[salt.size + 1] = ((counter ushr 16) and 0xFF).toByte()
+                msg[salt.size + 2] = ((counter ushr 8) and 0xFF).toByte()
+                msg[salt.size + 3] = (counter and 0xFF).toByte()
+                val block = mac.doFinal(msg)
+                val n = minOf(block.size, secretBytes.size - generated)
+                System.arraycopy(block, 0, keystream, generated, n)
+                generated += n
+                counter++
+            }
+
+            val ciphertext = ByteArray(secretBytes.size) { i ->
+                (secretBytes[i].toInt() xor keystream[i].toInt()).toByte()
+            }
+
+            val chunkSize = maxOf(1, ciphertext.size / 8)
+            val fragments = mutableListOf<Pair<ByteArray, Int>>()
+            var off = 0
+            while (off < ciphertext.size) {
+                val end = minOf(off + chunkSize, ciphertext.size)
+                val mask = 0x10 + rng.nextInt(0xEF)
+                val xored = ByteArray(end - off) { i ->
+                    ((ciphertext[off + i].toInt() and 0xFF) xor mask).toByte()
+                }
+                fragments += (xored to mask)
+                off = end
+            }
+
+            val reconCipher = ByteArray(secretBytes.size)
+            var rOff = 0
+            for ((xored, mask) in fragments) {
+                for (b in xored) {
+                    reconCipher[rOff++] = ((b.toInt() and 0xFF) xor mask).toByte()
+                }
+            }
+            val reconSecret = ByteArray(secretBytes.size) { i ->
+                (reconCipher[i].toInt() xor keystream[i].toInt()).toByte()
+            }
+            if (!reconSecret.contentEquals(secretBytes)) {
+                throw GradleException("Native bridge header verification failed")
+            }
+
+            val saltHex = salt.joinToString(",") { "0x%02X".format(it.toInt() and 0xFF) }
+            sb.append("static const uint8_t CLIENT_SECRET_SALT[16] = {$saltHex};\n")
+            sb.append("static constexpr size_t CLIENT_SECRET_TOTAL_LEN = ${secretBytes.size};\n")
+            sb.append("static constexpr int CLIENT_SECRET_FRAGMENT_COUNT = ${fragments.size};\n\n")
+            fragments.forEachIndexed { idx, (xored, _) ->
+                val hex = xored.joinToString(",") { "0x%02X".format(it.toInt() and 0xFF) }
+                sb.append("static const uint8_t CS$idx[] = {$hex};\n")
+            }
+            sb.append("\nstruct Fragment {\n    const uint8_t* data;\n    uint8_t len;\n    uint8_t mask;\n};\n\n")
+            sb.append("static const Fragment CLIENT_SECRET_FRAGMENTS[] = {\n")
+            fragments.forEachIndexed { idx, (xored, mask) ->
+                sb.append("    {CS$idx, ${xored.size}, 0x%02X},\n".format(mask))
+            }
+            sb.append("};\n")
+        }
+
+        outHeader.parentFile?.mkdirs()
+        outHeader.writeText(sb.toString(), Charsets.UTF_8)
+        // Refresh mtime on initial creation so Ninja adds the header to its depfile.
+        if (!existedBefore && cppFile.exists()) {
+            cppFile.setLastModified(System.currentTimeMillis())
+        }
+    }
+}
+
+android {
+    namespace = "com.lastwave.app"
+    compileSdk = 37
+
+    val localProps = Properties().apply {
+        val localPropsFile = rootProject.file("local.properties")
+        if (localPropsFile.exists()) {
+            localPropsFile.inputStream().use { load(it) }
+        }
+        val envFile = rootProject.file(".env")
+        if (envFile.exists()) {
+            envFile.readLines().forEach { line ->
+                val trimmed = line.trim()
+                if (trimmed.isNotEmpty() && !trimmed.startsWith("#") && trimmed.contains("=")) {
+                    val parts = trimmed.split("=", limit = 2)
+                    setProperty(parts[0].trim(), parts[1].trim())
+                }
+            }
+        }
+    }
+
+    fun resolveSecret(vararg keys: String): String {
+        for (key in keys) {
+            val fromEnv = System.getenv(key)
+            if (!fromEnv.isNullOrBlank()) return fromEnv.trim().replace("\r", "").replace("\n", "").replace("\"", "").replace("\\", "")
+            val fromGradle = project.findProperty(key) as? String
+            if (!fromGradle.isNullOrBlank()) return fromGradle.trim().replace("\r", "").replace("\n", "").replace("\"", "").replace("\\", "")
+            val fromLocal = localProps.getProperty(key)
+            if (!fromLocal.isNullOrBlank()) return fromLocal.trim().replace("\r", "").replace("\n", "").replace("\"", "").replace("\\", "")
+            val dotEnv = rootProject.file(".env")
+            if (dotEnv.isFile) {
+                dotEnv.useLines { lines ->
+                    for (line in lines) {
+                        val trimmed = line.trim()
+                        if (trimmed.startsWith("$key=")) {
+                            val v = trimmed.substringAfter("=").trim().replace("\"", "").replace("\\", "")
+                            if (v.isNotBlank()) return v
+                        }
+                    }
+                }
+            }
+        }
+        return ""
+    }
+
+    // vivo Origin Island / music widget build: `-PvivoOrigin=true`.
+    // OriginOS only follows apps whose package name is on vivo's own
+    // allowlist (a system setting no app can write), so this ships the same
+    // app under an allowlisted package. It installs as a separate app, cannot
+    // sit next to that package's real app, and keeps its own data.
+    // The list differs by OriginOS version/region: com.spotify.music is missing
+    // on many phones, while com.tencent.qqmusic is user-confirmed to show on the
+    // island and is almost never already installed outside China.
+    val vivoOrigin = (project.findProperty("vivoOrigin") as? String)?.toBoolean() == true
+
+    defaultConfig {
+        applicationId = if (vivoOrigin) "com.tencent.qqmusic" else "com.lastwave.app"
+        buildConfigField("boolean", "VIVO_ORIGIN", vivoOrigin.toString())
+        minSdk = (project.findProperty("minSdk") as? String)?.toIntOrNull() ?: 29
+        targetSdk = 35
+        versionCode = 38
+        versionName = "5.8.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        (project.findProperty("targetAbis") as? String)?.let { prop ->
+            ndk {
+                abiFilters.addAll(prop.split(",").map { it.trim() }.filter { it.isNotEmpty() })
+            }
+        }
+
+        val lastWaveLyricsToken = resolveSecret("LASTWAVE_LYRICS_TOKEN")
+        val lastWaveLyricsUrl = resolveSecret("LASTWAVE_LYRICS_URL")
+        buildConfigField("String", "LASTWAVE_LYRICS_TOKEN", "\"$lastWaveLyricsToken\"")
+        buildConfigField("String", "LASTWAVE_LYRICS_URL", "\"$lastWaveLyricsUrl\"")
+
+        externalNativeBuild {
+            cmake {
+                arguments += listOf(
+                    "-DANDROID_STL=c++_shared",
+                    // Android 15+ can boot with 16 KB memory pages; all native
+                    // libraries must be built/aligned accordingly. Ignored
+                    // harmlessly by NDK toolchains that predate the flag.
+                    "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
+                    "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+                )
+                cFlags += "-Wl,-z,max-page-size=16384"
+                cppFlags += "-Wl,-z,max-page-size=16384"
+            }
+        }
+    }
+
+    splits {
+        abi {
+            isEnable = false
+        }
+    }
+
+    val requestsRelease =
+        gradle.startParameter.taskNames.any { it.contains("Release", ignoreCase = true) }
+    val base64Key = resolveSecret("SIGNING_KEY")
+    val storeFilePath = resolveSecret("RELEASE_STORE_FILE")
+    val storePasswordProp = resolveSecret("RELEASE_STORE_PASSWORD", "KEY_STORE_PASSWORD")
+    val keyAliasProp = resolveSecret("RELEASE_KEY_ALIAS", "ALIAS").ifBlank { "release_key" }
+    val keyPasswordProp = resolveSecret("RELEASE_KEY_PASSWORD", "KEY_PASSWORD").ifBlank { storePasswordProp }
+
+    val decodedReleaseKeystoreBytes: ByteArray? = if (base64Key.isNotBlank()) {
+        runCatching { Base64.getDecoder().decode(base64Key.trim()) }.getOrNull()
+    } else {
+        null
+    }
+
+    val releaseKeystoreFile: File? = when {
+        decodedReleaseKeystoreBytes != null -> {
+            val tempKeystore = layout.buildDirectory.file("signing/release.keystore").get().asFile
+            tempKeystore.parentFile.mkdirs()
+            tempKeystore.writeBytes(decodedReleaseKeystoreBytes)
+            tempKeystore
+        }
+        storeFilePath.isNotBlank() -> file(storeFilePath)
+        else -> null
+    }
+
+    signingConfigs {
+        create("release_config") {
+            if (releaseKeystoreFile != null && releaseKeystoreFile.exists() && storePasswordProp.isNotBlank()) {
+                storeFile = releaseKeystoreFile
+                storePassword = storePasswordProp
+                keyAlias = keyAliasProp
+                keyPassword = keyPasswordProp
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+            } else {
+                // Never silently fall back to the debug key for a release
+                // variant. A release APK signed with the runner's random debug
+                // key installs once, then every future update fails with
+                // INSTALL_FAILED_UPDATE_INCOMPATIBLE (signature conflict) and
+                // forces the user to uninstall and lose their data. apksigner
+                // verify only proves *a* signature is valid, not whose it is,
+                // so we must refuse to produce the APK in the first place.
+                //
+                // Only fail when a release variant is actually being requested,
+                // so debug builds and unit tests keep working with no signing
+                // secrets present on a dev machine.
+                if (requestsRelease) {
+                    throw GradleException(
+                        "No release signing key found. Provide SIGNING_KEY (base64 " +
+                            "keystore) or RELEASE_STORE_FILE + RELEASE_STORE_PASSWORD + " +
+                            "RELEASE_KEY_ALIAS. Refusing to sign a release variant with " +
+                            "the debug key."
+                    )
+                }
+                initWith(getByName("debug"))
+            }
+        }
+    }
+
+    val addonClientSecret = resolveSecret("ADDON_CLIENT_SECRET")
+    val explicitCertSha = resolveSecret("RELEASE_CERT_SHA256")
+        .takeIf { it.matches(Regex("^[0-9a-fA-F]{64}$")) }
+        ?.lowercase()
+    val releaseCertBytes = decodedReleaseKeystoreBytes
+        ?: releaseKeystoreFile?.takeIf { it.isFile }?.readBytes()
+    val debugKeystoreBytes = signingConfigs.findByName("debug")?.storeFile
+        ?.takeIf { it.isFile }?.readBytes()
+
+    val effectiveCertPrefix = when {
+        requestsRelease -> {
+            val resolved = explicitCertSha ?: readCertSha256Hex(releaseCertBytes, storePasswordProp, keyAliasProp)
+            if (addonClientSecret.isNotBlank() && resolved == null) {
+                throw GradleException("Cannot resolve release certificate SHA-256 for native vault.")
+            }
+            resolved ?: "PLACEHOLDER_REPLACE_WITH_YOUR_CERT_SHA256"
+        }
+        addonClientSecret.isNotBlank() -> {
+            readCertSha256Hex(debugKeystoreBytes, "android", "androiddebugkey")
+                ?: "PLACEHOLDER_REPLACE_WITH_YOUR_CERT_SHA256"
+        }
+        else -> "PLACEHOLDER_REPLACE_WITH_YOUR_CERT_SHA256"
+    }
+    nativeVaultCertPrefix = effectiveCertPrefix
+    nativeVaultSecret = addonClientSecret
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release_config")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        create("rawRelease") {
+            initWith(getByName("release"))
+            isMinifyEnabled = false
+            isShrinkResources = false
+            // Raw variant — no code/resource shrinking, no ProGuard/R8
+            signingConfig = signingConfigs.getByName("release_config")
+            // proguardFiles from initWith are ignored when minify is off
+        }
+        debug {
+            isDebuggable = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        // Required by org.jellyfin.media3:media3-ffmpeg-decoder AAR metadata.
+        isCoreLibraryDesugaringEnabled = true
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+        prefab = true
+    }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+        ignoreWarnings = true
+    }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation("com.google.android.gms:play-services-cast-framework:22.3.1")
+    implementation("org.nanohttpd:nanohttpd:2.3.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.browser)
+    implementation(libs.androidx.palette)
+
+    // Home-screen "Now Playing" widget (Glance — Compose-style APIs over
+    // RemoteViews), driven by the same MediaController access the local
+    // scrobbler (MediaScrobbleListenerService) already holds.
+    implementation("androidx.glance:glance-appwidget:1.1.1")
+    implementation("androidx.glance:glance-material3:1.1.1")
+
+    // Required even in a Compose-only app: Theme.Material3.DayNight.NoActionBar
+    // (used as the AndroidManifest/splash theme parent in themes.xml) is an XML
+    // style resource shipped by this artifact. androidx.compose.material3 is
+    // Compose-only Kotlin and contributes no AAPT-resolvable style/ resources,
+    // so without this dependency that parent can never be found by the linker.
+    implementation(libs.material)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.kyant.backdrop)
+    implementation(libs.kyant.shapes)
+    // Android 13+ navigation optics; Kyant remains for existing surfaces and older devices.
+    implementation(libs.fletchmckee.liquid)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.navigation.compose)
+    debugImplementation(libs.androidx.ui.tooling)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.protobuf)
+
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlinx.serialization)
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
+    implementation(libs.jsoup)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    implementation(libs.datastore.preferences)
+    implementation(libs.coil.compose)
+    // Lyrics sync uses the in-house reference implementation
+    // (mirrors Metrolist/SimpMusic start-based active-index + per-frame
+    // position, no external karaoke canvas). No gradle lyrics library.
+    // Installs the baseline profiles bundled inside Compose (and other
+    // androidx) AARs so hot UI paths are AOT-compiled on device instead of
+    // running through JIT on first use — a large, zero-code smoothness win
+    // for scrolling and animations in release builds.
+    implementation(libs.androidx.profileinstaller)
+
+    // Native in-app audio playback, background service, system media
+    // controls, Bluetooth/headset controls and a MediaController-backed UI.
+    implementation("androidx.media3:media3-exoplayer:1.2.1")
+    implementation("androidx.media3:media3-datasource-okhttp:1.2.1")
+    implementation("androidx.media3:media3-exoplayer-hls:1.2.1")
+    // Segmented provider-module path: DASH chunk source + CDM decryption.
+    // Pinned to the same 1.2.1 line as exoplayer/hls to avoid binary mismatch.
+    implementation("androidx.media3:media3-exoplayer-dash:1.2.1")
+    // MediaBrowserServiceCompat/MediaSessionCompat bridge used by Android
+    // Auto to browse the LastWave library and control the same player.
+    implementation("androidx.media:media:1.7.0")
+
+    // GPLv3 Media3-matched FFmpeg software decoder (distribution must comply).
+    // The renderer factory prefers FFmpeg for every codec it supports so all
+    // devices decode through one deterministic, OEM-bug-free path; platform
+    // decoders remain as automatic fallbacks.
+    implementation("org.jellyfin.media3:media3-ffmpeg-decoder:1.2.1+1")
+
+    // NIO also backports NewPipe's URL encoder/decoder overloads below API 33.
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs_nio:2.0.4")
+
+    // Low-latency native output. Version 1.10 remains API-compatible with the
+    // requested Oboe 1.8+ baseline and exposes its CMake target through Prefab.
+    implementation("com.google.oboe:oboe:1.10.0")
+
+    // Metadata/search remains local InnerTube/NewPipe functionality; playback
+    // resolves through InnerTubeX first and retains NewPipe as a fallback.
+    implementation(libs.newpipe.extractor)
+
+    // InnerTubeX is invoked through the compatibility adapter because its
+    // current release is built with a newer Kotlin metadata version than the
+    // app. Runtime-only keeps the app compiler on its existing Kotlin line.
+    runtimeOnly(libs.innertubex)
+    // InnerTubeX cipher-context fetches use Ktor's OkHttp engine so TLS follows
+    // the same Android trust path as the app's working OkHttp requests. CIO
+    // remains a fallback; the Android engine closed streams on cancellation.
+    runtimeOnly("io.ktor:ktor-client-okhttp:3.6.0")
+    runtimeOnly("io.ktor:ktor-client-cio:3.6.0")
+
+    // Unit Testing dependencies
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation("org.robolectric:robolectric:4.12.2")
+    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Bit-perfect USB exclusive output: audio_engine UsbAudioDriver.
+    implementation(project(":audio:decent-usb-audio-driver"))
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        optIn.add("androidx.compose.foundation.ExperimentalFoundationApi")
+    }
+}
+
+composeCompiler {
+    stabilityConfigurationFiles.add(rootProject.layout.projectDirectory.file("compose_compiler_config.conf"))
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion(libs.versions.kotlin.get())
+        }
+    }
+}
+
+tasks.withType<Test> {
+    maxHeapSize = "2048m"
+}
+
+val nativeVaultFp = MessageDigest.getInstance("SHA-256")
+    .digest("$nativeVaultCertPrefix:$nativeVaultSecret".toByteArray(Charsets.UTF_8))
+    .joinToString("") { "%02x".format(it) }
+
+val prepareNativeBridge = tasks.register<PrepareNativeBridgeTask>("prepareNativeBridge") {
+    headerFile.set(layout.projectDirectory.file("src/main/cpp/SecretsBridge_generated.h"))
+    bridgeCppFile.set(layout.projectDirectory.file("src/main/cpp/SecretsBridge.cpp"))
+    certPrefix.set(nativeVaultCertPrefix)
+    stateFingerprint.set(nativeVaultFp)
+    plainSecret.set(nativeVaultSecret)
+}
+
+tasks.matching {
+    it.name == "preBuild" ||
+        it.name.startsWith("configureCMake") ||
+        it.name.startsWith("buildCMake") ||
+        it.name.startsWith("externalNativeBuild")
+}.configureEach {
+    dependsOn(prepareNativeBridge)
+}
+
+
+

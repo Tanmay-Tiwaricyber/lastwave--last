@@ -1,0 +1,269 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':app' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+w: ⚠️ Deprecated Gradle Property 'kotlin.incremental.useClasspathSnapshot' Used
+The `kotlin.incremental.useClasspathSnapshot` deprecated property is used in your build.
+Solutions:
+ * It is unsupported, please stop using it.
+ * History based incremental compilation approach for JVM platform is removed. Kotlin Gradle plugin is now using a more efficient approach based on ABI snapshots.
+
+
+> Configure project :audio:decent-usb-audio-driver
+w: ⚠️ Deprecated 'org.jetbrains.kotlin.android' plugin usage
+The 'org.jetbrains.kotlin.android' plugin in project ':audio:decent-usb-audio-driver' is no longer required for Kotlin support since AGP 9.0.
+Solution: Remove both `android.builtInKotlin=true` and `android.newDsl=false` from `gradle.properties`, then migrate to built-in Kotlin.
+See https://kotl.in/gradle/agp-built-in-kotlin for more details.
+
+
+> Task :app:prepareNativeBridge UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:preDebugBuild UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :audio:decent-usb-audio-driver:generateDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:packageDebugResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:parseDebugLocalResources UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:generateDebugRFile UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugKotlin UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:javaPreCompileDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugJavaWithJavac NO-SOURCE
+> Task :audio:decent-usb-audio-driver:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:kspDebugKotlin
+> Task :app:compileDebugKotlin
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:699:50 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:841:61 Unnecessary safe call on a non-null receiver of type 'Long'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:969:90 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1089:62 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1090:74 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1409:59 Unnecessary safe call on a non-null receiver of type 'YouTubeAudioStream'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1651:54 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1924:47 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1924:53 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedDrmRef'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1930:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:508:21 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:715:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/lossless/LosslessMusicApi.kt:325:51 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/update/ApkArchiveInspector.kt:96:45 Unnecessary non-null assertion (!!) on a non-null receiver of type 'ByteArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:347:70 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/MainActivity.kt:349:27 Unnecessary safe call on a non-null receiver of type 'Uri'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:699:50 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:837:61 Unnecessary safe call on a non-null receiver of type 'Long'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:968:60 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1086:51 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1088:3 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1405:58 Unnecessary safe call on a non-null receiver of type 'YouTubeAudioStream'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1649:6 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1922:101 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1923:5 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedDrmRef'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManager.kt:1927:76 Unnecessary non-null assertion (!!) on a non-null receiver of type 'SegmentedStreamDescriptor'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStorage.kt:869:36 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStreaming.kt:235:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/download/TrackDownloadManagerStreaming.kt:329:48 The corresponding parameter in the supertype 'Callback' is named 'e'. This may cause problems when calling this function with named arguments.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/jam/JamRepository.kt:498:32 Unnecessary non-null assertion (!!) on a non-null receiver of type 'ErrorPayload'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:508:21 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/local/SettingsPreferences.kt:715:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/lossless/LosslessMusicApi.kt:325:51 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/repository/ThemeRepository.kt:292:64 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/data/update/ApkArchiveInspector.kt:96:45 Unnecessary non-null assertion (!!) on a non-null receiver of type 'ByteArray'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1340:49 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1406:53 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1435:62 Elvis operator (?:) always returns the left operand of non-nullable type 'Throwable'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1684:22 'fun setAudioCapabilities(p0: AudioCapabilities): DefaultAudioSink.Builder' is deprecated. Deprecated in Java.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:1876:34 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:5342:26 Condition is always 'false'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:6086:38 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayer.kt:8832:108 Unnecessary safe call on a non-null receiver of type 'PlayableTrack'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayerAutomix.kt:538:61 Unnecessary safe call on a non-null receiver of type 'EqualizerSettings'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/playback/MusicPlayerQueue.kt:357:33 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:393:62 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:618:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:634:11 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:718:14 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/common/TrackContextMenuSheet.kt:885:47 'val Icons.Filled.PlaylistAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.PlaylistAdd.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/home/HomeViewModel.kt:388:64 Condition is always 'true'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:177:40 This declaration is in a preview state and can be changed in a backwards-incompatible manner with a best-effort migration. Its usage should be marked with '@kotlinx.coroutines.FlowPreview' or '@OptIn(kotlinx.coroutines.FlowPreview::class)' if you accept the drawback of relying on preview API
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/playlist/PlaylistViewModel.kt:494:98 Unnecessary safe call on a non-null receiver of type 'SavedPlaylist'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:172:179 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:178:175 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/HomeSectionsScreen.kt:185:169 'val Icons.Filled.TrendingUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.TrendingUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/ModulesViewModel.kt:39:10 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:336:29 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:740:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1107:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1122:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1148:53 'val Icons.Filled.VolumeUp: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.VolumeUp.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1250:57 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1256:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1267:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1278:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1289:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1290:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1301:87 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1303:58 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1317:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1328:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1339:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1372:48 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1401:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1402:52 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1404:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1410:46 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1758:57 'val Icons.Filled.FormatListBulleted: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.FormatListBulleted.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1769:57 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1798:53 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:1860:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2068:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2078:65 'val Icons.Filled.QueueMusic: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.QueueMusic.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2301:40 Unnecessary safe call on a non-null receiver of type 'ThemeUiState'.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsScreen.kt:2515:45 'when' is exhaustive so 'else' is redundant here.
+w: file:///home/user/LastWave-native/app/src/main/java/com/lastwave/app/ui/settings/SettingsViewModel.kt:950:17 Redundant creation of Json format. Creating instances for each usage can be slow.
+
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac
+> Task :audio:decent-usb-audio-driver:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :app:hiltSyncDebug
+> Task :app:hiltAggregateDepsDebug UP-TO-DATE
+> Task :app:hiltJavaCompileDebug
+> Task :audio:decent-usb-audio-driver:writeDebugAarMetadata UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:extractDeepLinksDebug UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:processDebugManifest UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:mapDebugSourceSetPaths UP-TO-DATE
+> Task :audio:decent-usb-audio-driver:compileDebugLibraryResources UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:transformDebugClassesWithAsm
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin SKIPPED
+
+> Task :app:compileDebugUnitTestKotlin
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:250:88 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:266:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:282:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:295:54 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:324:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:341:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:343:89 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:367:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:410:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:444:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/user/LastWave-native/app/src/test/java/com/lastwave/app/data/update/AppUpdateManagerTest.kt:510:89 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:hiltSyncDebugUnitTest
+> Task :app:hiltAggregateDepsDebugUnitTest UP-TO-DATE
+> Task :app:hiltJavaCompileDebugUnitTest NO-SOURCE
+> Task :app:transformDebugUnitTestClassesWithAsm
+> Task :audio:decent-usb-audio-driver:processDebugJavaRes UP-TO-DATE
+
+> Task :app:testDebugUnitTest
+
+AppUpdateManagerTest > installButton_handsTheDownloadedFileToTheProviderWhenTheGrantIsPresent FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > updateButton_refusesAnApkWhoseDigestDisagrees FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:249
+
+AppUpdateManagerTest > dismissalIsRememberedPerReleaseAndOutlivesTheLaunch FAILED
+    org.junit.ComparisonFailure at AppUpdateManagerTest.kt:547
+
+AppUpdateManagerTest > updateButton_refusesAnApkSignedWithSomeoneElsesKey FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:295
+
+AppUpdateManagerTest > updateButton_refusesAnApkThatIsNotNewerThanThisBuild FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:282
+
+AppUpdateManagerTest > updateButton_leavesTheRowUsableWhenTheDownloadDies FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > tappingUpdateWhileTheFileIsHereInstallsInsteadOfReDownloading FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > installButton_opensAndroidsUnknownAppsSettingWhenTheGrantIsMissing FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > aFinishedDownloadIsOfferedAgainWithoutFetchingItTwice FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > deleteDownloadFreesTheFileAndReturnsToTheOffer FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > updateButton_downloadsVerifiesAndBecomesReadyToInstall FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > aCachedReleaseNobodyInstalledIsForgottenAfterTheAppMovedOn FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > updateButton_refusesAnArchiveThePlatformCannotRead FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > installButton_saysSoWhenTheFileVanished FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > missingRepositoryIsReportedAsThat FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:338
+
+AppUpdateManagerTest > stalePartialsAreSweptOnLaunch FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+AppUpdateManagerTest > aSilentFailureSaysNothingButStillCountsAsChecked FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:354
+
+AppUpdateManagerTest > aReleaseWithNoApkSaysSoInsteadOfPromisingADownload FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:386
+
+AppUpdateManagerTest > aNewerReleaseIsOfferedAgainAfterADismissal FAILED
+    java.lang.AssertionError at AppUpdateManagerTest.kt:146
+
+66 tests completed, 19 failed
+
+> Task :app:testDebugUnitTest FAILED
+
+[Incubating] Problems report is available at: file:///home/user/LastWave-native/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:testDebugUnitTest'.
+> There were failing tests. See the report at: file:///home/user/LastWave-native/app/build/reports/tests/testDebugUnitTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 8m 8s
+48 actionable tasks: 11 executed, 37 up-to-date
+EXIT=1

@@ -1,0 +1,851 @@
+package com.lastwave.app.ui.shell
+
+import android.os.Build
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
+import androidx.compose.material.icons.automirrored.filled.QueueMusic
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.CloudDownload
+import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.Headphones
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Leaderboard
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.isSpecified
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.lerp
+import androidx.compose.ui.zIndex
+import android.view.HapticFeedbackConstants
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.platform.LocalView
+import android.graphics.Bitmap
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.layer.GraphicsLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
+import androidx.core.graphics.scale
+import com.lastwave.app.ui.theme.drawInteractiveGlass
+import com.lastwave.app.ui.theme.liquidGlass
+import com.lastwave.app.ui.theme.rememberGlassInteraction
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.withContext
+import java.nio.IntBuffer
+import kotlin.time.Duration.Companion.seconds
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.lastwave.app.ui.common.AmbientAnimationsGate
+import com.lastwave.app.ui.common.ExpressiveMotion
+import com.lastwave.app.ui.common.PredictiveBackScreen
+import com.lastwave.app.ui.common.adaptiveContentWidth
+import com.lastwave.app.ui.feed.FeedScreen
+import com.lastwave.app.ui.home.HomeScreen
+import com.lastwave.app.ui.player.LocalMiniPlayerScrollClearance
+import com.lastwave.app.ui.playlist.PlaylistScreen
+import androidx.compose.foundation.shape.CornerBasedShape
+import com.kyant.backdrop.drawBackdrop
+import com.kyant.backdrop.effects.blur
+import com.kyant.backdrop.effects.colorControls
+import com.kyant.backdrop.effects.vibrancy
+import com.kyant.backdrop.highlight.Highlight
+import com.kyant.backdrop.shadow.Shadow
+import kotlin.math.sign
+import com.lastwave.app.ui.theme.LocalIsDarkTheme
+import com.lastwave.app.ui.theme.LocalLiquidGlass
+import com.lastwave.app.ui.theme.LocalMd3NavBar
+import com.lastwave.app.ui.theme.LiquidGlassPreset
+import com.lastwave.app.ui.theme.liquidGlassChrome
+import com.lastwave.app.ui.theme.liquidGlassContainerColor
+import com.lastwave.app.ui.theme.LayerBackdrop
+import com.lastwave.app.ui.theme.SquircleShape
+import com.lastwave.app.ui.theme.rememberLayerBackdrop
+import com.lastwave.app.ui.theme.isLiquidGlassBackdropSupported
+import com.lastwave.app.ui.theme.liquidGlassSource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
+import io.github.fletchmckee.liquid.liquefiable
+import io.github.fletchmckee.liquid.rememberLiquidState
+import javax.inject.Inject
+import androidx.compose.ui.draw.drawBehind
+
+/** Thin bridge exposing AppUpdateManager's live update state to MainShell */
+@HiltViewModel
+class MainShellViewModel @Inject constructor(
+    val appUpdateManager: com.lastwave.app.data.update.AppUpdateManager,
+    val ytAuthManager: com.lastwave.app.data.ytmusic.YtMusicAuthManager,
+    val settingsPreferences: com.lastwave.app.data.local.SettingsPreferences,
+) : ViewModel() {
+    val updateInfo = appUpdateManager.updateInfo
+    val ytConnection = ytAuthManager.connection
+    val settings = settingsPreferences.settings
+
+    fun dismissUpdate(version: String) {
+        appUpdateManager.dismissUpdate(version)
+    }
+
+    fun openUpdate(context: android.content.Context) {
+        appUpdateManager.openUpdate(context)
+    }
+
+    fun setSuppressYouTubeLoginPrompt(suppress: Boolean) {
+        viewModelScope.launch {
+            settingsPreferences.setSuppressYouTubeLoginPrompt(suppress)
+        }
+    }
+
+    fun setDismissedJoinSupportPrompt(dismissed: Boolean = true) {
+        viewModelScope.launch {
+            settingsPreferences.setDismissedJoinSupportPrompt(dismissed)
+        }
+    }
+}
+
+private enum class MainTab(val labelRes: Int) {
+    FEED(com.lastwave.app.R.string.nav_feed),
+    STATS(com.lastwave.app.R.string.nav_stats),
+    PLAYLISTS(com.lastwave.app.R.string.nav_playlists),
+}
+
+/** Shared with any screen hosted inside [MainShell] so their scrolling
+ *  lists know how much bottom content padding to reserve — the nav
+ *  overlays content (it's not a Scaffold bottomBar reserving space), so
+ *  each screen leaves this much room for its last item to clear it. */
+object FloatingNavDefaults {
+    val ContentBottomPadding = 112.dp
+
+    /**
+     * Full bottom clearance for edge-to-edge scrolling content: the floating
+     * dock's visual height + margins ([ContentBottomPadding]) PLUS the live
+     * navigation-bar (gesture area) inset. Screens that let their list draw
+     * beneath the transparent gesture area must use this instead of the raw
+     * constant, otherwise the last row hides behind the dock/gesture bar.
+     */
+    @Composable
+    fun contentBottomPadding(): Dp {
+        val hideNav = com.lastwave.app.ui.theme.LocalHideNavTabs.current
+        val basePadding = when {
+            hideNav -> 16.dp
+            LocalMd3NavBar.current -> ContentBottomPadding
+            else -> 80.dp
+        }
+        return basePadding +
+            LocalMiniPlayerScrollClearance.current +
+            WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
+    }
+}
+
+private val DockShape: CornerBasedShape = RoundedCornerShape(32.dp)
+private val PillShape: Shape = CircleShape
+
+private fun <T> navSpring() = ExpressiveMotion.spatialSpring<T>()
+
+@Composable
+fun MainShell(
+    onOpenSettings: () -> Unit,
+    onOpenSearch: () -> Unit,
+    onOpenDiscover: () -> Unit,
+    onOpenGenres: () -> Unit,
+    onOpenFriends: () -> Unit,
+    onOpenFriendProfile: (username: String, displayName: String?, avatarUrl: String?) -> Unit = { _, _, _ -> },
+    onOpenFeedPlaylist: (String) -> Unit,
+    onOpenPlaylist: (Long) -> Unit = {},
+    onOpenGenerator: () -> Unit = {},
+    onOpenNewReleases: () -> Unit = {},
+    onOpenDownloads: () -> Unit = {},
+    onOpenPodcasts: () -> Unit = {},
+    onOpenPodcastShow: (String) -> Unit = {},
+    onOpenYouTubeLogin: () -> Unit = {},
+    onReturnToHome: () -> Boolean = { false },
+    mainShellViewModel: MainShellViewModel = hiltViewModel(),
+) {
+    val tabs = MainTab.entries
+    val pagerState = rememberPagerState(pageCount = { tabs.size })
+    val feedTapEvents = remember { kotlinx.coroutines.flow.MutableSharedFlow<Unit>(extraBufferCapacity = 1) }
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    // Drive the dock selection from an explicit tab index instead of
+    // pagerState.currentPage. currentPage flips mid-scroll (halfway through
+    // animateScrollToPage), which re-triggers the pill width animation + the
+    // generator FAB enter/exit while the pager is still moving — the two
+    // competing size animations clip the dock (rectangular, limited) and let
+    // the FAB draw over the pill. Updating immediately on tap and syncing from
+    // settledPage on swipe keeps one clean transition.
+    var selectedTabIndex by remember { mutableIntStateOf(pagerState.currentPage) }
+    var liquidNavigationJob by remember { mutableStateOf<Job?>(null) }
+    var liquidNavigationRequest by remember { mutableIntStateOf(0) }
+    LaunchedEffect(pagerState.settledPage, pagerState.isScrollInProgress, liquidNavigationJob) {
+        if (!pagerState.isScrollInProgress && liquidNavigationJob?.isActive != true &&
+            selectedTabIndex != pagerState.settledPage
+        ) {
+            selectedTabIndex = pagerState.settledPage
+        }
+    }
+    val ytConnection by mainShellViewModel.ytConnection.collectAsStateWithLifecycle()
+    val settings by mainShellViewModel.settings.collectAsStateWithLifecycle(initialValue = null)
+    var promptDismissedThisSession by rememberSaveable { mutableStateOf(false) }
+
+    val currentSettings = settings
+    val shouldShowLoginPrompt = currentSettings != null &&
+        !ytConnection.isConnected &&
+        !currentSettings.suppressYouTubeLoginPrompt &&
+        !promptDismissedThisSession
+
+    if (shouldShowLoginPrompt) {
+        var dontShowAgain by remember { mutableStateOf(false) }
+        AlertDialog(
+            onDismissRequest = {
+                if (dontShowAgain) mainShellViewModel.setSuppressYouTubeLoginPrompt(true)
+                promptDismissedThisSession = true
+            },
+            shape = RoundedCornerShape(28.dp),
+            containerColor = if (LocalLiquidGlass.current) {
+                MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.85f)
+            } else {
+                MaterialTheme.colorScheme.surfaceContainerHigh
+            },
+            title = {
+                Text(
+                    text = "Get better recommendations",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                )
+            },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Text(
+                        text = "Log in to YouTube Music, or create a free account, to get personalized songs and queues.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .clickable { dontShowAgain = !dontShowAgain }
+                            .padding(vertical = 4.dp),
+                    ) {
+                        Checkbox(
+                            checked = dontShowAgain,
+                            onCheckedChange = { dontShowAgain = it },
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            text = "Don't show again",
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        if (dontShowAgain) mainShellViewModel.setSuppressYouTubeLoginPrompt(true)
+                        promptDismissedThisSession = true
+                        onOpenYouTubeLogin()
+                    },
+                    shape = RoundedCornerShape(20.dp),
+                ) {
+                    Text("Take me to YT Music login")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        if (dontShowAgain) mainShellViewModel.setSuppressYouTubeLoginPrompt(true)
+                        promptDismissedThisSession = true
+                    },
+                ) {
+                    Text("OK, thanks")
+                }
+            },
+        )
+    }
+
+    val backgroundColor = MaterialTheme.colorScheme.background
+    val hideNavTabs = com.lastwave.app.ui.theme.LocalHideNavTabs.current
+    val useLiquidNavigation = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+        LocalLiquidGlass.current && !hideNavTabs
+    val navigationLiquidState = if (useLiquidNavigation) rememberLiquidState() else null
+    // Only one renderer records the pager for navigation. The bar is hosted by
+    // PlayerHost as a sibling, never below its own liquefiable source.
+    val navigationBackdrop = if (!useLiquidNavigation) {
+        rememberLayerBackdrop {
+            drawRect(backgroundColor)
+            drawContent()
+        }
+    } else null
+    val navGlass = isLiquidGlassBackdropSupported()
+
+    Box(Modifier.fillMaxSize()) {
+        val feedIndex = tabs.indexOf(MainTab.FEED)
+        HorizontalPager(
+            state = pagerState,
+            // Keep every tab composed. With 1, jumping Playlists -> Home
+            // (dock tap = instant scrollToPage) disposed and rebuilt the whole
+            // Feed (sections, shelves, covers) on that frame, and Statistics
+            // was rebuilt the same way from the far tab. Only 3 tabs, and
+            // off-screen pages are not drawn, so this is cheap.
+            beyondViewportPageCount = tabs.size - 1,
+            modifier = Modifier.fillMaxSize().then(
+                if (navigationLiquidState != null) {
+                    Modifier.liquefiable(navigationLiquidState).background(backgroundColor)
+                } else {
+                    Modifier.liquidGlassSource(if (navGlass) navigationBackdrop else null)
+                },
+            ),
+        ) { page ->
+            // derivedStateOf: reading currentPage directly recomposed every
+            // page's whole tab each time it flipped halfway through a swipe.
+            val isCurrent by remember(page) { derivedStateOf { page == pagerState.currentPage } }
+            val pageShown by remember(page) {
+                derivedStateOf { page == pagerState.currentPage || pagerState.isScrollInProgress }
+            }
+            AmbientAnimationsGate(visible = { pageShown }) {
+                PredictiveBackScreen(
+                    enabled = isCurrent && tabs[page] != MainTab.FEED,
+                    onBack = { scope.launch { pagerState.animateScrollToPage(feedIndex) } },
+                ) {
+                    when (tabs[page]) {
+                        MainTab.FEED -> FeedScreen(
+                            onOpenSettings = onOpenSettings,
+                            onOpenSearch = onOpenSearch,
+                            onOpenDiscover = onOpenDiscover,
+                            onOpenPlaylist = onOpenPlaylist,
+                            onOpenFeedPlaylist = onOpenFeedPlaylist,
+                            onOpenGenerator = onOpenGenerator,
+                            onOpenFriends = onOpenFriends,
+                            onOpenFriendProfile = onOpenFriendProfile,
+                            onOpenNewReleases = onOpenNewReleases,
+                            onOpenDownloads = onOpenDownloads,
+                            onOpenPodcasts = onOpenPodcasts,
+                            onOpenPodcastShow = onOpenPodcastShow,
+                            onOpenYouTubeLogin = onOpenYouTubeLogin,
+                            feedTapEvents = feedTapEvents,
+                        )
+                        MainTab.STATS -> HomeScreen(
+                            onOpenSettings = onOpenSettings,
+                            onOpenSearch = onOpenSearch,
+                            onOpenDiscover = onOpenDiscover,
+                            onOpenGenres = onOpenGenres,
+                            onOpenFriends = onOpenFriends,
+                            onOpenDownloads = onOpenDownloads,
+                        )
+                        MainTab.PLAYLISTS -> PlaylistScreen(
+                            onOpenPlaylist = onOpenPlaylist,
+                            onOpenFeedPlaylist = onOpenFeedPlaylist,
+                            onOpenGenerator = onOpenGenerator,
+                        )
+                    }
+                }
+            }
+        }
+
+        val bottomNavSlot = com.lastwave.app.ui.player.LocalBottomNavSlot.current
+        val md3NavBar = LocalMd3NavBar.current
+        val clearance = com.lastwave.app.ui.player.LocalMiniPlayerScrollClearance.current
+        val isMiniPlayerActive = clearance > 0.dp
+        val systemBottomInset = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
+
+        val currentSelectedIndex by androidx.compose.runtime.rememberUpdatedState(selectedTabIndex)
+        val navHaptic = androidx.compose.ui.platform.LocalHapticFeedback.current
+        val currentOnSelect by androidx.compose.runtime.rememberUpdatedState { index: Int ->
+            navHaptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.SegmentTick)
+            if (tabs[index] == MainTab.FEED) {
+                val wasOnDetail = onReturnToHome()
+                if (wasOnDetail) {
+                    if (selectedTabIndex != feedIndex) selectedTabIndex = feedIndex
+                    scope.launch { pagerState.scrollToPage(feedIndex) }
+                    return@rememberUpdatedState
+                }
+                if (pagerState.currentPage != feedIndex) {
+                    if (selectedTabIndex != feedIndex) selectedTabIndex = feedIndex
+                    scope.launch { pagerState.scrollToPage(feedIndex) }
+                    return@rememberUpdatedState
+                }
+                feedTapEvents.tryEmit(Unit)
+            } else {
+                if (index != selectedTabIndex) selectedTabIndex = index
+                scope.launch { pagerState.animateScrollToPage(index) }
+            }
+            Unit
+        }
+        val currentOnOpenGenerator by androidx.compose.runtime.rememberUpdatedState(onOpenGenerator)
+
+        // A scrub commits once on release. It must never use Feed's re-tap
+        // refresh action, or enqueue a page animation at every crossed tab.
+        fun selectLiquidTab(index: Int, refreshIfSelected: Boolean) {
+            navHaptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.SegmentTick)
+            val isFeed = tabs[index] == MainTab.FEED
+            val returnedFromDetail = isFeed && onReturnToHome()
+            val alreadySettled = selectedTabIndex == index &&
+                pagerState.settledPage == index && !pagerState.isScrollInProgress
+            if (refreshIfSelected && isFeed && alreadySettled && !returnedFromDetail) {
+                feedTapEvents.tryEmit(Unit)
+                return
+            }
+            val request = ++liquidNavigationRequest
+            liquidNavigationJob?.cancel()
+            selectedTabIndex = index
+            liquidNavigationJob = scope.launch {
+                try {
+                    if (returnedFromDetail) pagerState.scrollToPage(index)
+                    else pagerState.animateScrollToPage(index)
+                } finally {
+                    // A previous canceled request must not reset a newer target.
+                    // Also reconcile when a content swipe interrupts this request.
+                    if (request == liquidNavigationRequest) {
+                        selectedTabIndex = pagerState.settledPage
+                    }
+                }
+            }
+        }
+        val currentOnLiquidSelect by androidx.compose.runtime.rememberUpdatedState { index: Int ->
+            selectLiquidTab(index, refreshIfSelected = true)
+        }
+        val currentOnScrubSelect by androidx.compose.runtime.rememberUpdatedState { index: Int ->
+            selectLiquidTab(index, refreshIfSelected = false)
+        }
+
+        androidx.compose.runtime.DisposableEffect(navigationBackdrop, navigationLiquidState, tabs, hideNavTabs) {
+            if (!hideNavTabs) {
+                bottomNavSlot.value = { material3NavigationEnabled ->
+                    Box(Modifier.fillMaxSize()) {
+                        if (navigationLiquidState != null) {
+                            LiquidNavigationBar(
+                                liquidState = navigationLiquidState,
+                                items = tabs.map { tab ->
+                                    LiquidNavigationItem(
+                                        label = androidx.compose.ui.res.stringResource(tab.labelRes),
+                                        icon = tab.icon(),
+                                    )
+                                },
+                                selectedIndex = currentSelectedIndex,
+                                onSelect = currentOnLiquidSelect,
+                                onScrubSelect = currentOnScrubSelect,
+                                modifier = Modifier.align(Alignment.BottomCenter),
+                                style = if (material3NavigationEnabled) {
+                                    LiquidNavigationStyle.Material3
+                                } else {
+                                    LiquidNavigationStyle.Tabs
+                                },
+                            )
+                        } else {
+                            FloatingNavBar(
+                                backdrop = navigationBackdrop,
+                                tabs = tabs,
+                                selectedIndex = currentSelectedIndex,
+                                onSelect = currentOnSelect,
+                                onOpenGenerator = currentOnOpenGenerator,
+                                modifier = Modifier.align(Alignment.BottomCenter),
+                            )
+                        }
+                    }
+                }
+            } else {
+                bottomNavSlot.value = { _ -> }
+            }
+            onDispose { bottomNavSlot.value = { _ -> } }
+        }
+    }
+}
+
+@Composable
+private fun FloatingNavBar(
+    backdrop: LayerBackdrop?,
+    tabs: List<MainTab>,
+    selectedIndex: Int,
+    onSelect: (Int) -> Unit,
+    onOpenGenerator: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val liquidGlass = LocalLiquidGlass.current
+    val md3NavBar = LocalMd3NavBar.current
+    val glassHoverIndex = remember(liquidGlass) { mutableStateOf<Int?>(null) }
+    val glassNavBounds = remember { mutableStateMapOf<Int, Rect>() }
+    val dockInteraction = remember { MutableInteractionSource() }
+    val fabInteraction = remember { MutableInteractionSource() }
+    
+    if (!md3NavBar) {
+        val hairlineTopColor = MaterialTheme.colorScheme.outlineVariant
+        val navContainerColor = liquidGlassContainerColor(
+            MaterialTheme.colorScheme.surfaceContainer,
+            enabled = liquidGlass,
+            backdrop = backdrop,
+        )
+        Surface(
+            modifier = modifier
+                .fillMaxWidth()
+                .drawBehind {
+                    drawLine(
+                        color = hairlineTopColor,
+                        start = androidx.compose.ui.geometry.Offset(0f, 0f),
+                        end = androidx.compose.ui.geometry.Offset(size.width, 0f),
+                        strokeWidth = 1.dp.toPx(),
+                    )
+                }
+                .then(
+                    if (liquidGlass) {
+                        // Zero-radius CornerBasedShape, NOT RectangleShape: the
+                        // glass lens SDF only accepts corner-based shapes and
+                        // crashes the render pass for a plain rectangle.
+                        Modifier.liquidGlassChrome(
+                            RoundedCornerShape(0.dp),
+                            liquidGlass,
+                            LiquidGlassPreset.BottomNavigation,
+                            backdrop,
+                            interactionSource = dockInteraction,
+                        )
+                    } else {
+                        Modifier
+                    }
+                ),
+            shape = RoundedCornerShape(0.dp),
+            color = navContainerColor,
+            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            // v5.3.0: no tonal elevation — the dock is separated from content
+            // by a single hairline rule, matching the reference design's
+            // `border-t` chrome.
+            tonalElevation = 0.dp,
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal),
+                    ),
+                contentAlignment = Alignment.Center,
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(66.dp)
+                        .selectableGroup(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    tabs.forEachIndexed { index, tab ->
+                        val onClick = remember(index) { { onSelect(index) } }
+                        val selected = selectedIndex == index
+                        val indicatorColor by animateColorAsState(
+                            targetValue = if (selected) MaterialTheme.colorScheme.primary.copy(
+                                alpha = if (liquidGlass) 0.18f else 0.12f,
+                            ) else Color.Transparent,
+                            animationSpec = ExpressiveMotion.effectsDefault(),
+                            label = "md3IndicatorColor_$index",
+                        )
+                        val indicatorWidth by animateDpAsState(
+                            targetValue = if (selected) 64.dp else 32.dp,
+                            animationSpec = navSpring(),
+                            label = "md3IndicatorWidth_$index",
+                        )
+                        val iconTint by animateColorAsState(
+                            targetValue = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                            animationSpec = ExpressiveMotion.effectsDefault(),
+                            label = "md3IconTint_$index",
+                        )
+                        val labelColor by animateColorAsState(
+                            targetValue = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                            animationSpec = ExpressiveMotion.effectsDefault(),
+                            label = "md3LabelColor_$index",
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                                .clickable(
+                                    interactionSource = remember(index) { MutableInteractionSource() },
+                                    indication = androidx.compose.material3.ripple(bounded = false, radius = 32.dp),
+                                    onClick = onClick,
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .height(32.dp)
+                                    .width(indicatorWidth)
+                                    .clip(CircleShape)
+                                    .background(indicatorColor),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Icon(
+                                    imageVector = tab.icon(),
+                                    contentDescription = null,
+                                    tint = iconTint,
+                                    modifier = Modifier.size(24.dp),
+                                )
+                            }
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text = androidx.compose.ui.res.stringResource(tab.labelRes),
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                                color = labelColor,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        return
+    }
+
+    Box(
+        modifier = modifier
+            .windowInsetsPadding(
+                WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal),
+            )
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        // No animateContentSize here: the dock pills already animate their own
+        // width and the FAB animates its enter/exit size. Animating this outer
+        // wrapper at the same time squeezes the Row mid-transition, clipping
+        // the dock to a narrow rectangle and pushing the FAB over the pill.
+        contentAlignment = Alignment.Center,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Surface(
+                shape = DockShape,
+                color = liquidGlassContainerColor(
+                    MaterialTheme.colorScheme.surfaceContainerHigh,
+                    enabled = liquidGlass,
+                    backdrop = backdrop,
+                ),
+                tonalElevation = if (liquidGlass) 0.dp else 6.dp,
+                shadowElevation = if (liquidGlass) 0.dp else 12.dp,
+                modifier = Modifier.liquidGlassChrome(DockShape, liquidGlass, LiquidGlassPreset.BottomNavigation, backdrop, interactionSource = dockInteraction),
+            ) {
+                Row(
+                    modifier = Modifier
+                        .pointerInput(tabs, selectedIndex) {
+                            val bridge = 8.dp.toPx()
+                            val hitIndex: (Offset) -> Int? = { pos ->
+                                glassNavBounds.entries
+                                    .firstOrNull { it.value.inflate(bridge).contains(pos) }
+                                    ?.key
+                            }
+                            awaitEachGesture {
+                                val down = awaitFirstDown(requireUnconsumed = false)
+                                val initialHit = hitIndex(down.position)
+                                if (initialHit != null && initialHit != selectedIndex) {
+                                    onSelect(initialHit)
+                                }
+                                while (true) {
+                                    val event = awaitPointerEvent()
+                                    val change = event.changes.firstOrNull { it.id == down.id }
+                                    if (change == null || !change.pressed) break
+                                    val currentHit = hitIndex(change.position)
+                                    if (currentHit != null && currentHit != selectedIndex) {
+                                        onSelect(currentHit)
+                                    }
+                                }
+                            }
+                        }
+                        .padding(horizontal = 8.dp, vertical = 6.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    tabs.forEachIndexed { index, tab ->
+                        val onClick = remember(index) { { onSelect(index) } }
+                        FloatingNavItem(
+                            label = androidx.compose.ui.res.stringResource(tab.labelRes),
+                            icon = tab.icon(),
+                            selected = selectedIndex == index,
+                            onClick = onClick,
+                            modifier = Modifier.onGloballyPositioned { coords ->
+                                glassNavBounds[index] = coords.boundsInParent()
+                            },
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun FloatingNavItem(
+    label: String,
+    icon: ImageVector,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val backgroundColor by animateColorAsState(
+        targetValue = if (selected) MaterialTheme.colorScheme.primaryContainer.copy(
+            alpha = if (LocalLiquidGlass.current) 0.28f else 1f,
+        ) else Color.Transparent,
+        animationSpec = ExpressiveMotion.effectsDefault(),
+        label = "navItemBackground",
+    )
+    val contentColor by animateColorAsState(
+        targetValue = if (selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
+        animationSpec = ExpressiveMotion.effectsDefault(),
+        label = "navItemContent",
+    )
+    // Animate the pill padding instead of jumping it: combined with the label
+    // expand below this gives one smooth width change. (Previously this
+    // Surface also had animateContentSize on top of the label expand — the two
+    // competing width animations clipped the pill to a rectangle and cut the
+    // label mid-switch.)
+    val horizontalPadding by animateDpAsState(
+        targetValue = if (selected) 18.dp else 12.dp,
+        animationSpec = navSpring(),
+        label = "navItemPadding",
+    )
+
+    Surface(
+        onClick = onClick,
+        shape = PillShape,
+        color = backgroundColor,
+        modifier = modifier.height(48.dp),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(horizontal = horizontalPadding)
+                .height(48.dp),
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = label,
+                tint = contentColor,
+                modifier = Modifier.size(24.dp),
+            )
+            AnimatedVisibility(
+                visible = selected,
+                enter = fadeIn(animationSpec = navSpring()) + expandHorizontally(
+                    animationSpec = navSpring(),
+                    expandFrom = Alignment.Start,
+                    clip = false,
+                ),
+                exit = fadeOut(animationSpec = tween(90)) + shrinkHorizontally(
+                    animationSpec = navSpring(),
+                    shrinkTowards = Alignment.Start,
+                    clip = false,
+                ),
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 8.dp),
+                ) {
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = contentColor,
+                        maxLines = 1,
+                        softWrap = false,
+                    )
+                }
+            }
+        }
+    }
+}
+
+private fun MainTab.icon(): ImageVector = when (this) {
+    MainTab.FEED -> Icons.Filled.Home
+    MainTab.STATS -> Icons.Filled.Leaderboard
+    MainTab.PLAYLISTS -> Icons.AutoMirrored.Filled.QueueMusic
+}
+

@@ -1,0 +1,9 @@
+export JAVA_HOME=/home/user/.toolchain/jdk21
+export ANDROID_HOME=/home/user/.toolchain/sdk
+export ANDROID_SDK_ROOT=/home/user/.toolchain/sdk
+export GRADLE_USER_HOME=/home/user/.toolchain/gradle
+export PATH=$JAVA_HOME/bin:$PATH
+export RELEASE_STORE_FILE=/home/user/LastWave-native/signing/silent-release.jks
+export RELEASE_STORE_PASSWORD='SilentProg2026!'
+export RELEASE_KEY_ALIAS=tanmay_release
+export RELEASE_KEY_PASSWORD='SilentProg2026!'
